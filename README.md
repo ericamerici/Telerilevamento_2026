@@ -1,5 +1,6 @@
 # Telerilevamento_2026
 Code developed during Duccio Rocchini's class.
+
 <img width="444" height="250" alt="Sentinel-1_radar_satellite_card_medium" src="https://github.com/user-attachments/assets/13136730-2d38-43bb-bfee-9436bc7b83e3" />
 
 ## Cos'é? 
