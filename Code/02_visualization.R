@@ -2,12 +2,12 @@
 
 library(terra)
 library(imageRy)
-
 install.packages("viridis")
 library(viridis)
-
 install.packages("ggplot2")
 library(ggplot2)
+install.packages("patchwork")
+library(patchwork)
 
 # Listing data
 im.list()
@@ -32,7 +32,7 @@ plot(b2, col=mako(100))
 cl <- colorRampPalette(c("gray10", "gray47", "gray91"))(100)
 plot(b2, col=cl)
 
-# Multiframe
+# Multiframe 1
 par(mfrow=c(1,2))
 plot(b2, col=cl)
 plot(b2, col=inferno(100))
@@ -40,7 +40,7 @@ plot(b2, col=inferno(100))
 # Kill the device
 dev.off()
 
-# Multiframe
+# Multiframe 2
 im.multiframe(1,2)
 plot(b2, col=cl)
 plot(b2, col=inferno(100))
@@ -78,6 +78,7 @@ plot(b3, col=inferno(100))
 plot(b4, col=inferno(100))
 plot(b8, col=inferno(100))
 
+# Multiframe 3
 sentinel <- c(b2, b3, b4, b8)
 plot(sentinel)
 plot(sentinel, col=inferno(100))
@@ -90,4 +91,34 @@ plot(sentinel$sentinel.dolomites.b8)
 # layer1=b2, layer2=b3, layer3=b4, layer4=b8
 plot(sentinel[[4]])
 
+# Multiframe 4
+#ggplot
+?im.ggplot
+b2 <- im.import("sentinel.dolomites.b2.tif")
+b3 <- im.import("sentinel.dolomites.b3.tif")
+b4 <- im.import("sentinel.dolomites.b4.tif")
+b8 <- im.import("sentinel.dolomites.b8.tif")
+
+p1 <- im.ggplot(b8)
+p2 <- im.ggplot(b4)
+
+p1+p2
+
+# Multiframe:
+# 1. par(mfrow=c(1,2))
+# 2. im.multiframe(1,2)
+# 3. stack
+# 4. ggplot2 patchwork
+
+# RGB plotting
+?im.plotRGB
+sentinel <- c(b2, b3, b4, b8)
+
+# 1=b2 blue
+# 2=b3 green
+# 3=b4 red
+# 4=b8 nir
+
+# 3 filters and 4 bands
+im.plotRGB(sentinel, r=3, g=2, b=1)
 
