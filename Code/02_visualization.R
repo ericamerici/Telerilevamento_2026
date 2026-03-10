@@ -120,5 +120,43 @@ sentinel <- c(b2, b3, b4, b8)
 # 4=b8 nir
 
 # 3 filters and 4 bands
-im.plotRGB(sentinel, r=3, g=2, b=1)
+im.plotRGB(sentinel, r=3, g=2, b=1) # natural colors
+im.plotRGB(sentinel, r=4, g=3, b=2) # false colors
+
+im.multiframe(1,2)
+im.plotRGB(sentinel, r=3, g=2, b=1) # natural colors
+im.plotRGB(sentinel, r=4, g=3, b=2) # false colors
+
+plot(sentinel[[4]])
+im.plotRGB(sentinel, r=4, g=3, b=2) # false colors
+
+# nir in green
+im.plotRGB(sentinel, r=3, g=4, b=2) # false colors
+
+# nir in blue
+im.plotRGB(sentinel, r=3, g=2, b=4) # false colors
+
+# Plot the four manners of RGB in a single multiframe
+im.multiframe(2,2)
+im.plotRGB(sentinel, r=3, g=2, b=1) # natural colors
+im.plotRGB(sentinel, r=4, g=3, b=2) # false colors red
+im.plotRGB(sentinel, r=3, g=4, b=2) # false colors green
+im.plotRGB(sentinel, r=3, g=2, b=4) # false colors blue
+
+# Positioning of visible bands
+im.multiframe(1,2)
+im.plotRGB(sentinel, r=4, g=2, b=3)  
+im.plotRGB(sentinel, r=4, g=3, b=2)  
+
+# Scatter plot
+pairs(sentinel)
+
+# Simplifying the function
+im.plotRGB(sentinel, 4, 2, 3) # false colors
+
+# plotRGB() from terra
+plotRGB(sentinel, 4, 2, 3) # non funziona
+plotRGB(sentinel, 4, 2, 3, stretch="lin")
+plotRGB(sentinel, 4, 2, 3, stretch="hist")
+
 
