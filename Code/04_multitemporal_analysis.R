@@ -2,6 +2,7 @@
 
 library(terra)
 library(imageRy)
+library(viridis)
 
 im.list()
 
@@ -21,3 +22,22 @@ plot(EN_13)
 # Differencing
 ENdif <- EN_01[[1]]-EN_13[[1]]
 plot(ENdif)
+
+#  Greenland example: import all the greenland data and create a stack
+g2000 <- im.import("greenland.2000.tif")
+g2005 <- im.import("greenland.2005.tif")
+g2010 <- im.import("greenland.2010.tif")
+g2015 <- im.import("greenland.2015.tif")
+sg <- c(g2000, g2005, g2010, g2015)
+plot(sg)
+
+gr <- im.import("greenland") #per importare tutte le immagini che iniziano con questa parola
+im.multiframe(1,2)
+plot(gr[[1]], col=plasma(100))
+plot(gr[[4]], col=plasma(100))
+
+dif <- gr[[4]]-gr[[1]]
+plot(dif)
+
+#RGB
+im.plotRGB(gr, r=1, g=2, b=4)
