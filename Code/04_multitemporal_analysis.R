@@ -3,6 +3,9 @@
 library(terra)
 library(imageRy)
 library(viridis)
+library(ggplot2)
+install.packages("ggridges")
+library(ggridges)
 
 im.list()
 
@@ -39,5 +42,40 @@ plot(gr[[4]], col=plasma(100))
 dif <- gr[[4]]-gr[[1]]
 plot(dif)
 
-#RGB
+# RGB
 im.plotRGB(gr, r=1, g=2, b=4)
+
+# ndvi 
+ndvi <- im.import("Sentinel2_NDVI_2020")
+plot(ndvi, col=magma(100))
+
+# histograms
+hist(ndvi)
+
+# ridgeline plotting
+im.ridgeline(ndvi, scale=1) #scale 1 é perché il picco sia al massimo a 1 rettangolo (quindi non si sovrappone agli altri)
+# pero me ne viene solo 1, perché hanno tutti lo stesso nome (NDVI) quindi ogni volta sovrascrive il plot precedente. quindi cambio i nomi:
+
+names(ndvi) <- c("02_feb", "05_may", "08_aug", "11_nov")
+ndvi # ora vedo che hanno questi nomi
+im.ridgeline(ndvi, scale=1, palette="viridis") 
+im.ridgeline(ndvi, scale=2, palette="viridis") # si sovrappone ma non esageratamente, la più interessante
+# da immagini a rappresentazioni statistiche
+
+plot(ndvi[[1]], ndvi[[2]])
+pairs(ndvi)
+
+# y=x
+# y=a+bx
+# y=0+1x=x
+# a=0
+# b=1
+
+#insert the line x=y
+abline(0,1)
+
+# mettiamo i limiti delle due variabili che siano gli stessi per ottenere una linea a 45
+plot(ndvi[[1]], ndvi[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3,0.9))
+abline(0,1, col="red")
+
+
