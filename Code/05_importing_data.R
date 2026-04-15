@@ -76,3 +76,16 @@ dev.off()
 # link to the data
 # raw.githubusercontent.com per usare i DATI e non solo la pagina
 nirgit <- rast("https://raw.githubusercontent.com/ducciorocchini/Telerilevamento_2026/main/Drone/DJI_20260331174728_0001_MS_NIR.TIF") 
+
+# import satellite data
+
+# set working directory
+setwd("C:/Users/Erica/OneDrive/Documents/UNIVERSITA'/GEOGRAFIA/TELERILEVAMENTO IN R/data_ext")
+
+# get the directory 
+getwd()
+
+list.files()
+
+sat <-rast("ISS074-E-417243.jpg")
+plot(sat)
