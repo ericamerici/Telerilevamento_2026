@@ -2,6 +2,8 @@
 
 library(terra)
 library(imageRy)
+library(ggplot2)
+library(patchwork)
 
 # set wd
 setwd("C:/Users/Erica/OneDrive/Documents/UNIVERSITA'/GEOGRAFIA/TELERILEVAMENTO IN R/data_ext")
@@ -75,4 +77,48 @@ tabout <- data.frame(
   perc2006=c(45,55)
   )
 
-  
+ggplot(tabout, aes(x=class, y=perc1992, color=class)) + # structure
+  geom_bar(stat="identity", fill="white") # bar plot
+
+# Exercise: plot the bars of 2006
+
+# Bars filled with color
+ggplot(tabout, aes(x=class, y=perc2006, fill=class)) + 
+geom_bar(stat="identity")
+
+# Chosing colors
+ggplot(tabout, aes(x = class, y = perc1992, fill = class)) +
+  geom_col() +
+  scale_fill_manual(values = c("#008B00", "grey"))
+
+# geom_col() = scorciatoia per geom_bar(stat = "identity")
+
+# Using patchwork!
+
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) + # structure
+  geom_bar(stat="identity", fill="white") + # bar plot 
+  ylim(c(0,100)) + # limits
+  theme(legend.position="none")  # removing legend
+
+p2 <- ggplot(tabout, aes(x=class, y=perc2006, color=class)) + # structure
+  geom_bar(stat="identity", fill="white") + # bar plot
+  ylim(c(0,100)) + # limits
+  theme(legend.position="none")  # removing legend
+
+p1 + p2
+
+# Chosing colours
+
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) + # structure
+  geom_bar(stat="identity", fill="white") + # bar plot 
+  scale_colour_manual(values=c("#008B00", "#4A4A4A")) + # bar colors
+  ylim(c(0,100)) + # limits
+  theme(legend.position="none")  # removing legend
+
+p2 <- ggplot(tabout, aes(x=class, y=perc2006, color=class)) + # structure
+  geom_bar(stat="identity", fill="white") + # bar plot
+  scale_colour_manual(values=c("#008B00", "#4A4A4A")) + # bar colors
+  ylim(c(0,100)) + # limits
+  theme(legend.position="none")  # removing legend
+
+p1 + p2
