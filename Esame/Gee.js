@@ -30,7 +30,7 @@ function maskS2clouds(image) {   // la funzione prende un’immagine Sentinel-2 
 
 var aoi = ee.Geometry.Rectangle([-6.5, 41.8, -6.1, 42.1]); // aoi è un rettangolo in coordinate [xmin, ymin, xmax, ymax] = [lonmin, latmin, lonmax, latmax]; GEE interpreta come WGS84/lat-lon.
 Map.centerObject(aoi, 11); // centra la mappa su aoi con zoom 11; di solito lo zoom va da 0 a 20.
-Map.addLayer(aoi, {color: 'red'}, 'AOI Nome'); // aggiunge il layer di rettangolo rosso sulla mappa. 
+Map.addLayer(aoi, {color: 'red'}, 'AOI Medellín'); // aggiunge il layer di rettangolo rosso sulla mappa. 
 
 //=========================================
 // Collezione immagini Sentinel-2
@@ -79,7 +79,7 @@ Map.addLayer(composite17, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite17.select(['B2','B3','B4','B8','B12']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite17.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
   description: 'I17',
   folder: 'GEE_exports',
   fileNamePrefix: 'I17',
@@ -162,7 +162,7 @@ Map.addLayer(composite21, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite21.select(['B2','B3','B4','B8','B12']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite21.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
   description: 'I21',
   folder: 'GEE_exports',
   fileNamePrefix: 'I21',
@@ -245,7 +245,7 @@ Map.addLayer(composite25, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite25.select(['B2','B3','B4','B8','B12']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite25.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
   description: 'I25',
   folder: 'GEE_exports',
   fileNamePrefix: 'I25',
