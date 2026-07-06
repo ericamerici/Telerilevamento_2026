@@ -69,15 +69,43 @@ im.plotRGB(L25, r=3, g=2, b=4)
 # calcolo DVI
 # 2017
 dvi17 <- im.dvi(L17, 4, 3)
-# plot
-plot(dvi17, main = "DVI 2017", col=viridis(100))
-
 
 # 2025
 dvi25 <- im.dvi(L25, 4, 3)
-# plot
+
+
+# plottaggio insieme
+im.multiframe(1,2)
+plot(dvi17, main = "DVI 2017", col=viridis(100))
 plot(dvi25, main = "DVI 2025", col=viridis(100))
 
+# differenza DVI
+dvi.diff <- dvi17 - dvi25
+plot(dvi.diff, main = "Delta DVI", col=magma(100))
+
+#NDVI
+#2017
+ndvi17 <- im.ndvi(L17, 4, 3)
+
+# 2025
+ndvi25 <- im.ndvi(L25, 4, 3)
 
 
+# plottaggio insieme
+im.multiframe(1,2)
+plot(ndvi17, main = "NDVI 2017", col=viridis(100))
+plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 
+# differenza DVI
+ndvi.diff <- ndvi17 - ndvi25
+plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
+
+# differenza NBDI
+ndbi17 <- (L17[[5]]-L17[[4]])/(L17[[5]]+L17[[4]])
+plot(ndbi17, main = "NDBI 2017", col=viridis(100))
+
+ndbi25 <- (L25[[5]]-L25[[4]])/(L25[[5]]+L25[[4]])
+plot(ndbi25, main = "NDBI 2025", col=viridis(100))
+
+ndbi.diff <- ndbi17 - ndbi25
+plot(ndbi.diff, main = "DELTA NDBI", col=viridis(100))
