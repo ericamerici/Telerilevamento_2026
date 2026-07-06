@@ -73,14 +73,14 @@ Map.addLayer(first17, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'First image RGB');
+}, 'First image RGB 17');
 
 // Composite mediano RGB
 Map.addLayer(composite17, {
   bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
   min: 0,
   max: 0.3
-}, 'Median composite RGB');
+}, 'Median composite RGB 17');
 
 // ==============================================
 // Export su Google Drive
@@ -136,14 +136,14 @@ Map.addLayer(first21, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'First image RGB');
+}, 'First image RGB 21');
 
 // Composite mediano RGB
 Map.addLayer(composite21, {
   bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
   min: 0,
   max: 0.3
-}, 'Median composite RGB');
+}, 'Median composite RGB 21');
 
 // ==============================================
 // Export su Google Drive
@@ -171,7 +171,7 @@ Export.image.toDrive({
 var collection25 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
   .filterDate('2025-01-01', '2025-12-31') // range temporale
-  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 35)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 35% (metadato). Ho alzato la percentuale rispetto al 2017 perché altrimenti alcune zone rimanevano nodata.
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
 //=========================================
@@ -198,14 +198,14 @@ Map.addLayer(first25, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'First image RGB');
+}, 'First image RGB 25');
 
 // Composite mediano RGB
 Map.addLayer(composite25, {
   bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
   min: 0,
   max: 0.3
-}, 'Median composite RGB');
+}, 'Median composite RGB 25');
 
 // ==============================================
 // Export su Google Drive
