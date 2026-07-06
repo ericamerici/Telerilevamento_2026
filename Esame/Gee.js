@@ -68,11 +68,12 @@ var composite17 = collection17.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-Map.addLayer(collection17, {
+var first17 = ee.Image(collection17.first());
+Map.addLayer(first17, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'Image');
+}, 'First image RGB');
 
 // Composite mediano RGB
 Map.addLayer(composite17, {
@@ -130,11 +131,12 @@ var composite21 = collection21.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-Map.addLayer(collection21, {
+var first21 = ee.Image(collection21.first());
+Map.addLayer(first21, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'Image');
+}, 'First image RGB');
 
 // Composite mediano RGB
 Map.addLayer(composite21, {
@@ -191,11 +193,12 @@ var composite25 = collection25.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-Map.addLayer(collection25, {
+var first25 = ee.Image(collection25.first());
+Map.addLayer(first25, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'Image');
+}, 'First image RGB');
 
 // Composite mediano RGB
 Map.addLayer(composite25, {
