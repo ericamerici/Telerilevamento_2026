@@ -1,4 +1,4 @@
- Analisi multitemporale
+# Analisi multitemporale dell'espansione urbana della città di Medellín
 
 # set working directory
 setwd("/home/erica/Documenti/RS_R")
