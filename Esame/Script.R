@@ -2,7 +2,8 @@
 
 
 # set working directory
-setwd("/home/erica/Documenti/RS_R")
+setwd("/home/erica/Documenti/RS_R
+      "C:/Users/Erica/OneDrive/Documents/RS_R"
 
 # get the directory 
 getwd()
@@ -57,15 +58,14 @@ im.plotRGB(gutturu15, r=4, g=3, b=2)
 im.plotRGB(gutturu15, r=3, g=2, b=4)
 
 # 2025
-# import
-S25 <- rast("S25.tif")
+
 
 # plot
-plot(S25)
+plot(gutturu25)
 
 # plot separate bands
 im.multiframe(3,2)
-plot(S25[[1]], main = "B2 - Blue", col=cividis(100))
+plot(gutturu25[[1]], main = "B2 - Blue", col=cividis(100))
 plot(S25[[2]], main = "B3 - Green", col=cividis(100))
 plot(S25[[3]], main = "B4 - Red", col=cividis(100))
 plot(S25[[4]], main = "B8 - NIR", col=cividis(100))
@@ -118,11 +118,11 @@ plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
 
 
 # differenza NDMI
-ndmi17 <- (S17[[4]]-S17[[5]])/(S17[[4]]+S17[[5]])
-plot(ndmi17, main = "NDBI 2017", col=viridis(100))
+ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
+plot(ndmi15, main = "NDMI 2017", col=viridis(100))
 
-ndmi25 <- (S25[[4]]-S25[[5]])/(S25[[4]]+S25[[5]])
-plot(ndmi25, main = "NDBI 2025", col=viridis(100))
+ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
+plot(ndmi25, main = "NDMI 2025", col=viridis(100))
 
-ndmi.diff <- ndmi17 - ndmi25
+ndmi.diff <- ndmi15 - ndmi25
 plot(ndmi.diff, main = "DELTA NDMI", col=viridis(100))
