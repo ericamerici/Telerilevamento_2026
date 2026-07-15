@@ -87,7 +87,7 @@ Map.addLayer(composite17, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite17.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite17.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
   description: 'S17',
   folder: 'GEE_exports',
   fileNamePrefix: 'S17',
@@ -150,7 +150,7 @@ Map.addLayer(composite21, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite21.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite21.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
   description: 'S21',
   folder: 'GEE_exports',
   fileNamePrefix: 'S21',
@@ -212,7 +212,7 @@ Map.addLayer(composite25, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite25.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite25.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
   description: 'S25',
   folder: 'GEE_exports',
   fileNamePrefix: 'S25',
