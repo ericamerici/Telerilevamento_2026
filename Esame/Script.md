@@ -98,6 +98,7 @@ Vengono visualizzate tutte le bande comprese nell'immagine importata, attraverso
 
 ````R
 plot(gutturu15)
+dev.off() # eliminare il plot
 ````
 Si scarica l'immagine in formato .png, utilizzando la visualizzazione `im.multiframe()`
 ````R
@@ -107,6 +108,8 @@ plot(gutturu15[[2]], main = "B3 - Green", col=cividis(100))
 plot(gutturu15[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
 ````
 <img width="1536" height="738" alt="Bande15im" src="https://github.com/user-attachments/assets/cda51e27-6c98-4af8-8a43-7755a4176e1a" />
 
@@ -124,6 +127,8 @@ im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
 
 # plot RGB, nir in blue
 im.plotRGB(gutturu15, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2015)")
+
+dev.off()
 ````
 
 <img width="1536" height="738" alt="RGB15" src="https://github.com/user-attachments/assets/e3d5a6c9-9993-4c3f-ab16-985e433dd38d" />
@@ -136,6 +141,7 @@ Si compie lo stesso procedimento con le immagine relative al periodo estivo del 
 
 ````R
 plot(gutturu20)
+dev.off()
 ````
 Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
 ````R
@@ -145,6 +151,8 @@ plot(gutturu20[[2]], main = "B3 - Green", col=cividis(100))
 plot(gutturu20[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu20[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu20[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
 ````
 <img width="1536" height="738" alt="bande20" src="https://github.com/user-attachments/assets/9bb11784-5a22-406b-bbfd-e5cb766725aa" />
 
@@ -162,6 +170,8 @@ im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
 
 # plot RGB, nir in blue
 im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
+
+dev.off()
 ````
 <img width="1536" height="738" alt="RGB20" src="https://github.com/user-attachments/assets/07f767a9-7eec-42a7-8d88-7d7ecabf0712" />
 
@@ -174,6 +184,7 @@ Si ripete lo stesso procedimento per l'anno 2025, sempre nei mesi di luglio e ag
 
 ````R
 plot(gutturu25)
+dev.off()
 ````
 Si scarica l'immagine in formato .png, utilizzando la visualizzazione `im.multiframe()`
 ````R
@@ -183,6 +194,8 @@ plot(gutturu25[[2]], main = "B3 - Green", col=cividis(100))
 plot(gutturu25[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu25[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu25[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
 ````
 <img width="1536" height="738" alt="bande25im" src="https://github.com/user-attachments/assets/76469277-7c72-4631-86e6-206c69211e93" />
 
@@ -200,9 +213,19 @@ im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 
 # plot RGB, nir in blue
 im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
+
+dev.off()
 ````
 
 <img width="1536" height="738" alt="RGB25" src="https://github.com/user-attachments/assets/936dd6cc-c192-4960-8d00-a3ceb79d25ef" />
+
+# Calcolo Indici
+
+## DVI
+
+L'indice DVI (Difference Vegetation Index)
+
+###
 
 # Bibliografia e Sitografia
 Ministero dell’Ambiente e della Tutela del territorio e del Mare
