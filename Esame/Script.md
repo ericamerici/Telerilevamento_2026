@@ -24,7 +24,7 @@ Negli ultimi decenni gli ecosistemi forestali mediterranei sono stati sottoposti
 - incendi boschivi;
 - pressione antropica.
 
-In particolare, la zona meridionale della Sardegna risulta estremamente vulnerabile ai fenomeni di siccità e di desertificazione. 
+In particolare, la zona meridionale della Sardegna risulta estremamente vulnerabile ai fenomeni appena elencati. Da decenni, negli studi sulla vulnerabilità alla desertificazione (2006), tale zona emerge fortemente, insieme ad altri territori prevalentemente pugliesi e siciliani.
 
 Per questo motivo il monitoraggio dello stato della vegetazione mediante tecniche di telerilevamento rappresenta uno strumento fondamentale per valutare l'efficacia della conservazione del patrimonio forestale.
 
@@ -43,7 +43,7 @@ L'obiettivo principale del progetto è **valutare l'evoluzione dello stato della
 - **NDMI** (Normalized Difference Moist Index).
   
 ## Giustificazione
-L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale.
+L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale, caratterizzata da politiche di conservazione e da una struttura molto diversa dal territorio circostante. Si è deciso di analizzare questo parco perché risulta una foresta stabile e significativa per la salute ambientale e umana dell'intera regione, ma è localizzata in un contesto di precarietà.
 
 # Raccolta dati e metodologia
 
@@ -146,6 +146,8 @@ plot(gutturu20[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu20[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu20[[5]], main = "B11 - SWIR", col=cividis(100))
 ````
+<img width="1536" height="738" alt="bande20" src="https://github.com/user-attachments/assets/9bb11784-5a22-406b-bbfd-e5cb766725aa" />
+
 
 #### Visualizzazione RGB
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione, sempre utilizzando la funzione `im.multiframe()`
@@ -161,6 +163,8 @@ im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
 # plot RGB, nir in blue
 im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
 ````
+<img width="1536" height="738" alt="RGB20" src="https://github.com/user-attachments/assets/07f767a9-7eec-42a7-8d88-7d7ecabf0712" />
+
 
 ### 2025
 
@@ -171,7 +175,7 @@ Si ripete lo stesso procedimento per l'anno 2025, sempre nei mesi di luglio e ag
 ````R
 plot(gutturu25)
 ````
-Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
+Si scarica l'immagine in formato .png, utilizzando la visualizzazione `im.multiframe()`
 ````R
 im.multiframe(2,3)
 plot(gutturu25[[1]], main = "B2 - Blue", col=cividis(100))
@@ -180,6 +184,8 @@ plot(gutturu25[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu25[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu25[[5]], main = "B11 - SWIR", col=cividis(100))
 ````
+<img width="1536" height="738" alt="bande25im" src="https://github.com/user-attachments/assets/76469277-7c72-4631-86e6-206c69211e93" />
+
 
 #### Visualizzazione RGB
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione, sempre utilizzando la funzione `im.multiframe()`
@@ -196,6 +202,7 @@ im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 ````
 
+<img width="1536" height="738" alt="RGB25" src="https://github.com/user-attachments/assets/936dd6cc-c192-4960-8d00-a3ceb79d25ef" />
 
 # Bibliografia e Sitografia
 Ministero dell’Ambiente e della Tutela del territorio e del Mare
