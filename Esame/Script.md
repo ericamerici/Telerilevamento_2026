@@ -1,6 +1,6 @@
 >Erica Merici
 
-# Analisi multitemporale della desertificazione nella provincia del Sulcis Iglesiente, Sardegna (2017-2025)
+# Analisi Multitemporale dello Stato di Conservazione della Vegetazione nel Parco di Gutturu Mannu (2015–2025)
 
 Scaletta:
 Introduzione
@@ -15,11 +15,19 @@ Bibliografia
 
 # Introduzione
 
-La Sardegna risulta essere una regione particolarmente sensibile alla desertificazione. L’Isola, infatti, è tra le regioni d’Europa a maggior rischio. Le motivazioni sono legate ad un aumento dei processi di degrado del suolo e della vegetazione a seguito di variazioni climatiche, ma soprattutto di attività antropiche.
+Il Parco Naturale Regionale di Gutturu Mannu, situato nel settore sud-occidentale della Sardegna, rappresenta una delle più estese foreste mediterranee italiane. L'area ospita boschi di leccio, sughera e macchia mediterranea di elevato valore naturalistico, costituendo un importante habitat per numerose specie vegetali e animali.
 
-<img width="1382" height="914" alt="DesertificazioneSardegna" src="https://github.com/user-attachments/assets/efeb9011-3004-4ef5-9580-4b39ad0183df" />
+Negli ultimi decenni gli ecosistemi forestali mediterranei sono stati sottoposti a numerose pressioni ambientali, tra cui:
 
->Fotografia di Gloria Calvi ([Unionesarda.it](https://immagini.unionesarda.it/version/c:ZWEzMjMzZjEtZTRkMi00:ZjE2ZGU0NDQtNTNhNy00/image.webp?f=3:2&q=0.75&w=3840))
+- cambiamenti climatici;
+- siccità estive sempre più frequenti;
+- incendi boschivi;
+- pressione antropica.
+
+Per questo motivo il monitoraggio dello stato della vegetazione mediante tecniche di telerilevamento rappresenta uno strumento fondamentale per valutare l'efficacia della conservazione del patrimonio forestale.
+
+<img width="660" height="500" alt="gutturu_mannu" src="https://github.com/user-attachments/assets/f710ab78-ffed-481a-a9a2-7bc7721c3b85" />
+>Parco Gutturu Mannu.
 
 # Obiettivo
 
