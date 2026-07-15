@@ -43,7 +43,7 @@ L'obiettivo principale del progetto è **valutare l'evoluzione dello stato della
 - **NDMI** (Normalized Difference Moist Index).
   
 ## Giustificazione
-L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale, caratterizzata da politiche di conservazione e da una struttura molto diversa dal territorio circostante. Si è deciso di analizzare questo parco perché risulta una foresta stabile e significativa per la salute ambientale e umana dell'intera regione, ma è localizzata in un contesto di precarietà.
+L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale, caratterizzata da politiche di conservazione e da una struttura molto diversa dal territorio circostante. Si è deciso di analizzare questo parco perché risulta una foresta stabile e significativa per la salute ambientale e umana dell'intera regione, ma è localizzata in un contesto particolarmente vulnerabile alla desertificazione. 
 
 # Raccolta dati e metodologia
 
@@ -143,7 +143,7 @@ Si compie lo stesso procedimento con le immagine relative al periodo estivo del 
 plot(gutturu20)
 dev.off()
 ````
-Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
+Si scarica l'immagine in formato .png, utilizzando la visualizzazione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
 plot(gutturu20[[1]], main = "B2 - Blue", col=cividis(100))
@@ -226,12 +226,6 @@ dev.off()
 L'indice DVI (Difference Vegetation Index)
 
 
-### 2015
-
-### 2020
-
-### 2025
-
 ## NDVI
 
 ## NDMI
@@ -245,13 +239,65 @@ Innanzittutto, si visualizzano le diverse immagini RGB per avere un confronto in
 ````R
 im.multiframe (2,3)
 
-# plot RGB, colori naturali 
+# plot RGB, colori naturali 2015
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
+
+# plot RGB, colori naturali 2020
+im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
+
+# plot RGB, colori naturali 2025
 im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
 
-# plot RGB, nir in red
+# plot RGB, nir in red 2015
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
+
+# plot RGB, nir in red 2020
+im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
+
+# plot RGB, nir in red 2025
 im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+
 dev.off()
 ````
+<img width="1536" height="738" alt="AMultiTRGB" src="https://github.com/user-attachments/assets/17a539d0-7d35-430e-a710-f44898a780d1" />
+
+## Variazione degli indici
+
+La variazione degli indici è espressa in due modi: 
+
+- una differenza spettrale dei risultati degli anni 2015 e 2025;
+- una comparazione attraverso il ridge plot di tutti e tre gli anni presi in considerazione.
+
+### ΔDVI
+
+````R
+dvi.diff <- dvi15 - dvi25
+````
+
+### ΔNDVI
+
+````R
+ndvi.diff <- ndvi15 - ndvi25
+````
+### ΔNDMI
+
+````R
+dvi.diff <- ndmi15 - ndmi25
+````
+
+Si visualizzano insieme attraverso la funzione `im.multiframe()`
+
+````R
+# Visualizzazione dei tre risultati
+im.multiframe(1,3)
+plot(dvi.diff, main = "ΔDVI", col=magma(100))
+plot(ndvi.diff, main = "ΔNDVI", col=magma(100))
+plot(ndmi.diff, main = "ΔNDMI", col=magma(100))
+
+dev.off()
+````
+
+<img width="1536" height="738" alt="delta" src="https://github.com/user-attachments/assets/5ef50dba-fa59-44d2-8e67-08848c4c93e7" />
 
 
 # Bibliografia e Sitografia
