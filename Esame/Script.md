@@ -22,4 +22,6 @@ Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine]
 
 > [!NOTE]
 >
-> Il codice completo in JavaScript utilizzato per ottenere le immagini si trova nel file Code.js
+> Il codice completo in JavaScript utilizzato per ottenere le immagini si trova nel file Gee.js
+
+
