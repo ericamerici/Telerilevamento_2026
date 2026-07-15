@@ -1,6 +1,6 @@
 //================================================================================================================
 //================================================================================================================
-// Titolo
+// Analisi multitemporale della desertificazione nella provincia del Sulcis Iglesiente, Sardegna
 // Erica Merici, matricola 0001186080, Telerilevamento Geo-Ecologico in R
 // Codice in JavaScript utilizzato per scaricare le immagini satellitari da Google Earth Engine
 // https://code.earthengine.google.com/
@@ -108,7 +108,7 @@ Export.image.toDrive({
 
 var collection21 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2021-01-01', '2021-12-31') // range temporale
+  .filterDate('2021-07-01', '2021-08-31') // range temporale
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -151,9 +151,9 @@ Map.addLayer(composite21, {
 
 Export.image.toDrive({
   image: composite21.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
-  description: 'L21',
+  description: 'S21',
   folder: 'GEE_exports',
-  fileNamePrefix: 'L21',
+  fileNamePrefix: 'S21',
   region: aoi,
   scale: 10,
   crs: 'EPSG:4326', // coordinate reference system
@@ -170,8 +170,8 @@ Export.image.toDrive({
 
 var collection25 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2025-01-01', '2025-12-31') // range temporale
-  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 35)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 35% (metadato). Ho alzato la percentuale rispetto al 2017 perché altrimenti alcune zone rimanevano nodata.
+  .filterDate('2025-07-01', '2025-08-31') // range temporale: mesi di luglio e agosto
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20%.
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
 //=========================================
@@ -213,9 +213,9 @@ Map.addLayer(composite25, {
 
 Export.image.toDrive({
   image: composite25.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
-  description: 'L25',
+  description: 'S25',
   folder: 'GEE_exports',
-  fileNamePrefix: 'L25',
+  fileNamePrefix: 'S25',
   region: aoi,
   scale: 10,
   crs: 'EPSG:4326', // coordinate reference system
