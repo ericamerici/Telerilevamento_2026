@@ -105,7 +105,7 @@ Export.image.toDrive({
 // Collezione immagini Sentinel-2
 //=========================================
 
-var collection21 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
+var collection20 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
   .filterDate('2020-07-01', '2020-08-31') // range temporale
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
