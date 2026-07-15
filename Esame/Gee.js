@@ -8,10 +8,10 @@
 //================================================================================================================
 
 //=========================================
-  // Limiti amministrativi del comune di interesse importati in formato shapefile
+  // Limiti amministrativi della provincia di interesse importati in formato shapefile da ISTAT
 //=========================================
 
-var table = ee.FeatureCollection("projects/telerilevamento-493414/assets/Limites_84");
+var table = ee.FeatureCollection("projects/telerilevamento-493414/assets/sulcisiglesiente");
 
 //=========================================
   // Mashcera nubi (QA60)
@@ -32,9 +32,9 @@ function maskS2clouds(image) {   // la funzione prende un’immagine Sentinel-2 
 // AOI (Area of interest) e visualizzazione
 //=========================================
 
-var aoi = table; // table è uno shapefile importato
-Map.centerObject(aoi, 11); // centra la mappa su aoi con zoom 11; di solito lo zoom va da 0 a 20.
-Map.addLayer(aoi, {color: 'red'}, 'AOI Medellín'); // aggiunge il layer di rettangolo rosso sulla mappa. 
+var aoi = table; // table è lo shapefile importato
+Map.centerObject(aoi, 11); // centra la mappa su aoi con zoom 11
+Map.addLayer(aoi, {color: 'red'}, 'AOI Sulcis Iglesiente'); // aggiunge il layer di rettangolo rosso sulla mappa. 
 
 //=========================================
 // Collezione immagini Sentinel-2
@@ -45,7 +45,7 @@ Map.addLayer(aoi, {color: 'red'}, 'AOI Medellín'); // aggiunge il layer di rett
 
 var collection17 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2017-01-01', '2017-12-31') // range temporale
+  .filterDate('2017-01-07', '2017-08-31') // range temporale: mesi di luglio e agosto (estate)
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -53,7 +53,7 @@ var collection17 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende l
 // Numero di immagini disponibili
 //=========================================
 
-print('Number of images in collection:', collection17.size()); // dà quante immagini ci sono dopo i filtri. 
+print(collection17.size()); // dà quante immagini ci sono dopo i filtri. 
 
 // ==============================================
 // Creazione median composite
@@ -88,9 +88,9 @@ Map.addLayer(composite17, {
 
 Export.image.toDrive({
   image: composite17.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
-  description: 'I17',
+  description: 'S17',
   folder: 'GEE_exports',
-  fileNamePrefix: 'I17',
+  fileNamePrefix: 'S17',
   region: aoi,
   scale: 10,
   crs: 'EPSG:4326', // coordinate reference system
