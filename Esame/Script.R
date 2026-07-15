@@ -79,36 +79,35 @@ im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
 # plot RGB, nir in blue
 im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
 
+
 ################################ 2025
 
-
-
-
-
-# 2025
-
-
-# plot
 plot(gutturu25)
+dev.off()
 
-# plot separate bands
-im.multiframe(3,2)
+# visualizzazione dell'immagine importata in tutte le sue bande e scaricata l'immagine in .png
+
+im.multiframe(2,3)
 plot(gutturu25[[1]], main = "B2 - Blue", col=cividis(100))
-plot(S25[[2]], main = "B3 - Green", col=cividis(100))
-plot(S25[[3]], main = "B4 - Red", col=cividis(100))
-plot(S25[[4]], main = "B8 - NIR", col=cividis(100))
-plot(S25[[5]], main = "B11 - SWIR", col=cividis(100))
+plot(gutturu25[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu25[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu25[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu25[[5]], main = "B11 - SWIR", col=cividis(100))
 
+# visualizzazione dell'immagine in RGB
+
+im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(S25, r=3, g=2, b=1)
+im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
 
-# plot RGB, false color
-im.plotRGB(S25, r=4, g=2, b=1)
+# plot RGB, nir in red
+im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 
-# plot RGB, blue in red
-im.plotRGB(S25, r=3, g=2, b=4)
+# plot RGB, nir in blue
+im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 
+###################################
 # calcolo DVI
 # 2017
 dvi15 <- im.dvi(gutturu15, 4, 3)
