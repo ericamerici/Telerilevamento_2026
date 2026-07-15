@@ -11,16 +11,22 @@ Conclusioni
 Bibliografia
 
 
-## Introduzione
+# Introduzione
 
 La Sardegna risulta essere una regione particolarmente sensibile alla desertificazione. L’Isola, infatti, è tra le regioni d’Europa a maggior rischio. Le motivazioni sono legate ad un aumento dei processi di degrado del suolo e della vegetazione a seguito di variazioni climatiche, ma soprattutto di attività antropiche.
 
-## Obiettivi
+# Obiettivo
 
-## Localizzazione
-La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km^2 (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. 
+L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di una zona che risulta essere vulnerabile alla desertificazione, analizzando **immagini satellitari** in tre momenti distinti: 2017, 2021 e 2025. Tale analisi si sviluppa attorno al calcolo di **indici spettrali** legati alla vegetazione, quali:
+- **DVI** (Difference Vegetation Index);
+- **NDVI** (Normalized Difference Vegetation Index).
 
-### Raccolta delle immagini
+# Localizzazione
+La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. 
+
+# Raccolta dati e metodologia
+
+## Raccolta delle immagini
 Lo shapefile della provincia è stato scaricato dal sito web di [ISTAT](https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/). La definizione delle province della Sardegna tende a variare spesso, a seconda delle amministrazioni. Si è scaricata la cartella .zip dei limiti amministrativi del 2026, è stata esportata solo la provincia di Sulcis Iglesiente tramite Qgis.
 
 Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), importando lo shapefile della provincia come cartella compressa .zip, contentente i formati .cpg, .dbf, .prj, .qmd, .shp, .shx. 
@@ -31,7 +37,7 @@ Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine]
 
 ## Impostazione della working directory
 ````md
-setwd("C://Users/giuli/OneDrive/telexam/")
+setwd("/home/erica/Documenti/RS_R")
 ````
 
 ## Caricamento pacchetti
