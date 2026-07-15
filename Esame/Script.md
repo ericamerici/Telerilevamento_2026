@@ -70,9 +70,9 @@ Vengono caricati i pacchetti necessari per il progetto in R.
 library(terra)  
 library(imageRy) # utile per alcune funzioni di visualizzazione o di calcolo degli indici
 library(viridis) # visualizzazione mappe con colori adatti a colorblind
-library(ggridges) 
-library(ggplot2)  
-library(patchwork)  
+library(ggplot2)  # creazione grafici
+library(patchwork) # combinazione grafici
+library(ggridges)  # creazione grafici di tipo ridge plot
 ````
 
 ## Importazione raster Sentinel-2
@@ -111,11 +111,50 @@ plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
 
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
 ````R
-# plot RGB, colori naturali 
-im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori Naturali")
+im.multiframe(1,3)
 
-# plot RGB, false color
-im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Composizione Falsi Colori")
+# plot RGB, colori naturali 
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
+
+# plot RGB, nir in red
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
+
+# plot RGB, nir in blue
+im.plotRGB(gutturu15, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2015)")
+````
+
+<img width="1536" height="738" alt="RGB15" src="https://github.com/user-attachments/assets/e3d5a6c9-9993-4c3f-ab16-985e433dd38d" />
+
+### 2020
+
+Si compie lo stesso procedimento con le immagine relative al periodo estivo del 2020.
+
+````R
+plot(gutturu20)
+````
+Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
+````R
+im.multiframe(2,3)
+plot(gutturu20[[1]], main = "B2 - Blue", col=cividis(100))
+plot(gutturu20[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu20[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu20[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu20[[5]], main = "B11 - SWIR", col=cividis(100))
+````
+
+
+Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
+````R
+im.multiframe(1,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
+
+# plot RGB, nir in red
+im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
+
+# plot RGB, nir in blue
+im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
 ````
 
 
