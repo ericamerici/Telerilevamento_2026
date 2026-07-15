@@ -16,7 +16,7 @@ Bibliografia
 La Sardegna risulta essere una regione particolarmente sensibile alla desertificazione. L’Isola, infatti, è tra le regioni d’Europa a maggior rischio. Le motivazioni sono legate ad un aumento dei processi di degrado del suolo e della vegetazione a seguito di variazioni climatiche, ma soprattutto di attività antropiche.
 
 <img width="1382" height="914" alt="DesertificazioneSardegna" src="https://github.com/user-attachments/assets/efeb9011-3004-4ef5-9580-4b39ad0183df" />
- Immagine di Gloria Calvi [Unionesarda.it] (https://www.unionesarda.it/3-minuti-con/la-siccita-in-sardegna-colpa-della-corrente-del-golfo-oypiotce)
+ Immagine di Gloria Calvi [Unionesarda.it](https://www.unionesarda.it/3-minuti-con/la-siccita-in-sardegna-colpa-della-corrente-del-golfo-oypiotce)
 
 
 # Obiettivo
