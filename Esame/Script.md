@@ -100,21 +100,19 @@ plot(gutturu15)
 ````
 Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
 ````R
-png("Bande15.png",
-    width = 1600,
-    height = 1200,
-    res = 200)
-im.multiframe(3,2)
-plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100)) # main corrisponde al titolo e (100) è il numero di sfumature di colore
+im.multiframe(2,3)
+plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100))
 plot(gutturu15[[2]], main = "B3 - Green", col=cividis(100))
 plot(gutturu15[[3]], main = "B4 - Red", col=cividis(100))
 plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100))
 plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
 ````
+<img width="1536" height="738" alt="Bande15im" src="https://github.com/user-attachments/assets/cda51e27-6c98-4af8-8a43-7755a4176e1a" />
+
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
 ````R
 # plot RGB, colori naturali 
-im.plotRGB(gutturu15, r=3, g=2, b=1)
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "2015")
 
 # plot RGB, false color
 im.plotRGB(gutturu15, r=4, g=2, b=1)
