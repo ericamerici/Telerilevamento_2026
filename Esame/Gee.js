@@ -130,7 +130,7 @@ var composite20 = collection20.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-var first20 = ee.Image(collection21.first());
+var first20 = ee.Image(collection20.first());
 Map.addLayer(first20, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
