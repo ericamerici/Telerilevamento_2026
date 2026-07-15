@@ -20,9 +20,18 @@ La Sardegna risulta essere una regione particolarmente sensibile alla desertific
 L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di una zona che risulta essere vulnerabile alla desertificazione, analizzando **immagini satellitari** in tre momenti distinti: 2017, 2021 e 2025. Tale analisi si sviluppa attorno al calcolo di **indici spettrali** legati alla vegetazione, quali:
 - **DVI** (Difference Vegetation Index);
 - **NDVI** (Normalized Difference Vegetation Index).
+  
+## Giustificazione
+L'analisi è stata sviluppata nei limiti di una provincia per facilitare l'azione politica da parte delle amministrazioni, che in questo modo possono venire a conoscenza in modo specifico del territorio sui cui possono e devono agire.
 
 # Localizzazione
-La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. 
+La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. Al suo interno è presente una porzione di Parco Naturale Regionale di Gutturu Mannu, alcune Zone di Protezione Speciale e Zone Speciali di Conservazione; è presente un importante poligono militare, ovvero il poligono di Capo Teulada. 
+
+Confina a est con la provincia di Cagliari, anch'essa molto vulnerabile alla desertificazione e ancora più antropizzata. 
+
+L
+
+
 
 # Raccolta dati e metodologia
 
@@ -36,16 +45,16 @@ Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine]
 > Il codice completo in JavaScript utilizzato per ottenere le immagini si trova nel file Gee.js
 
 ## Impostazione della working directory
-````md
+````R
 setwd("/home/erica/Documenti/RS_R")
 ````
 
 ## Caricamento pacchetti
-````md
+````R
 library(terra)  
-library(imageRy)  
-library(viridis)
-library(ggridges)
+library(imageRy) # utile per alcune funzioni di visualizzazione o di calcolo degli indici
+library(viridis) # visualizzazione mappe con colori adatti a colorblind
+library(ggridges) 
 library(ggplot2)  
 library(patchwork)  
 ````
