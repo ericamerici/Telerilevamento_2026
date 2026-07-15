@@ -58,7 +58,7 @@ Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine]
 
 ## Impostazione della working directory
 ````R
-setwd("/home/erica/Documenti/RS_R") # set working directory
+setwd("C:/Users/Erica/OneDrive/Documents/RS_R") # set working directory
 getwd() # get working directory
 ````
 
@@ -112,10 +112,10 @@ plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
 ````R
 # plot RGB, colori naturali 
-im.plotRGB(gutturu15, r=3, g=2, b=1, title = "2015")
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori Naturali")
 
 # plot RGB, false color
-im.plotRGB(gutturu15, r=4, g=2, b=1)
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Composizione Falsi Colori")
 ````
 
 
