@@ -24,12 +24,16 @@ L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di
 ## Giustificazione
 L'analisi è stata sviluppata nei limiti di una provincia per facilitare l'azione politica da parte delle amministrazioni, che in questo modo possono venire a conoscenza in modo specifico del territorio sui cui possono e devono agire.
 
+La scelta di questa provincia è dovuta alla sua eterogeneità, che rende il territorio complesso e sfaccettato.
+
 # Localizzazione
 La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. Al suo interno è presente una porzione di Parco Naturale Regionale di Gutturu Mannu, alcune Zone di Protezione Speciale e Zone Speciali di Conservazione; è presente un importante poligono militare, ovvero il poligono di Capo Teulada. 
 
 Confina a est con la provincia di Cagliari, anch'essa molto vulnerabile alla desertificazione e ancora più antropizzata. 
 
-L
+
+
+
 
 
 
@@ -46,7 +50,8 @@ Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine]
 
 ## Impostazione della working directory
 ````R
-setwd("/home/erica/Documenti/RS_R")
+setwd("/home/erica/Documenti/RS_R") # set working directory
+getwd() # get working directory
 ````
 
 ## Caricamento pacchetti
@@ -58,6 +63,8 @@ library(ggridges)
 library(ggplot2)  
 library(patchwork)  
 ````
+
+
 
 # Bibliografia e Sitografia
 Ministero dell’Ambiente e della Tutela del territorio e del Mare
