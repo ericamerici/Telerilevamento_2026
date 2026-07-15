@@ -84,7 +84,41 @@ gutturu15 <- rast("S15.tif")
 gutturu20 <- rast("S20.tif")
 gutturu25 <- rast("S25.tif")
 ````
-## 
+> [!NOTE]
+> Come specificato nel file del codice GEE, il periodo considerato è quello estivo, specificatamente i mesi di luglio e agosto, in tutti e tre gli anni. Si è scelto questo periodo in quanto la vegetazione è maggiormente stressata: si ricerca di valutarne lo stato di salute nei momenti di stress idrico e di maggiore esposizione agli incendi.
+
+
+
+
+## Visualizzazione immagini
+### 2015
+
+Vengono visualizzate tutte le bande comprese nell'immagine importata, attraverso il plottaggio.
+
+````R
+plot(gutturu15)
+````
+Si scarica l'immagine in formato .png, utilizzando la visualizzazione im.multiframe()
+````R
+png("Bande15.png",
+    width = 1600,
+    height = 1200,
+    res = 200)
+im.multiframe(3,2)
+plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100)) # main corrisponde al titolo e (100) è il numero di sfumature di colore
+plot(gutturu15[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu15[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
+````
+Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
+````R
+# plot RGB, colori naturali 
+im.plotRGB(gutturu15, r=3, g=2, b=1)
+
+# plot RGB, false color
+im.plotRGB(gutturu15, r=4, g=2, b=1)
+````
 
 
 # Bibliografia e Sitografia
