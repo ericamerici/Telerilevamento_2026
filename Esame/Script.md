@@ -1,4 +1,4 @@
-# Analisi dell'espansione urbana nel municipio di Medellín, Colombia
+# Analisi della desertificazione della provincia del Sulcis Iglesiente, Sardegna
 
 Scaletta:
 Introduzione
@@ -7,6 +7,7 @@ Data Gathering e Metodologia
 Calcolo Indici
 Analisi
 Conclusioni
+Bibliografia
 
 
 ### Introduzione
