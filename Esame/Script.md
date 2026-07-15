@@ -225,7 +225,34 @@ dev.off()
 
 L'indice DVI (Difference Vegetation Index)
 
-###
+
+### 2015
+
+### 2020
+
+### 2025
+
+## NDVI
+
+## NDMI
+
+# Analisi multitemporale
+
+## Visualizzazione in RGB
+
+Innanzittutto, si visualizzano le diverse immagini RGB per avere un confronto indicativo. Si selezionano solamente le composizioni a colori naturali e a falsi colori con la banda NIR nel rosso.
+
+````R
+im.multiframe (2,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
+
+# plot RGB, nir in red
+im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+dev.off()
+````
+
 
 # Bibliografia e Sitografia
 Ministero dell’Ambiente e della Tutela del territorio e del Mare
