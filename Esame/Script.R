@@ -123,20 +123,26 @@ plot(dvi25, main = "DVI 2025", col=viridis(100))
 
 # differenza DVI
 dvi.diff <- dvi15 - dvi25
-plot(dvi.diff, main = "Delta DVI", col=magma(100))
+plot(dvi.diff, main = "ΔDVI", col=magma(100))
 
-#NDVI
-#2017
+# NDVI
+
+# 2015
 ndvi15 <- im.ndvi(gutturu15, 4, 3)
+
+# 2020
+ndvi20 <- im.ndvi(gutturu20, 4, 3)
 
 # 2025
 ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
 
 # plottaggio insieme
-im.multiframe(1,2)
+im.multiframe(1,3)
 plot(ndvi15, main = "NDVI 2015", col=viridis(100))
+plot(ndvi20, main = "NDVI 2020", col=viridis(100))
 plot(ndvi25, main = "NDVI 2025", col=viridis(100))
+
 
 # differenza DVI
 ndvi.diff <- ndvi15 - ndvi25
@@ -145,11 +151,30 @@ plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
 
 
 # differenza NDMI
+im.multiframe(1,3)
 ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
-plot(ndmi15, main = "NDMI 2017", col=viridis(100))
+plot(ndmi15, main = "NDMI 2015", col=viridis(100))
+
+ndmi20 <- (gutturu20[[4]]-gutturu20[[5]])/(gutturu20[[4]]+gutturu20[[5]])
+plot(ndmi20, main = "NDMI 2020", col=viridis(100))
 
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 plot(ndmi25, main = "NDMI 2025", col=viridis(100))
 
 ndmi.diff <- ndmi15 - ndmi25
 plot(ndmi.diff, main = "DELTA NDMI", col=viridis(100))
+
+dvi_ridg=c(dvi15, dvi25)  
+names(dvi_ridg) =c("DVI 2015", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(dvi_ridg, scale=2, palette="viridis")
+
+ndvi_ridg=c(ndvi15, ndvi20, ndvi25)  
+names(ndvi_ridg)=c("NDVI 2015", "NDVI 2020", "NDVI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndvi_ridg, scale=2, palette="viridis")
+
+ndmi_ridg=c(ndmi15, ndmi20, ndmi25)  
+names(ndmi_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndmi_ridg, scale=2, palette="viridis")
