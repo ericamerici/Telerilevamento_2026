@@ -11,7 +11,6 @@
   // Limiti amministrativi della provincia di interesse importati in formato shapefile da ISTAT
 //=========================================
 
-var table = ee.FeatureCollection("projects/telerilevamento-493414/assets/sulcisiglesiente");
 
 //=========================================
   // Mashcera nubi (QA60)
@@ -34,18 +33,18 @@ function maskS2clouds(image) {   // la funzione prende un’immagine Sentinel-2 
 
 var aoi = table; // table è lo shapefile importato
 Map.centerObject(aoi, 11); // centra la mappa su aoi con zoom 11
-Map.addLayer(aoi, {color: 'red'}, 'AOI Sulcis Iglesiente'); // aggiunge il layer di rettangolo rosso sulla mappa. 
+Map.addLayer(aoi, {color: 'red'}, 'AOI GM'); // aggiunge il layer di rettangolo rosso sulla mappa. 
 
 //=========================================
 // Collezione immagini Sentinel-2
 //=========================================
 
 ////////////////////////////////////////////////////////////////
-// Immagine del 2017
+// Immagine del 2015
 
-var collection17 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
+var collection15 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2017-01-07', '2017-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filterDate('2015-01-07', '2015-08-31') // range temporale: mesi di luglio e agosto (estate)
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -53,13 +52,13 @@ var collection17 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende l
 // Numero di immagini disponibili
 //=========================================
 
-print(collection17.size()); // dà quante immagini ci sono dopo i filtri. 
+print(collection15.size()); // dà quante immagini ci sono dopo i filtri. 
 
 // ==============================================
 // Creazione median composite
 // ==============================================
 
-var composite17 = collection17.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
+var composite15 = collection15.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
 
 // ==============================================
 // Visualizzazione sulla mappa 
@@ -68,29 +67,29 @@ var composite17 = collection17.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-var first17 = ee.Image(collection17.first());
-Map.addLayer(first17, {
+var first15 = ee.Image(collection15.first());
+Map.addLayer(first15, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'First image RGB 17');
+}, 'First image RGB 15');
 
 // Composite mediano RGB
-Map.addLayer(composite17, {
+Map.addLayer(composite15, {
   bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
   min: 0,
   max: 0.3
-}, 'Median composite RGB 17');
+}, 'Median composite RGB 15');
 
 // ==============================================
 // Export su Google Drive
 // ==============================================
 
 Export.image.toDrive({
-  image: composite17.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
-  description: 'S17',
+  image: composite15.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  description: 'S15',
   folder: 'GEE_exports',
-  fileNamePrefix: 'S17',
+  fileNamePrefix: 'S15',
   region: aoi,
   scale: 10,
   crs: 'EPSG:4326', // coordinate reference system
@@ -99,7 +98,7 @@ Export.image.toDrive({
 
 
 //////////////////////////////////////////////////////////////////
-// Immagine del 2021
+// Immagine del 2020
 
 
 //=========================================
@@ -108,7 +107,7 @@ Export.image.toDrive({
 
 var collection21 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2021-07-01', '2021-08-31') // range temporale
+  .filterDate('2020-07-01', '2020-08-31') // range temporale
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -131,12 +130,12 @@ var composite21 = collection21.median().clip(aoi); // per ogni pixel e per ogni 
 Map.centerObject(aoi, 10);
 
 // Prima immagine RGB
-var first21 = ee.Image(collection21.first());
-Map.addLayer(first21, {
+var first20 = ee.Image(collection21.first());
+Map.addLayer(first20, {
   bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
   min: 0,
   max: 0.3
-}, 'First image RGB 21');
+}, 'First image RGB 20');
 
 // Composite mediano RGB
 Map.addLayer(composite21, {
@@ -212,7 +211,7 @@ Map.addLayer(composite25, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite25.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite25.select(['B2','B3','B4','B8', 'B11']),  // Include tutte le bande che mi servono per l'analisi
   description: 'S25',
   folder: 'GEE_exports',
   fileNamePrefix: 'S25',
