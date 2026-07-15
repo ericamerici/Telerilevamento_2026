@@ -1,4 +1,5 @@
-# Analisi multitemporale della desertificazione nella provincia del Sulcis Iglesiente, Sardegna
+# Analisi Multitemporale dello Stato di Conservazione della Vegetazione nel Parco di Gutturu Mannu (2015–2025)
+
 
 # set working directory
 setwd("/home/erica/Documenti/RS_R")
@@ -16,30 +17,39 @@ library(ggridges)
 library(ggplot2)  
 library(patchwork) 
 
-# 2017
+# 2015
 # import
-S17 <- rast("S17.tif")
+gutturu15 <- rast("S15.tif")
 
 # plot
-plot(S17)
+plot(gutturu15)
+dev.off()
 
-# plot separate bands
+# visualizzazione dell'immagine importata in tutte le sue bande e scaricata l'immagine uscente in .png
+png("Bande15.png",
+    width = 1600,
+    height = 1200,
+    res = 200)
 im.multiframe(3,2)
-plot(S17[[1]], main = "B2 - Blue", col=cividis(100))
-plot(S17[[2]], main = "B3 - Green", col=cividis(100))
-plot(S17[[3]], main = "B4 - Red", col=cividis(100))
-plot(S17[[4]], main = "B8 - NIR", col=cividis(100))
-plot(S17[[5]], main = "B11 - SWIR", col=cividis(100))
+plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100))
+plot(gutturu15[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu15[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
+dev.off()
 
-
+png("RGB15.png",
+    width = 1600,
+    height = 1200,
+    res = 200)
 # plot RGB, colori naturali 
-im.plotRGB(S17, r=3, g=2, b=1)
+im.plotRGB(gutturu15, r=3, g=2, b=1)
 
 # plot RGB, false color
-im.plotRGB(S17, r=4, g=2, b=1)
+im.plotRGB(gutturu15, r=4, g=2, b=1)
 
 # plot RGB, blue in red
-im.plotRGB(S17, r=3, g=2, b=4)
+im.plotRGB(gutturu15, r=3, g=2, b=4)
 
 # 2025
 # import
@@ -100,12 +110,14 @@ plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 ndvi.diff <- ndvi17 - ndvi25
 plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
 
-# differenza NBDI
-ndbi17 <- (S17[[5]]-S17[[4]])/(S17[[5]]+S17[[4]])
-plot(ndbi17, main = "NDBI 2017", col=viridis(100))
 
-ndbi25 <- (S25[[5]]-S25[[4]])/(S25[[5]]+S25[[4]])
-plot(ndbi25, main = "NDBI 2025", col=viridis(100))
 
-ndbi.diff <- ndbi17 - ndbi25
-plot(ndbi.diff, main = "DELTA NDBI", col=viridis(100))
+# differenza NDMI
+ndmi17 <- (S17[[4]]-S17[[5]])/(S17[[4]]+S17[[5]])
+plot(ndmi17, main = "NDBI 2017", col=viridis(100))
+
+ndmi25 <- (S25[[4]]-S25[[5]])/(S25[[4]]+S25[[5]])
+plot(ndmi25, main = "NDBI 2025", col=viridis(100))
+
+ndmi.diff <- ndmi17 - ndmi25
+plot(ndmi.diff, main = "DELTA NDMI", col=viridis(100))
