@@ -59,4 +59,12 @@ library(ggplot2)
 library(patchwork)  
 ````
 
-
+# Bibliografia e Sitografia
+Ministero dell’Ambiente e della Tutela del territorio e del Mare
+Comitato Nazionale per la Lotta alla Siccità e alla Desertificazione (2006). La vulnerabilità
+alla desertificazione in Italia:
+raccolta, analisi, confronto
+e verifica delle procedure
+cartografiche di mappatura
+e degli indicatori a scala
+nazionale e locale. [link](https://www.isprambiente.gov.it/contentfiles/00003400/3468-manuali-2006-40.pdf/)
