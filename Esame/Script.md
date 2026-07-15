@@ -24,7 +24,7 @@ L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di
 ## Giustificazione
 L'analisi è stata sviluppata nei limiti di una provincia per facilitare l'azione politica da parte delle amministrazioni, che in questo modo possono venire a conoscenza in modo specifico del territorio sui cui possono e devono agire.
 
-La scelta di questa provincia è dovuta alla sua eterogeneità, che rende il territorio complesso e sfaccettato.
+La scelta di questa provincia è dovuta alla sua eterogeneità, che rende il territorio complesso e sfaccettato. La presenza di zone protette e naturali, di zone militare e di spiaggie antropizzate può costituire un interessante punto di partenza per un studio più approfondito, contestuale alle diverse identità e multi-disciplinare.
 
 # Localizzazione
 La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. Al suo interno è presente una porzione di Parco Naturale Regionale di Gutturu Mannu, alcune Zone di Protezione Speciale e Zone Speciali di Conservazione; è presente un importante poligono militare, ovvero il poligono di Capo Teulada. 
