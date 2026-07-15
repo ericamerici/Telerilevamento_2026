@@ -15,6 +15,9 @@ Bibliografia
 
 La Sardegna risulta essere una regione particolarmente sensibile alla desertificazione. L’Isola, infatti, è tra le regioni d’Europa a maggior rischio. Le motivazioni sono legate ad un aumento dei processi di degrado del suolo e della vegetazione a seguito di variazioni climatiche, ma soprattutto di attività antropiche.
 
+<img width="1433" height="948" alt="DesertificazioneSardegna" src="https://github.com/user-attachments/assets/656a5cf7-591f-46cb-b7ab-1f9c948509b0" />
+
+
 # Obiettivo
 
 L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di una zona che risulta essere vulnerabile alla desertificazione, analizzando **immagini satellitari** in tre momenti distinti: 2017, 2021 e 2025. Tale analisi si sviluppa attorno al calcolo di **indici spettrali** legati alla vegetazione, quali:
@@ -63,6 +66,8 @@ library(ggridges)
 library(ggplot2)  
 library(patchwork)  
 ````
+
+## Importazione raster Sentinel-2
 
 
 
