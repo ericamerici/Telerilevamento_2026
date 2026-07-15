@@ -17,10 +17,13 @@ library(ggridges)
 library(ggplot2)  
 library(patchwork) 
 
-# 2015
-# import
-gutturu15 <- rast("S15.tif")
 
+# importazione di tutti i file raster
+gutturu15 <- rast("S15.tif")
+gutturu20 <- rast("S20.tif")
+gutturu25 <- rast("S25.tif")
+
+# 2015
 # plot
 plot(gutturu15)
 dev.off()
@@ -42,6 +45,8 @@ png("RGB15.png",
     width = 1600,
     height = 1200,
     res = 200)
+plot(gutturu15)
+dev.off()
 # plot RGB, colori naturali 
 im.plotRGB(gutturu15, r=3, g=2, b=1)
 
