@@ -241,3 +241,28 @@ ndmiA_ridg=c(ndmiA15, ndmiA20, ndmiA25)
 names(ndmiA_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
 im.ridgeline(ndmiA_ridg, scale=2, palette="magma")
+
+####################################################
+####################################################
+####################################################
+####################################################
+GM16 <-rast("P16.tif")
+plot(GM16)
+
+GM21 <-rast("P21.tif")
+plot(GM21)
+
+GM26 <-rast("P26.tif")
+plot(GM26)
+
+# 2016
+dvi16 <- im.dvi(GM16, 4, 3)
+
+# 2021
+dvi21 <- im.dvi(GM21, 4, 3)
+
+# 2026
+dvi26 <- im.dvi(GM26, 4, 3)
+
+dvi.diff <- dvi16 - dvi26
+plot(dvi.diff)
