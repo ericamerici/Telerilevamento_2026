@@ -149,7 +149,7 @@ Map.addLayer(composite20, {
 // ==============================================
 
 Export.image.toDrive({
-  image: composite20.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
+  image: composite20.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
   description: 'S20',
   folder: 'GEE_exports',
   fileNamePrefix: 'S20',
