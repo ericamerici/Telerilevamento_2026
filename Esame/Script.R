@@ -108,22 +108,25 @@ im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 
 ###################################
-# calcolo DVI
-# 2017
+# Calcolo indici
+
+# Calcolo DVI
+
+# 2015
 dvi15 <- im.dvi(gutturu15, 4, 3)
+
+# 2020
+dvi20 <- im.dvi(gutturu20, 4, 3)
 
 # 2025
 dvi25 <- im.dvi(gutturu25, 4, 3)
 
+# plottaggio insieme DVI
 
-# plottaggio insieme
-im.multiframe(1,2)
+im.multiframe(1,3)
 plot(dvi15, main = "DVI 2015", col=viridis(100))
+plot(dvi20, main = "DVI 2020", col=viridis(100))
 plot(dvi25, main = "DVI 2025", col=viridis(100))
-
-# differenza DVI
-dvi.diff <- dvi15 - dvi25
-plot(dvi.diff, main = "ΔDVI", col=magma(100))
 
 # NDVI
 
@@ -136,45 +139,105 @@ ndvi20 <- im.ndvi(gutturu20, 4, 3)
 # 2025
 ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
+# plottaggio insieme NDVI
 
-# plottaggio insieme
 im.multiframe(1,3)
 plot(ndvi15, main = "NDVI 2015", col=viridis(100))
 plot(ndvi20, main = "NDVI 2020", col=viridis(100))
 plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 
-
-# differenza DVI
-ndvi.diff <- ndvi15 - ndvi25
-plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
-
-
-
-# differenza NDMI
-im.multiframe(1,3)
+# NDMI
+#2015
 ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
-plot(ndmi15, main = "NDMI 2015", col=viridis(100))
 
+#2020
 ndmi20 <- (gutturu20[[4]]-gutturu20[[5]])/(gutturu20[[4]]+gutturu20[[5]])
-plot(ndmi20, main = "NDMI 2020", col=viridis(100))
 
+#2025
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
+
+# Plottaggio insieme NDMI
+im.multiframe(1,3)
+plot(ndmi15, main = "NDMI 2015", col=viridis(100))
+plot(ndmi20, main = "NDMI 2020", col=viridis(100))
 plot(ndmi25, main = "NDMI 2025", col=viridis(100))
 
-ndmi.diff <- ndmi15 - ndmi25
-plot(ndmi.diff, main = "DELTA NDMI", col=viridis(100))
 
-dvi_ridg=c(dvi15, dvi25)  
-names(dvi_ridg) =c("DVI 2015", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
+#################################
+# Analisi multitemporale
+
+### Differenze spettrali degli indici tra il 2015 e il 2025 (Delta)
+
+# differenza DVI
+dvi.diff <- dvi15 - dvi25
+
+# differenza NDVI
+ndvi.diff <- ndvi15 - ndvi25
+
+# differenza NDMI
+ndmi.diff <- ndmi15 - ndmi25
+
+
+# Visualizzazione dei tre risultati
+im.multiframe(1,3)
+plot(dvi.diff, main = "ΔDVI 2015-2025", col=magma(100))
+plot(ndvi.diff, main = "ΔNDVI 2015-2025", col=magma(100))
+plot(ndmi.diff, main = "ΔNDMI 2015-2025", col=magma(100))
+
+### Ridge plot (per tutti gli indici e per tutti gli anni)
+  
+dvi_ridg=c(dvi15, dvi20, dvi25)  
+names(dvi_ridg) =c("DVI 2015", "DVI 2020", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
-im.ridgeline(dvi_ridg, scale=2, palette="viridis")
+im.ridgeline(dvi_ridg, scale=2, palette="magma")
 
 ndvi_ridg=c(ndvi15, ndvi20, ndvi25)  
 names(ndvi_ridg)=c("NDVI 2015", "NDVI 2020", "NDVI 2025") # Per assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
-im.ridgeline(ndvi_ridg, scale=2, palette="viridis")
+im.ridgeline(ndvi_ridg, scale=2, palette="magma")
 
 ndmi_ridg=c(ndmi15, ndmi20, ndmi25)  
 names(ndmi_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
-im.ridgeline(ndmi_ridg, scale=2, palette="viridis")
+im.ridgeline(ndmi_ridg, scale=2, palette="magma")
+
+##################################################
+##################################################
+# prova con rettangolo
+
+# importazione
+
+A15 <- rast("A15.tif")
+A20 <- rast("A20.tif")
+A25 <- rast("A25.tif")
+
+# NDVI
+
+# 2015
+ndviA15 <- im.ndvi(A15, 4, 3)
+
+# 2020
+ndviA20 <- im.ndvi(A20, 4, 3)
+
+# 2025
+ndviA25 <- im.ndvi(A25, 4, 3)
+
+ndviA.diff <- ndviA15 - ndviA25
+
+#NDMI
+
+#2015
+ndmiA15 <- (A15[[4]]-A15[[5]])/(A15[[4]]+A15[[5]])
+
+#2020
+ndmiA20 <- (A20[[4]]-A20[[5]])/(A20[[4]]+A20[[5]])
+
+#2025
+ndmiA25 <- (A25[[4]]-A25[[5]])/(A25[[4]]+A25[[5]])
+
+ndmiA.diff <- ndmiA15 - ndmiA25
+
+ndmiA_ridg=c(ndmiA15, ndmiA20, ndmiA25)  
+names(ndmiA_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndmiA_ridg, scale=2, palette="magma")
