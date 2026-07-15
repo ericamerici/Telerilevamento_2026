@@ -202,6 +202,7 @@ dev.off()
 
 #### Visualizzazione RGB
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione, sempre utilizzando la funzione `im.multiframe()`
+
 ````R
 im.multiframe(1,3)
 
@@ -225,10 +226,85 @@ dev.off()
 
 L'indice DVI (Difference Vegetation Index)
 
+Si visualizza l'indice DVI per ogni anno considerato.
+
+````R
+# 2015
+dvi15 <- im.dvi(gutturu15, 4, 3)
+
+# 2020
+dvi20 <- im.dvi(gutturu20, 4, 3)
+
+# 2025
+dvi25 <- im.dvi(gutturu25, 4, 3)
+````
+
+Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+````R
+im.multiframe(1,3)
+plot(dvi15, main = "DVI 2015", col=viridis(100))
+plot(dvi20, main = "DVI 2020", col=viridis(100))
+plot(dvi25, main = "DVI 2025", col=viridis(100))
+
+dev.off()
+````
+<img width="1536" height="738" alt="dvi" src="https://github.com/user-attachments/assets/10d38462-7298-448a-8de0-fd8bc65cbd8e" />
+
 
 ## NDVI
 
+Si visualizza l'indice DVI per ogni anno considerato.
+
+````R
+# 2015
+ndvi15 <- im.ndvi(gutturu15, 4, 3)
+
+# 2020
+ndvi20 <- im.ndvi(gutturu20, 4, 3)
+
+# 2025
+ndvi25 <- im.ndvi(gutturu25, 4, 3)
+````
+
+Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+````R
+im.multiframe(1,3)
+plot(ndvi15, main = "NDVI 2015", col=viridis(100))
+plot(ndvi20, main = "NDVI 2020", col=viridis(100))
+plot(ndvi25, main = "NDVI 2025", col=viridis(100))
+
+dev.off()
+````
+<img width="1536" height="738" alt="ndvi" src="https://github.com/user-attachments/assets/f602a8e7-da39-44c3-82f2-a2a727c70bb9" />
+
+
 ## NDMI
+
+Si visualizza l'indice DVI per ogni anno considerato.
+
+````R
+# 2015
+ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
+
+# 2020
+ndmi20 <- (gutturu20[[4]]-gutturu20[[5]])/(gutturu20[[4]]+gutturu20[[5]])
+
+# 2025
+ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
+````
+
+Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+
+````R
+im.multiframe(1,3)
+plot(ndmi15, main = "NDMI 2015", col=viridis(100))
+plot(ndmi20, main = "NDMI 2020", col=viridis(100))
+plot(ndmi25, main = "NDMI 2025", col=viridis(100))
+
+dev.off()
+````
+<img width="1536" height="738" alt="ndmi" src="https://github.com/user-attachments/assets/a5cfba50-3033-4c69-a2d2-32b0cb0d9dcc" />
+
 
 # Analisi multitemporale
 
@@ -268,22 +344,25 @@ La variazione degli indici è espressa in due modi:
 - una differenza spettrale dei risultati degli anni 2015 e 2025;
 - una comparazione attraverso il ridge plot di tutti e tre gli anni presi in considerazione.
 
-### ΔDVI
+#### ΔDVI
 
 ````R
 dvi.diff <- dvi15 - dvi25
 ````
 
-### ΔNDVI
+#### ΔNDVI
 
 ````R
 ndvi.diff <- ndvi15 - ndvi25
 ````
-### ΔNDMI
+
+#### ΔNDMI
 
 ````R
 dvi.diff <- ndmi15 - ndmi25
 ````
+
+### Differenza spettrale
 
 Si visualizzano insieme attraverso la funzione `im.multiframe()`
 
@@ -298,6 +377,47 @@ dev.off()
 ````
 
 <img width="1536" height="738" alt="delta" src="https://github.com/user-attachments/assets/5ef50dba-fa59-44d2-8e67-08848c4c93e7" />
+
+### Ridge plots
+
+#### ΔDVI
+
+````R
+dvi_ridg=c(dvi15, dvi20, dvi25)  
+names(dvi_ridg) =c("DVI 2015", "DVI 2020", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(dvi_ridg, scale=2, palette="magma")
+````
+<img width="1536" height="738" alt="dviRP" src="https://github.com/user-attachments/assets/d71671ac-c4fa-4d59-900f-dfe623ebd98a" />
+
+#### ΔNDVI
+
+````R
+ndvi_ridg=c(ndvi15, ndvi20, ndvi25)  
+names(ndvi_ridg)=c("NDVI 2015", "NDVI 2020", "NDVI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndvi_ridg, scale=2, palette="magma")
+````
+
+<img width="1536" height="738" alt="ndviRP" src="https://github.com/user-attachments/assets/48a1e1b1-2308-4a97-a010-a2d7405c08ac" />
+
+
+#### ΔNDMI
+
+````R
+ndmi_ridg=c(ndmi15, ndmi20, ndmi25)  
+names(ndmi_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndmi_ridg, scale=2, palette="magma")
+
+````
+
+<img width="1536" height="738" alt="ndmiRP" src="https://github.com/user-attachments/assets/dba352e3-e365-4a64-806b-ca7129145d9e" />
+
+
+
+# Conclusioni
+
 
 
 # Bibliografia e Sitografia
