@@ -1,6 +1,6 @@
 //================================================================================================================
 //================================================================================================================
-// Analisi multitemporale della desertificazione nella provincia del Sulcis Iglesiente, Sardegna
+// Analisi Multitemporale dello Stato di Conservazione della Vegetazione nel Parco di Gutturu Mannu (2015–2025)
 // Erica Merici, matricola 0001186080, Telerilevamento Geo-Ecologico in R
 // Codice in JavaScript utilizzato per scaricare le immagini satellitari da Google Earth Engine
 // https://code.earthengine.google.com/
@@ -115,13 +115,13 @@ var collection21 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende l
 // Numero di immagini disponibili
 //=========================================
 
-print(collection21.size()); // dà quante immagini ci sono dopo i filtri. 
+print(collection20.size()); // dà quante immagini ci sono dopo i filtri. 
 
 // ==============================================
 // Creazione median composite
 // ==============================================
 
-var composite21 = collection21.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
+var composite20 = collection20.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
 
 // ==============================================
 // Visualizzazione sulla mappa 
@@ -138,21 +138,21 @@ Map.addLayer(first20, {
 }, 'First image RGB 20');
 
 // Composite mediano RGB
-Map.addLayer(composite21, {
+Map.addLayer(composite20, {
   bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
   min: 0,
   max: 0.3
-}, 'Median composite RGB 21');
+}, 'Median composite RGB 20');
 
 // ==============================================
 // Export su Google Drive
 // ==============================================
 
 Export.image.toDrive({
-  image: composite21.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
-  description: 'S21',
+  image: composite20.select(['B2','B3','B4','B8']),  // Include tutte le bande che mi servono per l'analisi
+  description: 'S20',
   folder: 'GEE_exports',
-  fileNamePrefix: 'S21',
+  fileNamePrefix: 'S20',
   region: aoi,
   scale: 10,
   crs: 'EPSG:4326', // coordinate reference system
