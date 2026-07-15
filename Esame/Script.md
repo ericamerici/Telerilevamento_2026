@@ -15,7 +15,7 @@ Bibliografia
 
 # Introduzione
 
-Il Parco Naturale Regionale di Gutturu Mannu, situato nel settore sud-occidentale della Sardegna, rappresenta una delle più estese foreste mediterranee italiane. L'area ospita boschi di leccio, sughera e macchia mediterranea di elevato valore naturalistico, costituendo un importante habitat per numerose specie vegetali e animali.
+Il **Parco Naturale Regionale di Gutturu Mannu**, situato nel settore sud-occidentale della Sardegna, rappresenta **una delle più estese foreste mediterranee italiane**. L'area ospita boschi di leccio, sughera e macchia mediterranea di elevato valore naturalistico, costituendo un importante habitat per numerose specie vegetali e animali.
 
 Negli ultimi decenni gli ecosistemi forestali mediterranei sono stati sottoposti a numerose pressioni ambientali, tra cui:
 
@@ -24,39 +24,33 @@ Negli ultimi decenni gli ecosistemi forestali mediterranei sono stati sottoposti
 - incendi boschivi;
 - pressione antropica.
 
+In particolare, la zona meridionale della Sardegna risulta estremamente vulnerabile ai fenomeni di siccità e di desertificazione. 
+
 Per questo motivo il monitoraggio dello stato della vegetazione mediante tecniche di telerilevamento rappresenta uno strumento fondamentale per valutare l'efficacia della conservazione del patrimonio forestale.
 
+
 <img width="660" height="500" alt="gutturu_mannu" src="https://github.com/user-attachments/assets/f710ab78-ffed-481a-a9a2-7bc7721c3b85" />
->Parco Gutturu Mannu.
+
+
+>Parco Gutturu Mannu. Immagine da [maps.adac.de](https://maps.adac.de/poi/parco-naturale-regionale-di-gutturu-mannu?bounds=39.01488,8.73298-39.18642,9.05142).
+
 
 # Obiettivo
 
-L'obiettivo principale del progetto è **analizzare i cambiamenti** nel tempo di una zona che risulta essere vulnerabile alla desertificazione, analizzando **immagini satellitari** in tre momenti distinti: 2017, 2021 e 2025. Tale analisi si sviluppa attorno al calcolo di **indici spettrali** legati alla vegetazione, quali:
+L'obiettivo principale del progetto è **valutare l'evoluzione dello stato della vegetazione** del Parco, analizzando le **immagini satellitari** in tre momenti distinti: 2015, 2020 e 2025. Tale analisi si sviluppa attorno al calcolo di **indici spettrali** legati alla vegetazione, quali:
 - **DVI** (Difference Vegetation Index);
-- **NDVI** (Normalized Difference Vegetation Index).
+- **NDVI** (Normalized Difference Vegetation Index);
+- **NDMI** (Normalized Difference Moist Index).
   
 ## Giustificazione
-L'analisi è stata sviluppata nei limiti di una provincia per facilitare l'azione politica da parte delle amministrazioni, che in questo modo possono venire a conoscenza in modo specifico del territorio sui cui possono e devono agire.
-
-La scelta di questa provincia è dovuta alla sua eterogeneità, che rende il territorio complesso e sfaccettato. La presenza di zone protette e naturali, di zone militare e di spiaggie antropizzate può costituire un interessante punto di partenza per un studio più approfondito, contestuale alle diverse identità e multi-disciplinare.
-
-# Localizzazione
-La provincia del Sulcis-Iglesiente si trova nella parte sud-occidentale dell'Isola. Si estende per un'area di circa 1 747 km<sup>2</sup> (ISTAT 2026), e comprende le isole di Sant'Antioco e San Pietro. Al suo interno è presente una porzione di Parco Naturale Regionale di Gutturu Mannu, alcune Zone di Protezione Speciale e Zone Speciali di Conservazione; è presente un importante poligono militare, ovvero il poligono di Capo Teulada. 
-
-Confina a est con la provincia di Cagliari, anch'essa molto vulnerabile alla desertificazione e ancora più antropizzata. 
-
-
-
-
-
-
+L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale.
 
 # Raccolta dati e metodologia
 
 ## Raccolta delle immagini
-Lo shapefile della provincia è stato scaricato dal sito web di [ISTAT](https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/). La definizione delle province della Sardegna tende a variare spesso, a seconda delle amministrazioni. Si è scaricata la cartella .zip dei limiti amministrativi del 2026, è stata esportata solo la provincia di Sulcis Iglesiente tramite Qgis.
+Lo shapefile del Parco è stato scaricato dal sito web di [Sardegna GeoPortale](https://www.sardegnageoportale.it/index.html).
 
-Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), importando lo shapefile della provincia come cartella compressa .zip, contentente i formati .cpg, .dbf, .prj, .qmd, .shp, .shx. 
+Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), importando lo shapefile del parco come cartella compressa .zip, contentente i formati .cpg, .dbf, .prj, .qmd, .shp, .shx. 
 
 > [!NOTE]
 >
@@ -69,6 +63,9 @@ getwd() # get working directory
 ````
 
 ## Caricamento pacchetti
+
+Vengono caricati i pacchetti necessari per il progetto in R.
+
 ````R
 library(terra)  
 library(imageRy) # utile per alcune funzioni di visualizzazione o di calcolo degli indici
@@ -80,6 +77,14 @@ library(patchwork)
 
 ## Importazione raster Sentinel-2
 
+Si importano i raster dalla cartella impostata come working directory. I raster sono stati scaricati da Google Drive, dove erano stati salvati attraverso Google Earth Engine in formato .tif.
+
+````R
+gutturu15 <- rast("S15.tif")
+gutturu20 <- rast("S20.tif")
+gutturu25 <- rast("S25.tif")
+````
+## 
 
 
 # Bibliografia e Sitografia
