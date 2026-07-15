@@ -19,9 +19,9 @@ library(patchwork)
 
 
 # importazione di tutti i file raster
-gutturu15 <- rast("S15.tif")
-gutturu20 <- rast("S20.tif")
-gutturu25 <- rast("S25.tif")
+    gutturu15 <- rast("S15.tif")
+    gutturu20 <- rast("S20.tif")
+    gutturu25 <- rast("S25.tif")
 
 # 2015
 # plot
@@ -51,7 +51,7 @@ dev.off()
 im.plotRGB(gutturu15, r=3, g=2, b=1)
 
 # plot RGB, false color
-im.plotRGB(gutturu15, r=4, g=2, b=1)
+im.plotRGB(gutturu15, r=4, g=3, b=2)
 
 # plot RGB, blue in red
 im.plotRGB(gutturu15, r=3, g=2, b=4)
@@ -83,36 +83,36 @@ im.plotRGB(S25, r=3, g=2, b=4)
 
 # calcolo DVI
 # 2017
-dvi17 <- im.dvi(S17, 4, 3)
+dvi15 <- im.dvi(gutturu15, 4, 3)
 
 # 2025
-dvi25 <- im.dvi(S25, 4, 3)
+dvi25 <- im.dvi(gutturu25, 4, 3)
 
 
 # plottaggio insieme
 im.multiframe(1,2)
-plot(dvi17, main = "DVI 2017", col=viridis(100))
+plot(dvi15, main = "DVI 2015", col=viridis(100))
 plot(dvi25, main = "DVI 2025", col=viridis(100))
 
 # differenza DVI
-dvi.diff <- dvi17 - dvi25
+dvi.diff <- dvi15 - dvi25
 plot(dvi.diff, main = "Delta DVI", col=magma(100))
 
 #NDVI
 #2017
-ndvi17 <- im.ndvi(S17, 4, 3)
+ndvi15 <- im.ndvi(gutturu15, 4, 3)
 
 # 2025
-ndvi25 <- im.ndvi(S25, 4, 3)
+ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
 
 # plottaggio insieme
 im.multiframe(1,2)
-plot(ndvi17, main = "NDVI 2017", col=viridis(100))
+plot(ndvi15, main = "NDVI 2015", col=viridis(100))
 plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 
 # differenza DVI
-ndvi.diff <- ndvi17 - ndvi25
+ndvi.diff <- ndvi15 - ndvi25
 plot(ndvi.diff, main = "Delta NDVI", col=magma(100))
 
 
