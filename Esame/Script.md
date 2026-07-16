@@ -733,13 +733,16 @@ La classificazione viene svolta per la differenza tra 2015 e 2025.
 Per facilitare l'interpretazione dei risultati e confrontare le diverse immagini, i valori dell'NDMI sono stati raggruppati in quattro classi di stato idrico mediante la funzione `classify()` del pacchetto terra. La classificazione è stata definita attraverso una matrice `class_matrix` contenente, per ciascuna classe, il limite inferiore, il limite superiore e il codice identificativo assegnato. In questo modo ogni pixel del raster viene ricondotto a una categoria che rappresenta il livello di disponibilità idrica della vegetazione.
 
 ````R
-# Matrice di classificazione NDMI
+
+# Creazione della matrice di classificazione per l'indice NDMI
+# Ogni riga definisce un intervallo di valori NDMI e la classe assegnata
+
 class_matrix <- matrix(c(
-  -Inf, 0.00, 1,   # Stress idrico elevato
-   0.00, 0.20, 2,  # Stress idrico moderato
-   0.20, 0.40, 3,  # Buono stato idrico
-   0.40, Inf, 4    # Elevato contenuto idrico
-), ncol = 3, byrow = TRUE)
+  -Inf, 0.00, 1,   # Classe 1: valori NDMI inferiori a 0 → elevato stress idrico / vegetazione molto secca
+   0.00, 0.20, 2,  # Classe 2: valori NDMI tra 0 e 0.20 → stress idrico moderato
+   0.20, 0.40, 3,  # Classe 3: valori NDMI tra 0.20 e 0.40 → buono stato idrico della vegetazione
+   0.40, Inf, 4    # Classe 4: valori NDMI superiori a 0.40 → elevato contenuto idrico / vegetazione molto umida
+), ncol = 3, byrow = TRUE) # ncol: la matrice ha tre colonne: valore minimo, valore massimo, classe assegnata; byrow: valori vengono inseriti riga per riga
 ````
 ````R
 # Classificazione 15-25
