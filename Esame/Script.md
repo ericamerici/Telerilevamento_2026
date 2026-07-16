@@ -24,6 +24,11 @@ Per questo motivo il monitoraggio dello stato della vegetazione mediante tecnich
 
 >Parco Gutturu Mannu. Immagine dal [sito del parco](https://www.parcogutturumannu.it/).
 
+### Localizzazione
+
+<img width="3519" height="2488" alt="mappa" src="https://github.com/user-attachments/assets/e5ffa11b-41cc-40b2-bca1-97313ef8794e" />
+
+>Descrizione: Elaborazione propria da dati di Sardegna Geoportale (2023).
 
 # Obiettivo
 
