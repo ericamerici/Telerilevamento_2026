@@ -600,7 +600,7 @@ dev.off()
 La variazione degli indici è espressa in due modi: 
 
 - una differenza spettrale dei risultati degli anni 2015 e 2025;
-- una comparazione attraverso il ridge plot di tutti e tre gli anni presi in considerazione.
+- una comparazione attraverso il ridge plot di tutti e cinque gli anni presi in considerazione.
 
 ### Differenza spettrale
 
@@ -639,7 +639,7 @@ bsi.diff <- bsi15 - bsi25
 Si visualizzano insieme attraverso la funzione `im.multiframe()`
 
 ````R
-# Visualizzazione dei tre risultati
+# Visualizzazione dei risultati
 im.multiframe(2,2)
 plot(dvi.diff, main = "ΔDVI 2015-2025", col=magma(100))
 plot(ndvi.diff, main = "ΔNDVI 2015-2025", col=magma(100))
