@@ -421,7 +421,7 @@ ndvi25 <- im.ndvi(gutturu25, 4, 3)
 Si stabilisce un range comune.
 ````R
 lim_ndvi <- range(values(c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)),
-                  na.rm = TRUE)
+                  na.rm = TRUE) # values considera i DN; c rappresenta la concatenazione; na.rm rimuove i no data
 ````
 
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
@@ -437,7 +437,7 @@ dev.off()
 ````
 <img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/7b529e9e-8337-41c8-9140-5c4cc80c4d6e" />
 
->Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta stabile. Nell'anno 2015 la vegetazione risulta più stressata.
+>Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta buono e piuttosto stabile. Nell'anno 2015 e 2022 la vegetazione risulta più stressata.
 
 ## NDMI
 
@@ -475,14 +475,14 @@ ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 Si stabilisce un range comune.
 ````R
 lim_ndmi <- range(values(c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)),
-                  na.rm = TRUE)
+                  na.rm = TRUE) # values considera i DN; c rappresenta la concatenazione; na.rm rimuove i no data
 ````
 
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 
 ````R
 im.multiframe(2,3)
-plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi)
+plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi) 
 plot(ndmi18, main="NDMI 2018", col=viridis(100), range=lim_ndmi)
 plot(ndmi20, main="NDMI 2020", col=viridis(100), range=lim_ndmi)
 plot(ndmi22, main="NDMI 2022", col=viridis(100), range=lim_ndmi)
@@ -494,7 +494,7 @@ dev.off()
 
 
 >Commento: La vegetazione presente nel versante occidentale risulta più umida, anche se con valori non altissimi. Questo risultato è in linea con le aspettative, dato che si sta considerando la macchia mediterranea nel suo periodo più secco. Nella zona settentrionale e orientale, nuovamente, la vegetazione è molto più secca. 
-A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 risulta esserci più vegetazione secca rispetto agli altri anni. Emergono cambiamenti nel pattern- In ogni caso, i cambiamenti non sono significativi. 
+A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 e nel 2018 risulta esserci più vegetazione secca rispetto agli altri anni. Emergono cambiamenti nel pattern- In ogni caso, i cambiamenti non sono significativi. 
 
 ## BSI
 
@@ -535,7 +535,7 @@ bsi25 <- ((gutturu25[[5]] + gutturu25[[3]]) - (gutturu25[[4]] + gutturu25[[1]]))
 Si stabilisce un range comune.
 ````R
 lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)),
-                 na.rm = TRUE)
+                 na.rm = TRUE) # values considera i DN; c rappresenta la concatenazione; na.rm rimuove i no data
 ````
 
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
@@ -544,7 +544,7 @@ Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`
 # Plottaggio insieme BSI
 
 im.multiframe(2,3)
-plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi)
+plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi) 
 plot(bsi18, main="BSI 2018", col=viridis(100), range=lim_bsi)
 plot(bsi20, main="BSI 2020", col=viridis(100), range=lim_bsi)
 plot(bsi22, main="BSI 2022", col=viridis(100), range=lim_bsi)
