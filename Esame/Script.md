@@ -2,16 +2,6 @@
 
 # Analisi Multitemporale dello Stato di Conservazione della Vegetazione nel Parco di Gutturu Mannu (2015–2025)
 
-Scaletta:
-Introduzione
-Obiettivi
-Localizzazione
-Data Gathering e Metodologia
-Calcolo Indici
-Analisi
-Conclusioni
-Bibliografia
-
 
 # Introduzione
 
