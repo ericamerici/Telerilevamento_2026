@@ -19,7 +19,9 @@ library(ggridges)
 
 # importazione di tutti i file raster
     gutturu15 <- rast("S15.tif")
+    gutturu18 <- rast("S18.tif")
     gutturu20 <- rast("S20.tif")
+    gutturu22 <- rast("S22.tif")
     gutturu25 <- rast("S25.tif")
 
 ################################ 2015
@@ -51,6 +53,38 @@ im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
 # plot RGB, nir in blue
 im.plotRGB(gutturu15, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2015)")
 
+################################ 2018
+
+# plottaggio bande
+
+plot(gutturu18)
+dev.off()
+
+# visualizzazione dell'immagine importata in tutte le sue bande e scaricata l'immagine in .png
+
+im.multiframe(2,3)
+plot(gutturu18[[1]], main = "B2 - Blue", col=cividis(100))
+plot(gutturu18[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu18[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu18[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu18[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
+
+# visualizzazione in RGB
+
+im.multiframe(1,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")
+
+# plot RGB, nir in red
+im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
+
+# plot RGB, nir in blue
+im.plotRGB(gutturu18, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2018)")
+
+
 ################################ 2020
 
 # plot
@@ -79,6 +113,35 @@ im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
 # plot RGB, nir in blue
 im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
 
+################################ 2022
+
+# plot
+plot(gutturu2022)
+dev.off()
+
+# visualizzazione dell'immagine importata in tutte le sue bande e scaricata l'immagine in .png
+
+im.multiframe(2,3)
+plot(gutturu22[[1]], main = "B2 - Blue", col=cividis(100))
+plot(gutturu22[[2]], main = "B3 - Green", col=cividis(100))
+plot(gutturu22[[3]], main = "B4 - Red", col=cividis(100))
+plot(gutturu22[[4]], main = "B8 - NIR", col=cividis(100))
+plot(gutturu22[[5]], main = "B11 - SWIR", col=cividis(100))
+
+# visualizzazione dell'immagine in RGB
+
+im.multiframe(1,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")
+
+# plot RGB, nir in red
+im.plotRGB(gutturu22, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2022)")
+
+# plot RGB, nir in blue
+im.plotRGB(gutturu22, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2022)")
+
+dev.off()
 
 ################################ 2025
 
@@ -115,17 +178,25 @@ im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 # 2015
 dvi15 <- im.dvi(gutturu15, 4, 3)
 
+# 2018
+dvi18 <- im.dvi(gutturu18, 4, 3)
+
 # 2020
 dvi20 <- im.dvi(gutturu20, 4, 3)
+
+# 2022
+dvi22 <- im.dvi(gutturu22, 4, 3)
 
 # 2025
 dvi25 <- im.dvi(gutturu25, 4, 3)
 
 # plottaggio insieme DVI
 
-im.multiframe(1,3)
+im.multiframe(1,5)
 plot(dvi15, main = "DVI 2015", col=viridis(100))
+plot(dvi18, main = "DVI 2018", col=viridis(100))
 plot(dvi20, main = "DVI 2020", col=viridis(100))
+plot(dvi22, main = "DVI 2022", col=viridis(100))
 plot(dvi25, main = "DVI 2025", col=viridis(100))
 
 # NDVI
@@ -133,33 +204,74 @@ plot(dvi25, main = "DVI 2025", col=viridis(100))
 # 2015
 ndvi15 <- im.ndvi(gutturu15, 4, 3)
 
+# 2018
+ndvi18 <- im.ndvi(gutturu18, 4, 3)
+
 # 2020
 ndvi20 <- im.ndvi(gutturu20, 4, 3)
+
+# 2022
+ndvi22 <- im.ndvi(gutturu22, 4, 3)
 
 # 2025
 ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
 # plottaggio insieme NDVI
 
-im.multiframe(1,3)
+im.multiframe(1,5)
 plot(ndvi15, main = "NDVI 2015", col=viridis(100))
+plot(ndvi18, main = "NDVI 2018", col=viridis(100))
 plot(ndvi20, main = "NDVI 2020", col=viridis(100))
+plot(ndvi22, main = "NDVI 2022", col=viridis(100))
 plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 
 # NDMI
-#2015
+# 2015
 ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
 
-#2020
+# 2018
+ndmi18 <- (gutturu18[[4]]-gutturu18[[5]])/(gutturu18[[4]]+gutturu18[[5]])
+
+# 2020
 ndmi20 <- (gutturu20[[4]]-gutturu20[[5]])/(gutturu20[[4]]+gutturu20[[5]])
 
-#2025
+# 2022
+ndmi22 <- (gutturu22[[4]]-gutturu22[[5]])/(gutturu22[[4]]+gutturu22[[5]])
+
+# 2025
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 
 # Plottaggio insieme NDMI
-im.multiframe(1,3)
+im.multiframe(1,5)
 plot(ndmi15, main = "NDMI 2015", col=viridis(100))
+plot(ndmi18, main = "NDMI 2018", col=viridis(100))
 plot(ndmi20, main = "NDMI 2020", col=viridis(100))
+plot(ndmi22, main = "NDMI 2022", col=viridis(100))
+plot(ndmi25, main = "NDMI 2025", col=viridis(100))
+
+# BSI
+
+# 2015
+ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
+
+# 2018
+ndmi18 <- (gutturu18[[4]]-gutturu18[[5]])/(gutturu18[[4]]+gutturu18[[5]])
+
+# 2020
+ndmi20 <- (gutturu20[[4]]-gutturu20[[5]])/(gutturu20[[4]]+gutturu20[[5]])
+
+# 2022
+ndmi22 <- (gutturu22[[4]]-gutturu22[[5]])/(gutturu22[[4]]+gutturu22[[5]])
+
+# 2025
+ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
+
+# Plottaggio insieme NDMI
+im.multiframe(1,5)
+plot(ndmi15, main = "NDMI 2015", col=viridis(100))
+plot(ndmi18, main = "NDMI 2018", col=viridis(100))
+plot(ndmi20, main = "NDMI 2020", col=viridis(100))
+plot(ndmi22, main = "NDMI 2022", col=viridis(100))
 plot(ndmi25, main = "NDMI 2025", col=viridis(100))
 
 
