@@ -367,7 +367,7 @@ lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
-plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi)
+plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi) # range inserisce il plottaggio nei limiti massimi e minimi in comune che sono stati precedentemente stabiliti
 plot(dvi18, main="DVI 2018", col=viridis(100), range=lim_dvi)
 plot(dvi20, main="DVI 2020", col=viridis(100), range=lim_dvi)
 plot(dvi22, main="DVI 2022", col=viridis(100), range=lim_dvi)
@@ -455,6 +455,7 @@ Il valore ondeggia tra -1 e 1; maggiore il valore dell'indice più umida risulta
 Si visualizza l'indice NMDI per ogni anno considerato.
 
 ````R
+# Calcolo NDMI, considerando la formula (NIR-SWIR)/(NIR+SWIR)
 # 2015
 ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]]) # si sostituisce nella formula le bande corrispondenti: NIR=4, SWIR=5;
 
@@ -608,11 +609,15 @@ La variazione degli indici è espressa in due modi:
 
 #### ΔDVI
 
+Si calcola la differenza tra l'indice DVI del 2015 e del 2025.
+
 ````R
 dvi.diff <- dvi15 - dvi25
 ````
 
 #### ΔNDVI
+
+Si calcola la differenza tra l'indice NDVI del 2015 e del 2025.
 
 ````R
 ndvi.diff <- ndvi15 - ndvi25
@@ -620,11 +625,15 @@ ndvi.diff <- ndvi15 - ndvi25
 
 #### ΔNDMI
 
+Si calcola la differenza tra l'indice NDMI del 2015 e del 2025.
+
 ````R
 dvi.diff <- ndmi15 - ndmi25
 ````
 
 #### ΔBSI
+
+Si calcola la differenza tra l'indice BSI del 2015 e del 2025.
 
 ````R
 bsi.diff <- bsi15 - bsi25
@@ -652,19 +661,24 @@ dev.off()
 
 ### Ridge plots
 
+Per completare l'analisi spaziale degli indici di vegetazione, è stata effettuata un'analisi della distribuzione statistica dei valori pixel mediante grafici ridgeline (ridge plots). Questa rappresentazione permette di confrontare contemporaneamente la distribuzione dei valori degli indici spettrali nei diversi anni analizzati, evidenziando eventuali variazioni nella risposta della vegetazione nel tempo.
+
 #### ΔDVI
 
 ````R
 # DVI
   
-dvi_ridg=c(dvi15, dvi18, dvi20, dvi22, dvi25)  
-names(dvi_ridg) =c("DVI 2015", "DVI 2018", "DVI 2020", "DVI 2022", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
+dvi_ridg=c(dvi15, dvi18, dvi20, dvi22, dvi25)  # concatenazione degli indici di ogni anno
+names(dvi_ridg) =c("DVI 2015", "DVI 2018", "DVI 2020", "DVI 2022", "DVI 2025") # Assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
 im.ridgeline(dvi_ridg, scale=2, palette="magma")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="dviRP" src="https://github.com/user-attachments/assets/970847f7-b867-4388-8ec7-50f28197bbeb" />
+<img width="1536" height="738" alt="dviRP" src="https://github.com/user-attachments/assets/69fd0578-24e2-4779-9c21-b49ba8337988" />
+
+>Commento: come già previsto, il cambio tra i diversi anni non è accentuato; la maggior parte dei pixel si trovano sempre attorno al valore 0.2; il 2015 e il 2022 sono costituiti da maggiori pixel vero il valore 0.2, mentre gli altri anni presentano una maggiore quantità con valori più elevati, segno che la vegetazione si trova in uno stato di salute migliore.
+
 
 #### ΔNDVI
 
@@ -672,15 +686,15 @@ dev.off()
 # NDVI
 
 ndvi_ridg=c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)  
-names(ndvi_ridg) =c("NDVI 2015", "NDVI 2018, "NDVI 2020", "NDVI 2022", "NDVI 2025") # Per assegnare i nomi alle due immagini del vettore
-# Applicazione della funzione im.ridgeline del pacchetto imageRy
+names(ndvi_ridg) =c("NDVI 2015", "NDVI 2018, "NDVI 2020", "NDVI 2022", "NDVI 2025") 
 im.ridgeline(ndvi_ridg, scale=2, palette="magma")
 
 dev.off()
 ````
 
-<img width="766" height="729" alt="ndviRP" src="https://github.com/user-attachments/assets/c4915012-68ec-440d-ad82-5b1108e4ee9b" />
+<img width="1536" height="738" alt="ndviRP" src="https://github.com/user-attachments/assets/8b092ade-3a91-4021-8490-15a2c6724b95" />
 
+>Commento: in modo simile all'indice DVI, non emergono significative differenze, a parte per una maggiore quantità di valori più bassi negli anni 2015 e 2018. In generale, come già notato in precedenza, i valori sono conformi alle aspettative, ovvero piuttosto alti, in quanto si tratta di vegetazione forestale in stato di protezione, dunque in salute.
 
 #### ΔNDMI
 
@@ -688,14 +702,15 @@ dev.off()
 # NDMI
 
 ndmi_ridg=c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)  
-names(ndmi_ridg)=c("NDMI 2015", "NDMI 2018" "NDMI 2020", "NDMI 2022", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
-# Applicazione della funzione im.ridgeline del pacchetto imageRy
+names(ndmi_ridg)=c("NDMI 2015", "NDMI 2018" "NDMI 2020", "NDMI 2022", "NDMI 2025") 
 im.ridgeline(ndmi_ridg, scale=2, palette="magma")
 
 dev.off()
 ````
 
-<img width="1536" height="738" alt="ndmiRP" src="https://github.com/user-attachments/assets/5c1b66b2-80e5-468e-aea4-b9090a926caf" />
+<img width="1536" height="738" alt="ndmiRP" src="https://github.com/user-attachments/assets/e50d8d21-feee-4dec-bb23-f2dd980687ab" />
+
+>Commento: La distribuzione dei valori è più schiacciata rispetto al NDVI, infatti sebbene si tratti di vegetazione sana, è comunque vegetazione stressata a livello idrico, visto il contesto. Le differenze tra gli anni risultano come da aspettative.
 
 #### ΔBSI
 
@@ -703,62 +718,17 @@ dev.off()
 # BSI
 
 bsi_ridg=c(bsi15, bsi18, bsi20, bsi22, bsi25)  
-names(bsi_ridg)=c("BSI 2015", "BSI 2018" "BSI 2020", "BSI 2022", "BSI 2025") # Per assegnare i nomi alle due immagini del vettore
-# Applicazione della funzione im.ridgeline del pacchetto imageRy
+names(bsi_ridg)=c("BSI 2015", "BSI 2018" "BSI 2020", "BSI 2022", "BSI 2025") 
 im.ridgeline(bsi_ridg, scale=2, palette="magma")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="bsiRidge" src="https://github.com/user-attachments/assets/3c84e516-3301-4695-91d4-dd8644ace594" />
+<img width="1536" height="738" alt="bsiRP" src="https://github.com/user-attachments/assets/808b990b-9009-4fc2-9299-39767303ba7f" />
 
-# Analisi multitemporale stagionale
+>Commento: i valori scuri indicano l'elevata presenza di vegetazione a discapito del suolo nudo o degradato, pur in minima parte presente.
+>
+>[NOTA!] Questo indice viene espresso sul suolo nudo e non sulla vegetazione, per questa ragione i risultati appaiono "inversi" rispetto agli altri indici.
 
-Sempre in ottica di monitorare lo stato della vegetazione del parco, è utile sviluppare un'analisi tra stagioni diverse per conoscere il cambiamento di stress idrico a cui la vegetazione è sottoposta. 
-Viene considerato l'anno 2025, nella stagione primaverile (mesi di aprile e maggio), e confrontato con la stagione estiva precedentemente analizzato.
-
-## Importazione raster Sentinel-2
-
-Viene importato il file .tif del parco nella stagione primaverile del 2025.
-
-````R
-p25 <-rast("p25.tif")
-````
-## Visualizzazione immagini
-
-Si ripete il procedimento iniziale sulla visualizzazione del file importato, sia nelle sue singole bande, che nella composizione in RGB.
-
-### Visualizzazione singole bande
-
-````R
-im.multiframe(2,3)
-plot(p25[[1]], main = "B2 - Blue", col=cividis(100))
-plot(p25[[2]], main = "B3 - Green", col=cividis(100))
-plot(p25[[3]], main = "B4 - Red", col=cividis(100))
-plot(p25[[4]], main = "B8 - NIR", col=cividis(100))
-plot(p25[[5]], main = "B11 - SWIR", col=cividis(100))
-
-dev.off()
-````
-<img width="1536" height="738" alt="bandep" src="https://github.com/user-attachments/assets/30cd8c4f-636c-4b45-a405-ea9471eec70e" />
-
-### Visualizzazione RGB
-
-Si visualizzano anche le immagini in RGB: a colori naturali e colori falsati, per evidenziare meglio la presenza di vegetazione.
-
-````R
-# visualizzazione in RGB
-
-im.multiframe(1,3)
-
-# plot RGB, colori naturali 
-im.plotRGB(p25, r=3, g=2, b=1, title = "Colori naturali (2025)")
-
-# plot RGB, nir in red
-im.plotRGB(p25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
-
-# plot RGB, nir in blue
-im.plotRGB(p25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
-````
 
 # Classificazione
 
@@ -826,7 +796,7 @@ tabout # visualizzazione della tabella in R
 Per rappresentare graficamente la distribuzione percentuale delle classi NDMI nei due anni analizzati è stato utilizzato il pacchetto `ggplot2`. Sono stati creati due grafici a barre separati, uno relativo al 2015 e uno al 2025, nei quali l'asse delle ascisse riporta le classi di stato idrico della vegetazione e l'asse delle ordinate la percentuale di superficie occupata da ciascuna classe. Tramite il pacchetto `patchwork`, i due grafici sono stati successivamente affiancati per permettere un confronto visivo immediato delle variazioni avvenute nel tempo.
 
 ````R
-p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
+p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
    geom_bar(stat = "identity") + # creazione del grafico a barre; stat = "identity" indica a ggplot2 di non fare altri conteggi;
   scale_fill_manual(values = c(
     "Stress elevato" = "red",
@@ -837,7 +807,7 @@ p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea i
   ylim(c(0,20)) + # limiti
   theme(legend.position="none")  # rimuovere la legenda
 
-p2 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
+p25 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
    geom_bar(stat = "identity") +
   scale_fill_manual(values = c(
     "Stress elevato" = "red",
@@ -848,7 +818,7 @@ p2 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, co
   ylim(c(0,20)) + 
   theme(legend.position="none")  
 
-p1 + p2
+p15 + p25
 ````
 
 # Conclusioni
