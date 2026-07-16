@@ -494,7 +494,7 @@ dev.off()
 
 
 >Commento: La vegetazione presente nel versante occidentale risulta più umida, anche se con valori non altissimi. Questo risultato è in linea con le aspettative, dato che si sta considerando la macchia mediterranea nel suo periodo più secco. Nella zona settentrionale e orientale, nuovamente, la vegetazione è molto più secca. 
-A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 e nel 2018 risulta esserci più vegetazione secca rispetto agli altri anni. Emergono cambiamenti nel pattern- In ogni caso, i cambiamenti non sono significativi. 
+A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 e nel 2022 risulta esserci più vegetazione secca rispetto agli altri anni. Emergono cambiamenti nel pattern- In ogni caso, i cambiamenti non sono significativi. 
 
 ## BSI
 
@@ -597,6 +597,8 @@ im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 dev.off()
 ````
 <img width="1536" height="738" alt="rgbdelta" src="https://github.com/user-attachments/assets/5b7ae0df-ed92-4517-b1e5-3d2fc431ce02" />
+
+>Commento: si può notare come in generale ci siano differenze tra gli anni (soprattutto tra 2015, e 2022 da un lato, e gli altri anni dall'altro), ma che non siano differenze significative.
 
 ## Variazione degli indici
 
