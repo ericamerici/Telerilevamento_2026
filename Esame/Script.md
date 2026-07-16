@@ -14,7 +14,7 @@ Negli ultimi decenni gli ecosistemi forestali mediterranei sono stati sottoposti
 - incendi boschivi;
 - pressione antropica.
 
-In particolare, la zona meridionale della Sardegna risulta estremamente vulnerabile ai fenomeni appena elencati. Da decenni, negli studi sulla vulnerabilità alla desertificazione (2006), tale zona emerge fortemente, insieme ad altri territori prevalentemente pugliesi e siciliani.
+In particolare, la zona meridionale della Sardegna risulta estremamente vulnerabile ai fenomeni appena elencati. Da decenni, negli studi sulla vulnerabilità alla desertificazione (AA.VV. 2006), tale zona emerge fortemente, insieme ad altri territori prevalentemente pugliesi e siciliani.
 
 Per questo motivo il monitoraggio dello stato della vegetazione mediante tecniche di telerilevamento rappresenta uno strumento fondamentale per valutare l'efficacia della conservazione del patrimonio forestale.
 
@@ -820,12 +820,17 @@ p15 + p25
 ````
 <img width="1536" height="738" alt="tabella" src="https://github.com/user-attachments/assets/8da070fc-0418-4d42-bba9-b0af32f62432" />
 
->Commento: La vegetazione con stress moderato e con buono stato idrico non è cambiata di molto: i maggiori cambiamenti si rivelano nella percentuale di vegetazione a stress elevato, e in quella di vegetazione a elevato contenuto idrico.
+>Commento: La vegetazione con stress moderato e con buono stato idrico non è cambiata di molto: i maggiori cambiamenti si rivelano nella percentuale di vegetazione a stress elevato, e in quella di vegetazione a elevato contenuto idrico, come anche mostrano le percentuali nella tabella.
 
 # Conclusioni
 
-Il parco negli ultimi dieci anni ha pressoché conservato un costante stato vegetativo, mostrando a volte alcuni miglioramenti, che possono essere dovuti a diverse ragioni. 
+L'analisi multitemporale degli indici spettrali (NDVI, DVI, NDMI e BSI) ha evidenziato una sostanziale stabilità della vegetazione del Parco di Gutturu Mannu tra il 2015 e il 2025. Non sono emerse variazioni significative tali da indicare un processo di degrado diffuso o di desertificazione.
 
+In particolare, l'NDMI si è rivelato un indice particolarmente utile, poiché consente di valutare il contenuto idrico della vegetazione, un aspetto fondamentale negli ecosistemi mediterranei, dove la disponibilità di acqua rappresenta uno dei principali fattori che influenzano lo stato della copertura vegetale.
+
+È importante considerare che la desertificazione è un fenomeno che si sviluppa su scale temporali molto lunghe. Un periodo di dieci anni può evidenziare gli effetti di annate particolarmente siccitose, ma non è sufficiente per valutare con certezza l'evoluzione di un processo di desertificazione. La stabilità osservata potrebbe inoltre essere favorita dallo stato di tutela del parco, che contribuisce a limitare le pressioni antropiche e a preservare gli ecosistemi.
+
+Infine, questo studio mostra come il telerilevamento rappresenti uno strumento efficace per il monitoraggio della vegetazione, consentendo analisi rapide e ripetibili nel tempo. Tuttavia, i risultati devono essere interpretati insieme ad altre informazioni, come dati climatici e osservazioni sul campo, per ottenere una valutazione più completa dello stato e dell'evoluzione degli ecosistemi.
 
 # Bibliografia e Sitografia
 Ministero dell’Ambiente e della Tutela del territorio e del Mare
@@ -836,3 +841,9 @@ e verifica delle procedure
 cartografiche di mappatura
 e degli indicatori a scala
 nazionale e locale. [link](https://www.isprambiente.gov.it/contentfiles/00003400/3468-manuali-2006-40.pdf/)
+
+GeoPortale Sardegna https://www.sardegnageoportale.it/
+
+Sardegna Arpa https://www.sar.sardegna.it/
+
+
