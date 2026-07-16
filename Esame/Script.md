@@ -865,4 +865,67 @@ sic.bsi()
 ````
 dove
 
+````R
+# NDMI 
+# Normalized Difference Moist Index, useful when water must be detected in the vegetation
+# How to use (an example)
+# park2025 <- rast("p25.tif")
+# ndmi2025 <- sic.ndmi(park2025, 5, 4)
+# plot(ndmi2025)
 
+sic.ndmi <- function(x, swir, nir) { 
+  
+  # Controllo che l'immagine in input sia un oggetto SpatRaster del pacchetto terra
+  if (!inherits(x, "SpatRaster")) {
+    stop("Input image should be a SpatRaster object.")
+  }
+  
+  # Controllo che gli indici delle bande SWIR e NIR siano valori numerici
+  if (!is.numeric(swir) || !is.numeric(nir)) {
+    stop("SWIR and NIR must be numeric.")
+  }
+  
+  # Calcolo dell'indice NDMI:
+  # (NIR - SWIR) / (NIR + SWIR)
+  # L'indice evidenzia il contenuto idrico della vegetazione
+  ndmi <- (x[[nir]] - x[[swir]]) /
+          (x[[nir]] + x[[swir]])
+  
+  # Restituisce il raster risultante con i valori NDMI calcolati
+  return(ndmi)
+
+}
+````
+e
+
+````R
+# BSI
+# Bare Soil Index, useful when soil must be detected in relationship with vegetation
+# How to use (an example)
+# park2025 <- rast("p25.tif")
+# bsi2025 <- sic.ndmi(park2025, 5, 3, 4, 1)
+# plot(bsi2025)
+
+
+sic.bsi <- function(x, swir, red, nir, blue) {
+
+# Controllo che l'immagine in input sia un oggetto SpatRaster del pacchetto terra
+  if (!inherits(x, "SpatRaster")) {
+    stop("Input image should be a SpatRaster object.")
+  }
+
+ # Controllo che gli indici delle bande SWIR, RED, NIR E BLUE siano valori numerici
+  if (!is.numeric(swir) || !is.numeric(red) || !is.numeric(nir) || !is.numeric(blue)) {
+    stop("SWIR, RED, NIR and BLUE must be numeric.")
+  }
+
+ # Calcolo dell'indice BSI:
+  # ((SWIR+RED) - (NIR+BLUE) / ((SWIR+RED) + (NIR+BLUE))
+  # L'indice evidenzia la presenza di suolo rispetto alla vegetazione
+  bsi <- ((x[[swir]] + x[[red]]) - (x[[nir]] + x[[blue]])) /
+         ((x[[swir]] + x[[red]]) + (x[[nir]] + x[[blue]]))
+
+ # Restituisce il raster risultante con i valori BSI calcolati
+  return(bsi)
+}
+````
