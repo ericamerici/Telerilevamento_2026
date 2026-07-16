@@ -190,14 +190,18 @@ dvi22 <- im.dvi(gutturu22, 4, 3)
 # 2025
 dvi25 <- im.dvi(gutturu25, 4, 3)
 
+# stabilire range comune
+lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
+                 na.rm = TRUE) # values considera i DN; na.rm rimuove i no data
+
 # plottaggio insieme DVI
 
 im.multiframe(2,3)
-plot(dvi15, main = "DVI 2015", col=viridis(100))
-plot(dvi18, main = "DVI 2018", col=viridis(100))
-plot(dvi20, main = "DVI 2020", col=viridis(100))
-plot(dvi22, main = "DVI 2022", col=viridis(100))
-plot(dvi25, main = "DVI 2025", col=viridis(100))
+plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi)
+plot(dvi18, main="DVI 2018", col=viridis(100), range=lim_dvi)
+plot(dvi20, main="DVI 2020", col=viridis(100), range=lim_dvi)
+plot(dvi22, main="DVI 2022", col=viridis(100), range=lim_dvi)
+plot(dvi25, main="DVI 2025", col=viridis(100), range=lim_dvi)
 
 # NDVI
 
@@ -216,14 +220,19 @@ ndvi22 <- im.ndvi(gutturu22, 4, 3)
 # 2025
 ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
-# plottaggio insieme NDVI
+# stabilire range comune
+lim_ndvi <- range(values(c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)),
+                  na.rm = TRUE)
 
+# plottaggio insieme NDVI
 im.multiframe(2,3)
-plot(ndvi15, main = "NDVI 2015", col=viridis(100))
-plot(ndvi18, main = "NDVI 2018", col=viridis(100))
-plot(ndvi20, main = "NDVI 2020", col=viridis(100))
-plot(ndvi22, main = "NDVI 2022", col=viridis(100))
-plot(ndvi25, main = "NDVI 2025", col=viridis(100))
+plot(ndvi15, main="NDVI 2015", col=viridis(100), range=lim_ndvi)
+plot(ndvi18, main="NDVI 2018", col=viridis(100), range=lim_ndvi)
+plot(ndvi20, main="NDVI 2020", col=viridis(100), range=lim_ndvi)
+plot(ndvi22, main="NDVI 2022", col=viridis(100), range=lim_ndvi)
+plot(ndvi25, main="NDVI 2025", col=viridis(100), range=lim_ndvi)
+dev.off()
+
 
 # NDMI
 # 2015
@@ -241,13 +250,19 @@ ndmi22 <- (gutturu22[[4]]-gutturu22[[5]])/(gutturu22[[4]]+gutturu22[[5]])
 # 2025
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 
+# Range comune
+lim_ndmi <- range(values(c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)),
+                  na.rm = TRUE)
+
 # Plottaggio insieme NDMI
 im.multiframe(2,3)
-plot(ndmi15, main = "NDMI 2015", col=viridis(100))
-plot(ndmi18, main = "NDMI 2018", col=viridis(100))
-plot(ndmi20, main = "NDMI 2020", col=viridis(100))
-plot(ndmi22, main = "NDMI 2022", col=viridis(100))
-plot(ndmi25, main = "NDMI 2025", col=viridis(100))
+plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi)
+plot(ndmi18, main="NDMI 2018", col=viridis(100), range=lim_ndmi)
+plot(ndmi20, main="NDMI 2020", col=viridis(100), range=lim_ndmi)
+plot(ndmi22, main="NDMI 2022", col=viridis(100), range=lim_ndmi)
+plot(ndmi25, main="NDMI 2025", col=viridis(100), range=lim_ndmi)
+
+dev.off()
 
 # BSI
 
@@ -270,16 +285,60 @@ bsi22 <- ((gutturu22[[5]] + gutturu22[[3]]) - (gutturu22[[4]] + gutturu22[[1]]))
 bsi25 <- ((gutturu25[[5]] + gutturu25[[3]]) - (gutturu25[[4]] + gutturu25[[1]])) /
          ((gutturu25[[5]] + gutturu25[[3]]) + (gutturu25[[4]] + gutturu25[[1]]))
 
+
+# Range Comune
+
+lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)), na.rm = TRUE)
+
 # Plottaggio insieme BSI
 im.multiframe(2,3)
-plot(bsi15, main = "BSI 2015", col = viridis(100))
-plot(bsi18, main = "BSI 2018", col = viridis(100))
-plot(bsi20, main = "BSI 2020", col = viridis(100))
-plot(bsi22, main = "BSI 2022", col = viridis(100))
-plot(bsi25, main = "BSI 2025", col = viridis(100))
+plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi)
+plot(bsi18, main="BSI 2018", col=viridis(100), range=lim_bsi)
+plot(bsi20, main="BSI 2020", col=viridis(100), range=lim_bsi)
+plot(bsi22, main="BSI 2022", col=viridis(100), range=lim_bsi)
+plot(bsi25, main="BSI 2025", col=viridis(100), range=lim_bsi)
+
+dev.off()
 
 #################################
 # Analisi multitemporale
+
+# Visualizzazione RGB
+
+im.multiframe (2,5)
+
+# plot RGB, colori naturali 2015
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
+
+# plot RGB, colori naturali 2018
+im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
+
+# plot RGB, colori naturali 2020
+im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")
+
+# plot RGB, colori naturali 2022
+im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")
+
+# plot RGB, colori naturali 2025
+im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
+
+# plot RGB, nir in red 2015
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
+
+# plot RGB, nir in red 2018
+im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
+
+# plot RGB, nir in red 2020
+im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
+
+# plot RGB, nir in red 2022
+im.plotRGB(gutturu22, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2022)")
+
+# plot RGB, nir in red 2025
+im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+
+
+dev.off()
 
 ### Differenze spettrali degli indici tra il 2015 e il 2025 (Delta)
 
