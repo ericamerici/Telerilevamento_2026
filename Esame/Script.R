@@ -15,7 +15,7 @@ library(imageRy)
 library(viridis)
 library(ggplot2)  
 library(patchwork) 
-library(ggridges)
+
 
 # importazione di tutti i file raster
     gutturu15 <- rast("S15.tif")
