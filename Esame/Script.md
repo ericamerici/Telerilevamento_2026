@@ -48,7 +48,7 @@ L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di e
 
 Si vuole, in questo modo, fornire agli incaricati all'amministrazione del parco uno strumento che possa apportare ulteriori risultati da combinare con altre analisi legate al campo, ad esempio.
 
-Si è scelto un lasso di tempo di 10 anni, per sfruttare la totalità della missione Sentinel 2. 
+Si è scelto un lasso di tempo di 10 anni, per sfruttare la totalità della missione Sentinel 2. L'istituzione del parco è avvenuta nel 2014, quindi risulta un buon periodo di tempo per verificare l'efficacia di tale istituzione.
 
 # Raccolta dati e metodologia
 
@@ -603,6 +603,8 @@ La variazione degli indici è espressa in due modi:
 - una differenza spettrale dei risultati degli anni 2015 e 2025;
 - una comparazione attraverso il ridge plot di tutti e tre gli anni presi in considerazione.
 
+### Differenza spettrale
+
 #### ΔDVI
 
 ````R
@@ -626,8 +628,6 @@ dvi.diff <- ndmi15 - ndmi25
 ````R
 bsi.diff <- bsi15 - bsi25
 ````
-
-### Differenza spettrale
 
 Si visualizzano insieme attraverso la funzione `im.multiframe()`
 
@@ -773,26 +773,82 @@ class_matrix <- matrix(c(
    0.40, Inf, 4    # Elevato contenuto idrico
 ), ncol = 3, byrow = TRUE)
 ````
-````
+````R
 # Classificazione 15-25
 ndmi15_cl <- classify(ndmi15, class_matrix)
 ndmi25_cl <- classify(ndmi25, class_matrix)
 
 # Plottaggio assegnando i colori a ciascuna classe
 im.multiframe(1,2)
-plot(ndmi15_cl,
-     col = c("red", "orange", "yellowgreen", "darkgreen"),
-     main = "NDMI classificato 2015") # il rosso è associato alla 1 classe, l'arancione alla 2, il giallo-verde alla 3 e il verdescuro alla 4
+plot(ndmi15_cl, col = c("red", "orange", "yellowgreen", "darkgreen"), main = "NDMI classificato 2015") # il rosso è associato alla 1 classe, l'arancione alla 2, il giallo-verde alla 3 e il verdescuro alla 4
 
-plot(ndmi25_cl,
-     col = c("red", "orange", "yellowgreen", "darkgreen"),
-     main = "NDMI classificato 2025")  
+plot(ndmi25_cl, col = c("red", "orange", "yellowgreen", "darkgreen"), main = "NDMI classificato 2025")  
 ````
 
 <img width="1536" height="738" alt="ndmi classificato" src="https://github.com/user-attachments/assets/5dc8df55-658a-48c6-9076-05ea50cc5289" />
 
 >Commento: si nota un aumento della classe con elevato contenuto idrico e una diminuzione della classe a stress idrico elevato.
 
+## Grafici di uscita
+
+Per visualizzare la classificazione, è utile riportare il grafico corrispondente.
+
+### Calcolo frequenze e percentuali
+
+Dopo la classificazione dei raster NDMI, è stata calcolata la distribuzione spaziale delle classi attraverso la funzione `freq()` del pacchetto terra. Questa funzione permette di ottenere il numero di celle (pixel) appartenenti a ciascuna classe NDMI. Successivamente, il numero di pixel di ogni classe è stato convertito in percentuale rispetto al numero totale di celle del raster, al fine di quantificare la superficie occupata da ciascuna categoria di stato idrico della vegetazione.
+
+````R
+freq_2015 <- freq(ndmi15_cl)
+freq_2025 <- freq(ndmi25_cl)
+
+perc_2015 <- freq_2015$count * 100 / ncell(ndmi15_cl) # ncell è il numero di pixel totali del raster
+perc_2025 <- freq_2025$count * 100 / ncell(ndmi25_cl)
+````
+
+### Tabella
+
+I risultati ottenuti dal calcolo delle frequenze percentuali sono stati organizzati in una tabella tramite la funzione `data.frame()`. La tabella riporta, per ciascuna classe di stato idrico definita sulla base dell'NDMI, la percentuale di superficie occupata negli anni 2015 e 2025. Questo permette un confronto diretto della variazione della distribuzione delle classi tra i due periodi analizzati.
+
+````R
+# Creazione tabella
+tabout <- data.frame(
+  Classe = c("Stress elevato", "Stress moderato", "Buono stato idrico", "Elevato contenuto idrico"), # concatenazione delle 4 classi
+  NDMI2015 = round(perc_2015, 2), # round arrotonda a 2 cifre decimali per semplificare la leggibilità
+  NDMI2025 = round(perc_2025, 2)
+)
+
+tabout # visualizzazione della tabella in R
+````
+
+### Grafici a confronto
+
+Per rappresentare graficamente la distribuzione percentuale delle classi NDMI nei due anni analizzati è stato utilizzato il pacchetto `ggplot2`. Sono stati creati due grafici a barre separati, uno relativo al 2015 e uno al 2025, nei quali l'asse delle ascisse riporta le classi di stato idrico della vegetazione e l'asse delle ordinate la percentuale di superficie occupata da ciascuna classe. I due grafici sono stati successivamente affiancati per permettere un confronto visivo immediato delle variazioni avvenute nel tempo.
+
+````R
+p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
+   geom_bar(stat = "identity") + # creazione del grafico a barre; stat = "identity" indica a ggplot2 di non fare altri conteggi;
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+      )) + # assegnazione colori di riempimento alle classi
+  ylim(c(0,20)) + # limiti
+  theme(legend.position="none")  # rimuovere la legenda
+
+p2 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
+   geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+      )) + 
+  ylim(c(0,20)) + 
+  theme(legend.position="none")  
+
+p1 + p2
+````
 
 # Conclusioni
 
