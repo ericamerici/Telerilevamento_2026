@@ -8,7 +8,7 @@
 //================================================================================================================
 
 //=========================================
-  // Limiti amministrativi della provincia di interesse importati in formato shapefile da ISTAT
+  // Limiti amministrativi del parco di interesse importati in formato shapefile da Sardegna Geoportale
 //=========================================
 
 
@@ -96,6 +96,62 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 
+////////////////////////////////////////////////////////////////
+// Immagine del 2018
+
+var collection18 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
+  .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
+  .filterDate('2018-01-07', '2018-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
+  .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
+
+//=========================================
+// Numero di immagini disponibili
+//=========================================
+
+print(collection18.size()); // dà quante immagini ci sono dopo i filtri. 
+
+// ==============================================
+// Creazione median composite
+// ==============================================
+
+var composite18 = collection18.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
+
+// ==============================================
+// Visualizzazione sulla mappa 
+// ==============================================
+
+Map.centerObject(aoi, 10);
+
+// Prima immagine RGB
+var first18 = ee.Image(collection18.first());
+Map.addLayer(first18, {
+  bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
+  min: 0,
+  max: 0.3
+}, 'First image RGB 18');
+
+// Composite mediano RGB
+Map.addLayer(composite18, {
+  bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
+  min: 0,
+  max: 0.3
+}, 'Median composite RGB 18');
+
+// ==============================================
+// Export su Google Drive
+// ==============================================
+
+Export.image.toDrive({
+  image: composite18.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  description: 'S18',
+  folder: 'GEE_exports',
+  fileNamePrefix: 'S18',
+  region: aoi,
+  scale: 10,
+  crs: 'EPSG:4326', // coordinate reference system
+  maxPixels: 1e13
+});
 
 //////////////////////////////////////////////////////////////////
 // Immagine del 2020
@@ -159,6 +215,62 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 
+////////////////////////////////////////////////////////////////
+// Immagine del 2022
+
+var collection22 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
+  .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
+  .filterDate('2022-01-07', '2022-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
+  .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
+
+//=========================================
+// Numero di immagini disponibili
+//=========================================
+
+print(collection22.size()); // dà quante immagini ci sono dopo i filtri. 
+
+// ==============================================
+// Creazione median composite
+// ==============================================
+
+var composite22 = collection22.median().clip(aoi); // per ogni pixel e per ogni banda prende il valore mediano tra tutte le immagini disponibili (riduce rumore e outlier); clip() ritaglia il risultato al rettangolo
+
+// ==============================================
+// Visualizzazione sulla mappa 
+// ==============================================
+
+Map.centerObject(aoi, 10);
+
+// Prima immagine RGB
+var first22 = ee.Image(collection22.first());
+Map.addLayer(first22, {
+  bands: ['B4','B3','B2'],   // Solo RGB per visualizzazione
+  min: 0,
+  max: 0.3
+}, 'First image RGB 15');
+
+// Composite mediano RGB
+Map.addLayer(composite22, {
+  bands: ['B8','B3','B2'],   // Solo false colour per visualizzazione
+  min: 0,
+  max: 0.3
+}, 'Median composite RGB 15');
+
+// ==============================================
+// Export su Google Drive
+// ==============================================
+
+Export.image.toDrive({
+  image: composite15.select(['B2','B3','B4','B8','B11']),  // Include tutte le bande che mi servono per l'analisi
+  description: 'S22',
+  folder: 'GEE_exports',
+  fileNamePrefix: 'S22',
+  region: aoi,
+  scale: 10,
+  crs: 'EPSG:4326', // coordinate reference system
+  maxPixels: 1e13
+});
 
 ////////////////////////////////////////////////////////////////
 // Immagine del 2025
