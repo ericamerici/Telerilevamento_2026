@@ -712,10 +712,91 @@ dev.off()
 
 # Analisi multitemporale stagionale
 
+Sempre in ottica di monitorare lo stato della vegetazione del parco, è utile sviluppare un'analisi tra stagioni diverse per conoscere il cambiamento di stress idrico a cui la vegetazione è sottoposta. 
+Viene considerato l'anno 2025, nella stagione primaverile (mesi di aprile e maggio), e confrontato con la stagione estiva precedentemente analizzato.
+
+## Importazione raster Sentinel-2
+
+Viene importato il file .tif del parco nella stagione primaverile del 2025.
+
+````R
+p25 <-rast("p25.tif")
+````
+## Visualizzazione immagini
+
+Si ripete il procedimento iniziale sulla visualizzazione del file importato, sia nelle sue singole bande, che nella composizione in RGB.
+
+### Visualizzazione singole bande
+
+````R
+im.multiframe(2,3)
+plot(p25[[1]], main = "B2 - Blue", col=cividis(100))
+plot(p25[[2]], main = "B3 - Green", col=cividis(100))
+plot(p25[[3]], main = "B4 - Red", col=cividis(100))
+plot(p25[[4]], main = "B8 - NIR", col=cividis(100))
+plot(p25[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
+````
+<img width="1536" height="738" alt="bandep" src="https://github.com/user-attachments/assets/30cd8c4f-636c-4b45-a405-ea9471eec70e" />
+
+### Visualizzazione RGB
+
+Si visualizzano anche le immagini in RGB: a colori naturali e colori falsati, per evidenziare meglio la presenza di vegetazione.
+
+````R
+# visualizzazione in RGB
+
+im.multiframe(1,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(p25, r=3, g=2, b=1, title = "Colori naturali (2025)")
+
+# plot RGB, nir in red
+im.plotRGB(p25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+
+# plot RGB, nir in blue
+im.plotRGB(p25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
+````
+
+# Classificazione
+
+La classificazione viene svolta per la differenza tra 2015 e 2025. 
+Per facilitare l'interpretazione dei risultati e confrontare le diverse immagini, i valori dell'NDMI sono stati raggruppati in quattro classi di stato idrico mediante la funzione `classify()` del pacchetto terra. La classificazione è stata definita attraverso una matrice `class_matrix` contenente, per ciascuna classe, il limite inferiore, il limite superiore e il codice identificativo assegnato. In questo modo ogni pixel del raster viene ricondotto a una categoria che rappresenta il livello di disponibilità idrica della vegetazione.
+
+````R
+# Matrice di classificazione NDMI
+class_matrix <- matrix(c(
+  -Inf, 0.00, 1,   # Stress idrico elevato
+   0.00, 0.20, 2,  # Stress idrico moderato
+   0.20, 0.40, 3,  # Buono stato idrico
+   0.40, Inf, 4    # Elevato contenuto idrico
+), ncol = 3, byrow = TRUE)
+````
+````
+# Classificazione 15-25
+ndmi15_cl <- classify(ndmi15, class_matrix)
+ndmi25_cl <- classify(ndmi25, class_matrix)
+
+# Plottaggio assegnando i colori a ciascuna classe
+im.multiframe(1,2)
+plot(ndmi15_cl,
+     col = c("red", "orange", "yellowgreen", "darkgreen"),
+     main = "NDMI classificato 2015") # il rosso è associato alla 1 classe, l'arancione alla 2, il giallo-verde alla 3 e il verdescuro alla 4
+
+plot(ndmi25_cl,
+     col = c("red", "orange", "yellowgreen", "darkgreen"),
+     main = "NDMI classificato 2025")  
+````
+
+<img width="1536" height="738" alt="ndmi classificato" src="https://github.com/user-attachments/assets/5dc8df55-658a-48c6-9076-05ea50cc5289" />
+
+>Commento: si nota un aumento della classe con elevato contenuto idrico e una diminuzione della classe a stress idrico elevato.
 
 
 # Conclusioni
 
+Il parco negli ultimi dieci anni ha pressoché conservato un costante stato vegetativo, mostrando a volte alcuni miglioramenti, che possono essere dovuti a diverse ragioni. 
 
 
 # Bibliografia e Sitografia
