@@ -163,7 +163,7 @@ plot(gutturu18[[5]], main = "B11 - SWIR", col=cividis(100))
 
 dev.off()
 ````
-<img width="1536" height="738" alt="bande18" src="https://github.com/user-attachments/assets/7204744d-405a-48ab-8a56-0d6f824c309f" />
+<img width="1536" height="738" alt="bande18" src="https://github.com/user-attachments/assets/0c9d4d8d-2f3a-436a-ac51-f4748fcd2a60" />
 
 
 #### Visualizzazione RGB
@@ -183,7 +183,7 @@ im.plotRGB(gutturu18, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2018)")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="rgb18" src="https://github.com/user-attachments/assets/5b3234bc-67b2-464d-af2c-6a90f2ab17ff" />
+<img width="1536" height="738" alt="rgb18" src="https://github.com/user-attachments/assets/f0e3c562-4e28-4964-b18b-75aad3d5e9e8" />
 
 
 ### 2020
@@ -249,7 +249,7 @@ plot(gutturu22[[5]], main = "B11 - SWIR", col=cividis(100))
 
 dev.off()
 ````
-<img width="1536" height="738" alt="bande22" src="https://github.com/user-attachments/assets/1d81b549-8ae6-4370-8267-83f582d2c95c" />
+<img width="1536" height="738" alt="bande22" src="https://github.com/user-attachments/assets/b3ed1976-2901-49a5-95fe-b9268dc3cfc4" />
 
 
 #### Visualizzazione RGB
@@ -268,7 +268,8 @@ im.plotRGB(gutturu22, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2022)")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="RGB22" src="https://github.com/user-attachments/assets/8f35fbc3-0c49-4a50-8cfe-2bd341f20cb1" />
+<img width="1536" height="738" alt="RGB22" src="https://github.com/user-attachments/assets/fc894702-d11d-465f-b682-701543233124" />
+
 
 
 ### 2025
