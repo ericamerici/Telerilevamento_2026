@@ -173,7 +173,7 @@ im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 ###################################
 # Calcolo indici
 
-# Calcolo DVI
+# Calcolo DVI con funzione im.dvi(x, NIR, Red), appartenente a imageRy
 
 # 2015
 dvi15 <- im.dvi(gutturu15, 4, 3)
@@ -197,13 +197,13 @@ lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
 # plottaggio insieme DVI
 
 im.multiframe(2,3)
-plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi)
+plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi) # range inserisce il plottaggio nei limiti massimi e minimi in comune che sono stati precedentemente stabiliti
 plot(dvi18, main="DVI 2018", col=viridis(100), range=lim_dvi)
 plot(dvi20, main="DVI 2020", col=viridis(100), range=lim_dvi)
 plot(dvi22, main="DVI 2022", col=viridis(100), range=lim_dvi)
 plot(dvi25, main="DVI 2025", col=viridis(100), range=lim_dvi)
 
-# NDVI
+# Calcolo NDVI con funzione im.dvi(x, NIR, Red), appartenente a imageRy
 
 # 2015
 ndvi15 <- im.ndvi(gutturu15, 4, 3)
@@ -233,10 +233,9 @@ plot(ndvi22, main="NDVI 2022", col=viridis(100), range=lim_ndvi)
 plot(ndvi25, main="NDVI 2025", col=viridis(100), range=lim_ndvi)
 dev.off()
 
-
-# NDMI
+# Calcolo NDMI, considerando la formula (NIR-SWIR)/(NIR+SWIR).
 # 2015
-ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
+ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]]) # si sostituisce nella formula le bande corrispondenti: NIR=4, SWIR=5;
 
 # 2018
 ndmi18 <- (gutturu18[[4]]-gutturu18[[5]])/(gutturu18[[4]]+gutturu18[[5]])
@@ -264,11 +263,11 @@ plot(ndmi25, main="NDMI 2025", col=viridis(100), range=lim_ndmi)
 
 dev.off()
 
-# BSI
+# Calcolo BSI, con la formula (SWIR+RED)-(NIR+BLUE)/(SWIR+RED)+(NIR+BLUE)
 
 # 2015
 bsi15 <- ((gutturu15[[5]] + gutturu15[[3]]) - (gutturu15[[4]] + gutturu15[[1]])) /
-         ((gutturu15[[5]] + gutturu15[[3]]) + (gutturu15[[4]] + gutturu15[[1]]))
+         ((gutturu15[[5]] + gutturu15[[3]]) + (gutturu15[[4]] + gutturu15[[1]])) # Corrispondenze: SWIR:5; RED:3; NIR:4; BLUE:1
 # 2018
 bsi18 <- ((gutturu18[[5]] + gutturu18[[3]]) - (gutturu18[[4]] + gutturu18[[1]])) /
          ((gutturu18[[5]] + gutturu18[[3]]) + (gutturu18[[4]] + gutturu18[[1]]))
