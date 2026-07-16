@@ -370,6 +370,7 @@ plot(dvi25, main = "DVI 2025", col=viridis(100))
 dev.off()
 ````
 <img width="1536" height="738" alt="dvi5" src="https://github.com/user-attachments/assets/eaed21b5-c8bc-400c-aa88-cda7568b70f6" />
+
 >Commento: Ciò che emerge a livello interno è che nella zona centro-occidentale del parco la vegetazione è più presente e rigorosa, nel versante settentrionale tende ad essere più scarsa, così come nella punta orientale. A livello multitemporale, non si riscontrano grandi differenze.
 
 
@@ -425,6 +426,7 @@ plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 dev.off()
 ````
 <img width="1536" height="738" alt="ndviL" src="https://github.com/user-attachments/assets/0620276a-3f75-46b8-8c3f-032c1539c439" />
+
 >Commento: Il commento a questo risultato risulta simile all'indice DVI. 
 
 ## NDMI
