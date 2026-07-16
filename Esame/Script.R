@@ -226,7 +226,7 @@ lim_ndvi <- range(values(c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)),
 
 # plottaggio insieme NDVI
 im.multiframe(2,3)
-plot(ndvi15, main="NDVI 2015", col=viridis(100), range=lim_ndvi)
+plot(ndvi15, main="NDVI 2015", col=viridis(100), range=lim_ndvi) # range inserisce il plottaggio nei limiti massimi e minimi in comune che sono stati precedentemente stabiliti
 plot(ndvi18, main="NDVI 2018", col=viridis(100), range=lim_ndvi)
 plot(ndvi20, main="NDVI 2020", col=viridis(100), range=lim_ndvi)
 plot(ndvi22, main="NDVI 2022", col=viridis(100), range=lim_ndvi)
@@ -255,7 +255,7 @@ lim_ndmi <- range(values(c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)),
 
 # Plottaggio insieme NDMI
 im.multiframe(2,3)
-plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi)
+plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi) # range inserisce il plottaggio nei limiti massimi e minimi in comune che sono stati precedentemente stabiliti
 plot(ndmi18, main="NDMI 2018", col=viridis(100), range=lim_ndmi)
 plot(ndmi20, main="NDMI 2020", col=viridis(100), range=lim_ndmi)
 plot(ndmi22, main="NDMI 2022", col=viridis(100), range=lim_ndmi)
@@ -291,7 +291,7 @@ lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)), na.rm = TRUE)
 
 # Plottaggio insieme BSI
 im.multiframe(2,3)
-plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi)
+plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi) # range inserisce il plottaggio nei limiti massimi e minimi in comune che sono stati precedentemente stabiliti
 plot(bsi18, main="BSI 2018", col=viridis(100), range=lim_bsi)
 plot(bsi20, main="BSI 2020", col=viridis(100), range=lim_bsi)
 plot(bsi22, main="BSI 2022", col=viridis(100), range=lim_bsi)
