@@ -375,7 +375,7 @@ plot(dvi25, main="DVI 2025", col=viridis(100), range=lim_dvi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="dvirange" src="https://github.com/user-attachments/assets/b4ad7dd8-75f0-4013-a7bb-c63e494b5bc0" />
+<img width="1536" height="738" alt="dvirange" src="https://github.com/user-attachments/assets/ef48e2c3-eecb-4dfd-af9f-d64f9cd96777" />
 
 >Commento: Ciò che emerge a livello interno è che nella zona centro-occidentale del parco la vegetazione è più presente e rigorosa, nel versante settentrionale tende ad essere più scarsa, così come nella punta orientale. A livello multitemporale, non si riscontrano grandi differenze.
 
@@ -435,7 +435,7 @@ plot(ndvi25, main="NDVI 2025", col=viridis(100), range=lim_ndvi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/208987b3-51d9-4bee-af24-d99d7e4288f9" />
+<img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/7b529e9e-8337-41c8-9140-5c4cc80c4d6e" />
 
 >Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta stabile. Nell'anno 2015 la vegetazione risulta più stressata.
 
@@ -489,7 +489,7 @@ plot(ndmi25, main="NDMI 2025", col=viridis(100), range=lim_ndmi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="ndmirange" src="https://github.com/user-attachments/assets/db30e346-b4b1-44f5-8603-0b725d8675f3" />
+<img width="1536" height="738" alt="ndmirange" src="https://github.com/user-attachments/assets/d11f7f88-da28-4ba5-8119-8f1750205b1a" />
 
 
 >Commento: La vegetazione presente nel versante occidentale risulta più umida, anche se con valori non altissimi. Questo risultato è in linea con le aspettative, dato che si sta considerando la macchia mediterranea nel suo periodo più secco. Nella zona settentrionale e orientale, nuovamente, la vegetazione è molto più secca. 
