@@ -392,68 +392,242 @@ names(bsi_ridg)=c("BSI 2015", "BSI 2018", "BSI 2020", "BSI 2022", "BSI 2025") # 
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
 im.ridgeline(bsi_ridg, scale=2, palette="magma")
 
-##################################################
-##################################################
-# prova con rettangolo
+####################################################
+####################################################
+####################################################
 
-# importazione
+# Analisi tra stagioni, anno 2025
 
-A15 <- rast("A15.tif")
-A20 <- rast("A20.tif")
-A25 <- rast("A25.tif")
+# ripeto lo stesso procedimento, con il file riguardante il periodo di aprile-maggio 2025
 
-# NDVI
+# importare il raster
+
+p25 <-rast("p25.tif")
+
+# visualizzazione delle bande singole con funzione im.multiframe()
+im.multiframe(2,3)
+plot(p25[[1]], main = "B2 - Blue", col=cividis(100))
+plot(p25[[2]], main = "B3 - Green", col=cividis(100))
+plot(p25[[3]], main = "B4 - Red", col=cividis(100))
+plot(p25[[4]], main = "B8 - NIR", col=cividis(100))
+plot(p25[[5]], main = "B11 - SWIR", col=cividis(100))
+
+dev.off()
+
+# visualizzazione in RGB
+
+im.multiframe(1,3)
+
+# plot RGB, colori naturali 
+im.plotRGB(p25, r=3, g=2, b=1, title = "Colori naturali (2025)")
+
+# plot RGB, nir in red
+im.plotRGB(p25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+
+# plot RGB, nir in blue
+im.plotRGB(p25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
+
+dev.off()
+
+ndmip <- (p25[[4]]-p25[[5]])/(p25[[4]]+p25[[5]])
+
+lim_ndmi2 <- range(values(c(ndmip, ndmi25)),
+                  na.rm = TRUE)
+
+# Plottaggio insieme NDMI
+im.multiframe(1,2)
+plot(ndmip, main="NDMI primavera 2025", col=viridis(100), range=lim_ndmi2)
+plot(ndmi25, main="NDMI estate 2025", col=viridis(100), range=lim_ndmi2)
+
+ndmi.diff <- ndmip-ndmi25
+plot(ndmi.diff, main = "ΔNDMI primavera-estate", col=magma(100))
+
+ndmip_ridg=c(ndmip, ndmi25)  
+names(ndmip_ridg)=c("NDMI primavera 2025", "NDMI estate 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(ndmip_ridg, scale=2, palette="magma")
+
+
+# Matrice di classificazione NDMI
+class_matrix <- matrix(c(
+  -Inf, 0.00, 1,   # Stress idrico elevato
+   0.00, 0.20, 2,  # Stress idrico moderato
+   0.20, 0.40, 3,  # Buono stato idrico
+   0.40, Inf, 4    # Elevato contenuto idrico
+), ncol = 3, byrow = TRUE)
+
+# Classificazione 15-25
+ndmi15_cl <- classify(ndmi15, class_matrix)
+ndmi25_cl <- classify(ndmi25, class_matrix)
+
+# plottaggio
+
+im.multiframe(1,2)
+plot(ndmi15_cl,
+     col = c("red", "orange", "yellowgreen", "darkgreen"),
+     main = "NDMI classificato 2015")
+
+plot(ndmi25_cl,
+     col = c("red", "orange", "yellowgreen", "darkgreen"),
+     main = "NDMI classificato 2025")  
+
+# Percentuali
+freq_2015 <- freq(ndmi15_cl)
+freq_2025 <- freq(ndmi25_cl)
+
+perc_2015 <- freq_2015$count * 100 / ncell(ndmi15_cl)
+perc_2025 <- freq_2025$count * 100 / ncell(ndmi25_cl)
+
+# Creazione tabella
+tabout <- data.frame(
+  Classe = c("Stress elevato",
+             "Stress moderato",
+             "Buono stato idrico",
+             "Elevato contenuto idrico"),
+  NDMI2015 = round(perc_2015, 2),
+  NDMI2025 = round(perc_2025, 2)
+)
+
+tabout
+
+# Grafici
 
 # 2015
-ndviA15 <- im.ndvi(A15, 4, 3)
-
-# 2020
-ndviA20 <- im.ndvi(A20, 4, 3)
+ggplot(tabout, aes(x = Classe, y = NDMI2015, fill = Classe)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+  )) +
+  labs(title = "Classi NDMI 2015",
+       x = "Classe",
+       y = "Percentuale (%)")
 
 # 2025
-ndviA25 <- im.ndvi(A25, 4, 3)
+ggplot(tabout, aes(x = Classe, y = NDMI2025, fill = Classe)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+      )) +
+  labs(title = "Classi NDMI 2025",
+       x = "Classe",
+       y = "Percentuale (%)")
 
-ndviA.diff <- ndviA15 - ndviA25
 
-#NDMI
+p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # structure
+   geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+      )) + # bar plot 
+  ylim(c(0,20)) + # limits
+  theme(legend.position="none")  # removing legend
 
-#2015
-ndmiA15 <- (A15[[4]]-A15[[5]])/(A15[[4]]+A15[[5]])
+p2 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # structure
+   geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Stress elevato" = "red",
+    "Stress moderato" = "orange",
+    "Buono stato idrico" = "yellowgreen",
+    "Elevato contenuto idrico" = "darkgreen"
+      )) + # bar plot
+  ylim(c(0,20)) + # limits
+  theme(legend.position="none")  # removing legend
 
-#2020
-ndmiA20 <- (A20[[4]]-A20[[5]])/(A20[[4]]+A20[[5]])
+p1 + p2 # si usa il pacchetto patchwork
 
-#2025
-ndmiA25 <- (A25[[4]]-A25[[5]])/(A25[[4]]+A25[[5]])
 
-ndmiA.diff <- ndmiA15 - ndmiA25
 
-ndmiA_ridg=c(ndmiA15, ndmiA20, ndmiA25)  
-names(ndmiA_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
-# Applicazione della funzione im.ridgeline del pacchetto imageRy
-im.ridgeline(ndmiA_ridg, scale=2, palette="magma")
 
-####################################################
-####################################################
-####################################################
-####################################################
-GM16 <-rast("P16.tif")
-plot(GM16)
 
-GM21 <-rast("P21.tif")
-plot(GM21)
 
-GM26 <-rast("P26.tif")
-plot(GM26)
 
-# 2016
-dvi16 <- im.dvi(GM16, 4, 3)
 
-# 2021
-dvi21 <- im.dvi(GM21, 4, 3)
 
-# 2026
-dvi26 <- im.dvi(GM26, 4, 3)
 
-dvi.diff <- dvi16 - dvi26
-plot(dvi.diff)
+
+
+
+
+
+
+
+# Tabella
+tabella <- data.frame(
+  Classe = c("Stress elevato",
+             "Stress moderato",
+             "Buono stato idrico",
+             "Elevato contenuto idrico"),
+  NDMI_2015 = round(perc_2015, 2),
+  NDMI_2025 = round(perc_2025, 2)
+)
+
+print(tabella)
+
+# Grafico comparativo
+
+library(reshape2)
+library(ggplot2)
+
+df_long <- melt(tabella,
+                id.vars = "Classe",
+                variable.name = "Anno",
+                value.name = "Percentuale")
+
+ggplot(df_long,
+       aes(x = Classe,
+           y = Percentuale,
+           fill = Anno)) +
+
+  geom_bar(stat = "identity",
+           position = "dodge") +
+
+  geom_text(aes(label = round(Percentuale,1)),
+            position = position_dodge(width = 0.9),
+            vjust = -0.25,
+            size = 3) +
+
+  scale_fill_manual(values = c("NDMI_2015" = "steelblue",
+                               "NDMI_2025" = "darkgreen")) +
+
+  ylim(0,100) +
+
+  labs(title = "Confronto delle classi NDMI",
+       x = "Classi NDMI",
+       y = "Percentuale (%)") +
+
+  theme_minimal()
+
+im.multiframe(2,3)
+hist(ndmi15,
+     main = "NDMI 2015",
+     xlab = "NDMI",
+     col = "steelblue")
+
+hist(ndmi18,
+     main = "NDMI 2018",
+     xlab = "NDMI",
+     col = "steelblue")
+
+hist(ndmi20,
+     main = "NDMI 2020",
+     xlab = "NDMI",
+     col = "steelblue")
+
+hist(ndmi22,
+     main = "NDMI 2022",
+     xlab = "NDMI",
+     col = "steelblue")
+
+hist(ndmi25,
+     main = "NDMI 2025",
+     xlab = "NDMI",
+     col = "steelblue")
+
