@@ -851,4 +851,18 @@ GeoPortale Sardegna https://www.sardegnageoportale.it/
 
 Sardegna Arpa https://www.sar.sardegna.it/
 
+# Appendice
+
+## Pacchetto sic
+
+Siccome questo studio risulta sensato in una prospettiva di più largo periodo, e nell'ottica che sia utile per monitorare il parco per il tema siccità e desertificazione, è stato creato un pacchetto che semplifica alcune azioni svolte in questo progetto. 
+
+In particolare, sono state create le funzioni:
+
+````R
+sic.ndmi()
+sic.bsi()
+````
+dove
+
 
