@@ -44,7 +44,7 @@ Map.addLayer(aoi, {color: 'red'}, 'AOI GM'); // aggiunge il layer di rettangolo 
 
 var collection15 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2015-01-07', '2015-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filterDate('2015-07-01', '2015-08-31') // range temporale: mesi di luglio e agosto (estate)
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -101,7 +101,7 @@ Export.image.toDrive({
 
 var collection18 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2018-01-07', '2018-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filterDate('2018-07-01', '2018-08-31') // range temporale: mesi di luglio e agosto (estate)
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
@@ -220,7 +220,7 @@ Export.image.toDrive({
 
 var collection22 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') // prende la collezione Harmonized, Surface Reflectance
   .filterBounds(aoi) // solo immagini che coprono l'Area of Interest
-  .filterDate('2022-01-07', '2022-08-31') // range temporale: mesi di luglio e agosto (estate)
+  .filterDate('2022-07-01', '2022-08-31') // range temporale: mesi di luglio e agosto (estate)
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) // tiene solo immagini con percentuale di pixel nuvolosi minore del 20% (metadato)
   .map(maskS2clouds); // applica la maschera nubi a ogni immagine della collezione
 
