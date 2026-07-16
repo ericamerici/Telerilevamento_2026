@@ -436,7 +436,7 @@ dev.off()
 ````
 <img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/208987b3-51d9-4bee-af24-d99d7e4288f9" />
 
->Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta stabile.
+>Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta stabile. Nell'anno 2015 la vegetazione risulta più stressata.
 
 ## NDMI
 
@@ -488,10 +488,11 @@ plot(ndmi25, main="NDMI 2025", col=viridis(100), range=lim_ndmi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/efc97437-9a73-4f70-98bf-a3ef7af240c6" />
+<img width="1536" height="738" alt="ndmirange" src="https://github.com/user-attachments/assets/db30e346-b4b1-44f5-8603-0b725d8675f3" />
+
 
 >Commento: La vegetazione presente nel versante occidentale risulta più umida, anche se con valori non altissimi. Questo risultato è in linea con le aspettative, dato che si sta considerando la macchia mediterranea nel suo periodo più secco. Nella zona settentrionale e orientale, nuovamente, la vegetazione è molto più secca. 
-A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 risulta esserci più vegetazione secca rispetto agli altri anni. In ogni caso, i cambiamenti non sono significativi. 
+A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 risulta esserci più vegetazione secca rispetto agli altri anni. Emergono cambiamenti nel pattern- In ogni caso, i cambiamenti non sono significativi. 
 
 ## BSI
 
@@ -552,20 +553,26 @@ plot(bsi25, main="BSI 2025", col=viridis(100), range=lim_bsi)
 >Commento: Le immagini risultano scure perché i valori bassi corrispondono a presenza di vegetazione. Ci sono alcune zone in cui si evidenziano valori maggiori, nella zona a nord ed a ovest, soprattutto nel 2015 e nel 2025.
 Si riscontrano alcuni cambiamenti di pattern.
 
-# Analisi multitemporale
+# Analisi multitemporale tra gli anni
 
 ## Visualizzazione in RGB
 
 Innanzittutto, si visualizzano le diverse immagini RGB per avere un confronto indicativo. Si selezionano solamente le composizioni a colori naturali e a falsi colori con la banda NIR nel rosso.
 
 ````R
-im.multiframe (2,3)
+im.multiframe (2,5)
 
 # plot RGB, colori naturali 2015
 im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
 
-# plot RGB, colori naturali 2020
+# plot RGB, colori naturali 2018
 im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
+
+# plot RGB, colori naturali 2020
+im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")
+
+# plot RGB, colori naturali 2022
+im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")
 
 # plot RGB, colori naturali 2025
 im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
@@ -573,15 +580,21 @@ im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
 # plot RGB, nir in red 2015
 im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
 
+# plot RGB, nir in red 2018
+im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
+
 # plot RGB, nir in red 2020
 im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
+
+# plot RGB, nir in red 2022
+im.plotRGB(gutturu22, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2022)")
 
 # plot RGB, nir in red 2025
 im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="AMultiTRGB" src="https://github.com/user-attachments/assets/17a539d0-7d35-430e-a710-f44898a780d1" />
+<img width="1536" height="738" alt="rgbdelta" src="https://github.com/user-attachments/assets/3ff15103-a351-41a5-9a3b-f9954c8ca502" />
 
 ## Variazione degli indici
 
@@ -630,6 +643,11 @@ dev.off()
 ````
 
 <img width="1536" height="738" alt="delta" src="https://github.com/user-attachments/assets/8a429f03-763d-47a5-9a79-59c607139410" />
+
+>Commento: si notano alcuni cambiamenti tra il 2015 e il 2020, come era già stato notato nel calcolo degli indici spettrali, soprattutto per quanto riguarda alcuni pattern.
+
+> [!NOTE]
+>A differenza degli altri indici, il BSI associa a numeri positivi il suolo nudo, per questa ragione i risultati risultano inversi.
 
 ### Ridge plots
 
@@ -691,6 +709,10 @@ im.ridgeline(bsi_ridg, scale=2, palette="magma")
 dev.off()
 ````
 <img width="1536" height="738" alt="bsiRidge" src="https://github.com/user-attachments/assets/3c84e516-3301-4695-91d4-dd8644ace594" />
+
+# Analisi multitemporale stagionale
+
+
 
 # Conclusioni
 
