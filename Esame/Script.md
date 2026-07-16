@@ -549,7 +549,7 @@ plot(bsi20, main="BSI 2020", col=viridis(100), range=lim_bsi)
 plot(bsi22, main="BSI 2022", col=viridis(100), range=lim_bsi)
 plot(bsi25, main="BSI 2025", col=viridis(100), range=lim_bsi)
 ````
-<img width="1536" height="738" alt="bsirange" src="https://github.com/user-attachments/assets/d25ef10f-bf3e-4e52-855e-dae1ff00786c" />
+<img width="1536" height="738" alt="bsirange" src="https://github.com/user-attachments/assets/b65247d3-c5ab-4703-a236-7d58cdcaf1a4" />
 
 >Commento: Le immagini risultano scure perché i valori bassi corrispondono a presenza di vegetazione. Ci sono alcune zone in cui si evidenziano valori maggiori, nella zona a nord ed a ovest, soprattutto nel 2015 e nel 2025.
 Si riscontrano alcuni cambiamenti di pattern.
@@ -595,7 +595,7 @@ im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
 
 dev.off()
 ````
-<img width="1536" height="738" alt="rgbdelta" src="https://github.com/user-attachments/assets/3ff15103-a351-41a5-9a3b-f9954c8ca502" />
+<img width="1536" height="738" alt="rgbdelta" src="https://github.com/user-attachments/assets/5b7ae0df-ed92-4517-b1e5-3d2fc431ce02" />
 
 ## Variazione degli indici
 
