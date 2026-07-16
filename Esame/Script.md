@@ -822,7 +822,7 @@ tabout # visualizzazione della tabella in R
 
 ### Grafici a confronto
 
-Per rappresentare graficamente la distribuzione percentuale delle classi NDMI nei due anni analizzati è stato utilizzato il pacchetto `ggplot2`. Sono stati creati due grafici a barre separati, uno relativo al 2015 e uno al 2025, nei quali l'asse delle ascisse riporta le classi di stato idrico della vegetazione e l'asse delle ordinate la percentuale di superficie occupata da ciascuna classe. I due grafici sono stati successivamente affiancati per permettere un confronto visivo immediato delle variazioni avvenute nel tempo.
+Per rappresentare graficamente la distribuzione percentuale delle classi NDMI nei due anni analizzati è stato utilizzato il pacchetto `ggplot2`. Sono stati creati due grafici a barre separati, uno relativo al 2015 e uno al 2025, nei quali l'asse delle ascisse riporta le classi di stato idrico della vegetazione e l'asse delle ordinate la percentuale di superficie occupata da ciascuna classe. Tramite il pacchetto `patchwork`, i due grafici sono stati successivamente affiancati per permettere un confronto visivo immediato delle variazioni avvenute nel tempo.
 
 ````R
 p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
