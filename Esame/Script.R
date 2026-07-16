@@ -447,13 +447,16 @@ names(ndmip_ridg)=c("NDMI primavera 2025", "NDMI estate 2025") # Per assegnare i
 im.ridgeline(ndmip_ridg, scale=2, palette="magma")
 
 
-# Matrice di classificazione NDMI
+
+# Creazione della matrice di classificazione per l'indice NDMI
+# Ogni riga definisce un intervallo di valori NDMI e la classe assegnata
+
 class_matrix <- matrix(c(
-  -Inf, 0.00, 1,   # Stress idrico elevato
-   0.00, 0.20, 2,  # Stress idrico moderato
-   0.20, 0.40, 3,  # Buono stato idrico
-   0.40, Inf, 4    # Elevato contenuto idrico
-), ncol = 3, byrow = TRUE)
+  -Inf, 0.00, 1,   # Classe 1: valori NDMI inferiori a 0 → elevato stress idrico / vegetazione molto secca
+   0.00, 0.20, 2,  # Classe 2: valori NDMI tra 0 e 0.20 → stress idrico moderato
+   0.20, 0.40, 3,  # Classe 3: valori NDMI tra 0.20 e 0.40 → buono stato idrico della vegetazione
+   0.40, Inf, 4    # Classe 4: valori NDMI superiori a 0.40 → elevato contenuto idrico / vegetazione molto umida
+), ncol = 3, byrow = TRUE) # ncol: la matrice ha tre colonne: valore minimo, valore massimo, classe assegnata; byrow: valori vengono inseriti riga per riga
 
 # Classificazione 15-25
 ndmi15_cl <- classify(ndmi15, class_matrix)
@@ -478,67 +481,41 @@ perc_2015 <- freq_2015$count * 100 / ncell(ndmi15_cl)
 perc_2025 <- freq_2025$count * 100 / ncell(ndmi25_cl)
 
 # Creazione tabella
+
 tabout <- data.frame(
-  Classe = c("Stress elevato",
-             "Stress moderato",
-             "Buono stato idrico",
-             "Elevato contenuto idrico"),
-  NDMI2015 = round(perc_2015, 2),
+  Classe = c("Stress elevato", "Stress moderato", "Buono stato idrico", "Elevato contenuto idrico"), # concatenazione delle 4 classi
+  NDMI2015 = round(perc_2015, 2), # round arrotonda a 2 cifre decimali per semplificare la leggibilità
   NDMI2025 = round(perc_2025, 2)
 )
 
-tabout
+tabout # visualizzazione della tabella in R
+
 
 # Grafici
 
-# 2015
-ggplot(tabout, aes(x = Classe, y = NDMI2015, fill = Classe)) +
-  geom_bar(stat = "identity") +
+p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
+   geom_bar(stat = "identity") + # creazione del grafico a barre; stat = "identity" indica a ggplot2 di non fare altri conteggi;
   scale_fill_manual(values = c(
     "Stress elevato" = "red",
     "Stress moderato" = "orange",
     "Buono stato idrico" = "yellowgreen",
     "Elevato contenuto idrico" = "darkgreen"
-  )) +
-  labs(title = "Classi NDMI 2015",
-       x = "Classe",
-       y = "Percentuale (%)")
+      )) + # assegnazione colori di riempimento alle classi
+  ylim(c(0,20)) + # limiti
+  theme(legend.position="none")  # rimuovere la legenda
 
-# 2025
-ggplot(tabout, aes(x = Classe, y = NDMI2025, fill = Classe)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
-      )) +
-  labs(title = "Classi NDMI 2025",
-       x = "Classe",
-       y = "Percentuale (%)")
-
-
-p1 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # structure
+p25 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
    geom_bar(stat = "identity") +
   scale_fill_manual(values = c(
     "Stress elevato" = "red",
     "Stress moderato" = "orange",
     "Buono stato idrico" = "yellowgreen",
     "Elevato contenuto idrico" = "darkgreen"
-      )) + # bar plot 
-  ylim(c(0,20)) + # limits
-  theme(legend.position="none")  # removing legend
+      )) + 
+  ylim(c(0,20)) + 
+  theme(legend.position="none")  
 
-p2 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # structure
-   geom_bar(stat = "identity") +
-  scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
-      )) + # bar plot
-  ylim(c(0,20)) + # limits
-  theme(legend.position="none")  # removing legend
+p15 + p25
 
 p1 + p2 # si usa il pacchetto patchwork
 
@@ -556,77 +533,4 @@ p1 + p2 # si usa il pacchetto patchwork
 
 
 
-
-
-# Tabella
-tabella <- data.frame(
-  Classe = c("Stress elevato",
-             "Stress moderato",
-             "Buono stato idrico",
-             "Elevato contenuto idrico"),
-  NDMI_2015 = round(perc_2015, 2),
-  NDMI_2025 = round(perc_2025, 2)
-)
-
-print(tabella)
-
-# Grafico comparativo
-
-library(reshape2)
-library(ggplot2)
-
-df_long <- melt(tabella,
-                id.vars = "Classe",
-                variable.name = "Anno",
-                value.name = "Percentuale")
-
-ggplot(df_long,
-       aes(x = Classe,
-           y = Percentuale,
-           fill = Anno)) +
-
-  geom_bar(stat = "identity",
-           position = "dodge") +
-
-  geom_text(aes(label = round(Percentuale,1)),
-            position = position_dodge(width = 0.9),
-            vjust = -0.25,
-            size = 3) +
-
-  scale_fill_manual(values = c("NDMI_2015" = "steelblue",
-                               "NDMI_2025" = "darkgreen")) +
-
-  ylim(0,100) +
-
-  labs(title = "Confronto delle classi NDMI",
-       x = "Classi NDMI",
-       y = "Percentuale (%)") +
-
-  theme_minimal()
-
-im.multiframe(2,3)
-hist(ndmi15,
-     main = "NDMI 2015",
-     xlab = "NDMI",
-     col = "steelblue")
-
-hist(ndmi18,
-     main = "NDMI 2018",
-     xlab = "NDMI",
-     col = "steelblue")
-
-hist(ndmi20,
-     main = "NDMI 2020",
-     xlab = "NDMI",
-     col = "steelblue")
-
-hist(ndmi22,
-     main = "NDMI 2022",
-     xlab = "NDMI",
-     col = "steelblue")
-
-hist(ndmi25,
-     main = "NDMI 2025",
-     xlab = "NDMI",
-     col = "steelblue")
 
