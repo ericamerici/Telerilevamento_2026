@@ -319,6 +319,7 @@ dev.off()
 
 Per ogni indice il procedimento è il seguente: 
 - si calcola l'indice attraverso la formula (si tratta di una operazione tra bande);
+- si stabilisce un range comune (limiti massimi e minimi) per facitilare il confronto multi-temporale;
 - si visualizzano i plot di tutti gli anni considerati;
 - si interpretano i risultati. 
 
@@ -356,20 +357,24 @@ dvi22 <- im.dvi(gutturu22, 4, 3)
 dvi25 <- im.dvi(gutturu25, 4, 3)
 ````
 
-
+Si stabilisce un range comune.
+````R
+lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
+                 na.rm = TRUE) # values considera i DN; c rappresenta la concatenazione; na.rm rimuove i no data
+````
 
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
-plot(dvi15, main = "DVI 2015", col=viridis(100))
-plot(dvi18, main = "DVI 2018", col=viridis(100))
-plot(dvi20, main = "DVI 2020", col=viridis(100))
-plot(dvi22, main = "DVI 2022", col=viridis(100))
-plot(dvi25, main = "DVI 2025", col=viridis(100))
+plot(dvi15, main="DVI 2015", col=viridis(100), range=lim_dvi)
+plot(dvi18, main="DVI 2018", col=viridis(100), range=lim_dvi)
+plot(dvi20, main="DVI 2020", col=viridis(100), range=lim_dvi)
+plot(dvi22, main="DVI 2022", col=viridis(100), range=lim_dvi)
+plot(dvi25, main="DVI 2025", col=viridis(100), range=lim_dvi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="dvi5" src="https://github.com/user-attachments/assets/eaed21b5-c8bc-400c-aa88-cda7568b70f6" />
+<img width="1536" height="738" alt="dvirange" src="https://github.com/user-attachments/assets/b4ad7dd8-75f0-4013-a7bb-c63e494b5bc0" />
 
 >Commento: Ciò che emerge a livello interno è che nella zona centro-occidentale del parco la vegetazione è più presente e rigorosa, nel versante settentrionale tende ad essere più scarsa, così come nella punta orientale. A livello multitemporale, non si riscontrano grandi differenze.
 
@@ -412,30 +417,45 @@ ndvi22 <- im.ndvi(gutturu22, 4, 3)
 ndvi25 <- im.ndvi(gutturu25, 4, 3)
 ````
 
-
+Si stabilisce un range comune.
+````R
+lim_ndvi <- range(values(c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)),
+                  na.rm = TRUE)
+````
 
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
-plot(ndvi15, main = "NDVI 2015", col=viridis(100))
-plot(ndvi18, main = "NDVI 2018", col=viridis(100))
-plot(ndvi20, main = "NDVI 2020", col=viridis(100))
-plot(ndvi22, main = "NDVI 2022", col=viridis(100))
-plot(ndvi25, main = "NDVI 2025", col=viridis(100))
+plot(ndvi15, main="NDVI 2015", col=viridis(100), range=lim_ndvi)
+plot(ndvi18, main="NDVI 2018", col=viridis(100), range=lim_ndvi)
+plot(ndvi20, main="NDVI 2020", col=viridis(100), range=lim_ndvi)
+plot(ndvi22, main="NDVI 2022", col=viridis(100), range=lim_ndvi)
+plot(ndvi25, main="NDVI 2025", col=viridis(100), range=lim_ndvi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="ndviL" src="https://github.com/user-attachments/assets/0620276a-3f75-46b8-8c3f-032c1539c439" />
+<img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/208987b3-51d9-4bee-af24-d99d7e4288f9" />
 
->Commento: Il commento a questo risultato risulta simile all'indice DVI. 
+>Commento: Il commento a questo risultato risulta simile all'indice DVI. Lo stato di salute della vegetazione risulta stabile.
 
 ## NDMI
+
+Il NDMI (Normalized Difference Moist Index) misura il contenuto di acqua della vegetazione, dunque risulta un indice importante in contesti di vulnerabilità alla siccità e alla desertificazione. La sua formula è:
+
+$NDMI=\frac{NIR-SWIR}{NIR+SWIR}$
+
+La banda SWIR corrisponde alla B11 in Sentinel, ed è sensibile all'acqua presente nelle foglie:
+
+- più acqua → maggiore assorbimento SWIR;
+- meno acqua → maggiore riflettanza SWIR.
+
+Il valore ondeggia tra -1 e 1; maggiore il valore dell'indice più umida risulta la vegetazione. Valori negativi indicano una vegetazione molto secca.
 
 Si visualizza l'indice NMDI per ogni anno considerato.
 
 ````R
 # 2015
-ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]])
+ndmi15 <- (gutturu15[[4]]-gutturu15[[5]])/(gutturu15[[4]]+gutturu15[[5]]) # si sostituisce nella formula le bande corrispondenti: NIR=4, SWIR=5;
 
 # 2018
 ndmi18 <- (gutturu18[[4]]-gutturu18[[5]])/(gutturu18[[4]]+gutturu18[[5]])
@@ -450,26 +470,48 @@ ndmi22 <- (gutturu22[[4]]-gutturu22[[5]])/(gutturu22[[4]]+gutturu22[[5]])
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 ````
 
+Si stabilisce un range comune.
+````R
+lim_ndmi <- range(values(c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)),
+                  na.rm = TRUE)
+````
+
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 
 ````R
 im.multiframe(2,3)
-plot(ndmi15, main = "NDMI 2015", col=viridis(100))
-plot(ndmi18, main = "NDMI 2018", col=viridis(100))
-plot(ndmi20, main = "NDMI 2020", col=viridis(100))
-plot(ndmi22, main = "NDMI 2022", col=viridis(100))
-plot(ndmi25, main = "NDMI 2025", col=viridis(100))
+plot(ndmi15, main="NDMI 2015", col=viridis(100), range=lim_ndmi)
+plot(ndmi18, main="NDMI 2018", col=viridis(100), range=lim_ndmi)
+plot(ndmi20, main="NDMI 2020", col=viridis(100), range=lim_ndmi)
+plot(ndmi22, main="NDMI 2022", col=viridis(100), range=lim_ndmi)
+plot(ndmi25, main="NDMI 2025", col=viridis(100), range=lim_ndmi)
 
 dev.off()
 ````
-<img width="1536" height="738" alt="ndmi5" src="https://github.com/user-attachments/assets/56d2422a-5e04-42dd-bc81-2de1510064d4" />
+<img width="1536" height="738" alt="ndvirange" src="https://github.com/user-attachments/assets/efc97437-9a73-4f70-98bf-a3ef7af240c6" />
+
+>Commento: La vegetazione presente nel versante occidentale risulta più umida, anche se con valori non altissimi. Questo risultato è in linea con le aspettative, dato che si sta considerando la macchia mediterranea nel suo periodo più secco. Nella zona settentrionale e orientale, nuovamente, la vegetazione è molto più secca. 
+A livello multitemporale vi sono lievi cambiamenti, probabilmente dovuti al contesto annuale meteorologico, e nel 2015 risulta esserci più vegetazione secca rispetto agli altri anni. In ogni caso, i cambiamenti non sono significativi. 
 
 ## BSI
+
+Il BSI (Bare Soil Index) evidenzia la presenza di suolo nudo, per questo è un altro indice utile nell'analisi della siccità e del fenomeno della desertificazione.
+La sua formula è:
+
+$BSI=\frac{(SWIR+RED)-(NIR+BLUE)}
+{(SWIR+RED)+(NIR+BLUE)}$
+
+Il suolo nudo generalmente:
+
+- riflette maggiormente nel SWIR e nel rosso;
+- riflette meno nel NIR rispetto alla vegetazione.
+
+Al contrario rispetto agli altri indici, il BSI evidenzia con numeri positivi una elevata presenza di suolo nuovo, mentre valori minori corrispondono a bassa presenza di suolo nudo. 
 
 ````R
 # 2015
 bsi15 <- ((gutturu15[[5]] + gutturu15[[3]]) - (gutturu15[[4]] + gutturu15[[1]])) /
-         ((gutturu15[[5]] + gutturu15[[3]]) + (gutturu15[[4]] + gutturu15[[1]]))
+         ((gutturu15[[5]] + gutturu15[[3]]) + (gutturu15[[4]] + gutturu15[[1]])) # Corrispondenze: SWIR:5; RED:3; NIR:4; BLUE:1
 # 2018
 bsi18 <- ((gutturu18[[5]] + gutturu18[[3]]) - (gutturu18[[4]] + gutturu18[[1]])) /
          ((gutturu18[[5]] + gutturu18[[3]]) + (gutturu18[[4]] + gutturu18[[1]]))
@@ -487,21 +529,28 @@ bsi25 <- ((gutturu25[[5]] + gutturu25[[3]]) - (gutturu25[[4]] + gutturu25[[1]]))
          ((gutturu25[[5]] + gutturu25[[3]]) + (gutturu25[[4]] + gutturu25[[1]]))
 ````
 
+Si stabilisce un range comune.
+````R
+lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)),
+                 na.rm = TRUE)
+````
+
 Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 
 ````R
 # Plottaggio insieme BSI
 
 im.multiframe(2,3)
-plot(bsi15, main = "BSI 2015", col = viridis(100))
-plot(bsi18, main = "BSI 2018", col = viridis(100))
-plot(bsi20, main = "BSI 2020", col = viridis(100))
-plot(bsi22, main = "BSI 2022", col = viridis(100))
-plot(bsi25, main = "BSI 2025", col = viridis(100))
+plot(bsi15, main="BSI 2015", col=viridis(100), range=lim_bsi)
+plot(bsi18, main="BSI 2018", col=viridis(100), range=lim_bsi)
+plot(bsi20, main="BSI 2020", col=viridis(100), range=lim_bsi)
+plot(bsi22, main="BSI 2022", col=viridis(100), range=lim_bsi)
+plot(bsi25, main="BSI 2025", col=viridis(100), range=lim_bsi)
 ````
-<img width="1536" height="738" alt="bsi5" src="https://github.com/user-attachments/assets/f5847aa8-6629-46fc-ac0c-966389b4eaa9" />
->Commento: efjnoefnelfvmelfvmàfmv
->elfvnlfnvl
+<img width="1536" height="738" alt="bsirange" src="https://github.com/user-attachments/assets/d25ef10f-bf3e-4e52-855e-dae1ff00786c" />
+
+>Commento: Le immagini risultano scure perché i valori bassi corrispondono a presenza di vegetazione. Ci sono alcune zone in cui si evidenziano valori maggiori, nella zona a nord ed a ovest, soprattutto nel 2015 e nel 2025.
+Si riscontrano alcuni cambiamenti di pattern.
 
 # Analisi multitemporale
 
