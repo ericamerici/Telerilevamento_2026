@@ -45,8 +45,10 @@ L'obiettivo principale del progetto è **valutare l'evoluzione dello stato della
   
 ## Giustificazione
 L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di enti di protezione come quella del Parco Naturale Regionale, caratterizzata da politiche di conservazione e da una struttura molto diversa dal territorio circostante. Si è deciso di analizzare questo parco perché risulta una foresta stabile e significativa per la salute ambientale e umana dell'intera regione, ma è localizzata in un contesto particolarmente vulnerabile alla desertificazione. 
+
 Si vuole, in questo modo, fornire agli incaricati all'amministrazione del parco uno strumento che possa apportare ulteriori risultati da combinare con altre analisi legate al campo, ad esempio.
-Si è scelto un lasso di tempo di 10 anni, in parte per sfruttare la totalità della missione Sentinel 2. 
+
+Si è scelto un lasso di tempo di 10 anni, per sfruttare la totalità della missione Sentinel 2. 
 
 # Raccolta dati e metodologia
 
@@ -315,13 +317,27 @@ dev.off()
 
 # Calcolo Indici
 
-Per ogni indice il procedimento è il seguente:
+Per ogni indice il procedimento è il seguente: 
+- si calcola l'indice attraverso la formula (si tratta di una operazione tra bande);
+- si visualizzano i plot di tutti gli anni considerati;
+- si interpretano i risultati. 
 
 ## DVI
 
-L'indice DVI (Difference Vegetation Index)
+L'indice DVI (Difference Vegetation Index) misura la differenza assoluta tra riflettanza nel vicino infrarosso e nel rosso. Infatti, la sua formula è: 
 
-Si visualizza l'indice DVI per ogni anno considerato, utilizzando la funzione `im.dvi()`, appartenente al pacchetto imageRy.
+$DVI=NIR-RED$
+
+- NIR: Infrarosso vicino (che in Sentinel corrisponde alla banda 08);
+- RED: Rosso (che in Sentinel corrisponde alla banda 04).
+
+Questo indice si basa sul contrasto della risposta alle due bande da parte di una vegetazione sana:
+- NIR: riflette molto;
+- RED: assorbe molto.
+
+Maggiori sono i valori del DVI, più vigorosa risulta la vegetazione.
+
+Procedendo, si visualizza l'indice DVI per ogni anno considerato, utilizzando la funzione `im.dvi()`, appartenente al pacchetto imageRy.
 
 ````R
 # 2015
@@ -342,7 +358,7 @@ dvi25 <- im.dvi(gutturu25, 4, 3)
 
 
 
-Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
 plot(dvi15, main = "DVI 2015", col=viridis(100))
@@ -354,10 +370,27 @@ plot(dvi25, main = "DVI 2025", col=viridis(100))
 dev.off()
 ````
 <img width="1536" height="738" alt="dvi5" src="https://github.com/user-attachments/assets/eaed21b5-c8bc-400c-aa88-cda7568b70f6" />
->Commento:
+>Commento: Ciò che emerge a livello interno è che nella zona centro-occidentale del parco la vegetazione è più presente e rigorosa, nel versante settentrionale tende ad essere più scarsa, così come nella punta orientale. A livello multitemporale, non si riscontrano grandi differenze.
 
 
 ## NDVI
+
+L'indice NDVI (Normalized Difference Vegetation Index) è simile al DVI, ma standardizzato. La sua formula è: 
+
+$NDVI=\frac{NIR-RED}{NIR+RED}$
+
+e i suoi risultati sono compresi tra -1 e 1.
+
+| Valore NDVI | Interpretazione |
+|---|---|
+| < 0 | Acqua, neve, superfici molto scure o non vegetate |
+| 0 - 0.1 | Suolo nudo, rocce, aree urbanizzate |
+| 0.1 - 0.2 | Vegetazione molto rada o fortemente stressata |
+| 0.2 - 0.4 | Vegetazione bassa o moderatamente presente (prati, pascoli, arbusti) |
+| 0.4 - 0.6 | Vegetazione moderata e in buone condizioni |
+| 0.6 - 0.8 | Vegetazione densa e vigorosa (boschi, colture in crescita) |
+| > 0.8 | Vegetazione molto fitta e altamente produttiva |
+
 
 Si visualizza l'indice NDVI per ogni anno considerato, utilizzando la funzione `im.ndvi()`, appartenente al pacchetto imageRy.
 
@@ -380,7 +413,7 @@ ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
 
 
-Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 ````R
 im.multiframe(2,3)
 plot(ndvi15, main = "NDVI 2015", col=viridis(100))
@@ -392,7 +425,7 @@ plot(ndvi25, main = "NDVI 2025", col=viridis(100))
 dev.off()
 ````
 <img width="1536" height="738" alt="ndviL" src="https://github.com/user-attachments/assets/0620276a-3f75-46b8-8c3f-032c1539c439" />
->Commento:
+>Commento: Il commento a questo risultato risulta simile all'indice DVI. 
 
 ## NDMI
 
@@ -415,7 +448,7 @@ ndmi22 <- (gutturu22[[4]]-gutturu22[[5]])/(gutturu22[[4]]+gutturu22[[5]])
 ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 ````
 
-Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 
 ````R
 im.multiframe(2,3)
@@ -452,7 +485,7 @@ bsi25 <- ((gutturu25[[5]] + gutturu25[[3]]) - (gutturu25[[4]] + gutturu25[[1]]))
          ((gutturu25[[5]] + gutturu25[[3]]) + (gutturu25[[4]] + gutturu25[[1]]))
 ````
 
-Si visualizzano tutti e tre i risultati tramite la funzione `im.multiframe()`.
+Si visualizzano tutti e cinque i risultati tramite la funzione `im.multiframe()`.
 
 ````R
 # Plottaggio insieme BSI
@@ -545,7 +578,7 @@ plot(bsi.diff, main = "ΔBSI 2015-2025", col=magma(100))
 dev.off()
 ````
 
-<img width="1536" height="738" alt="delta" src="https://github.com/user-attachments/assets/5ef50dba-fa59-44d2-8e67-08848c4c93e7" />
+<img width="1536" height="738" alt="delta" src="https://github.com/user-attachments/assets/8a429f03-763d-47a5-9a79-59c607139410" />
 
 ### Ridge plots
 
@@ -576,22 +609,37 @@ im.ridgeline(ndvi_ridg, scale=2, palette="magma")
 dev.off()
 ````
 
-<img width="1536" height="738" alt="ndviRP" src="https://github.com/user-attachments/assets/48a1e1b1-2308-4a97-a010-a2d7405c08ac" />
+<img width="766" height="729" alt="ndviRP" src="https://github.com/user-attachments/assets/c4915012-68ec-440d-ad82-5b1108e4ee9b" />
 
 
 #### ΔNDMI
 
 ````R
-ndmi_ridg=c(ndmi15, ndmi20, ndmi25)  
-names(ndmi_ridg)=c("NDMI 2015", "NDMI 2020", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
+# NDMI
+
+ndmi_ridg=c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)  
+names(ndmi_ridg)=c("NDMI 2015", "NDMI 2018" "NDMI 2020", "NDMI 2022", "NDMI 2025") # Per assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
 im.ridgeline(ndmi_ridg, scale=2, palette="magma")
 
+dev.off()
 ````
 
-<img width="1536" height="738" alt="ndmiRP" src="https://github.com/user-attachments/assets/dba352e3-e365-4a64-806b-ca7129145d9e" />
+<img width="1536" height="738" alt="ndmiRP" src="https://github.com/user-attachments/assets/5c1b66b2-80e5-468e-aea4-b9090a926caf" />
 
+#### ΔBSI
 
+````R
+# BSI
+
+bsi_ridg=c(bsi15, bsi18, bsi20, bsi22, bsi25)  
+names(bsi_ridg)=c("BSI 2015", "BSI 2018" "BSI 2020", "BSI 2022", "BSI 2025") # Per assegnare i nomi alle due immagini del vettore
+# Applicazione della funzione im.ridgeline del pacchetto imageRy
+im.ridgeline(bsi_ridg, scale=2, palette="magma")
+
+dev.off()
+````
+<img width="1536" height="738" alt="bsiRidge" src="https://github.com/user-attachments/assets/3c84e516-3301-4695-91d4-dd8644ace594" />
 
 # Conclusioni
 
