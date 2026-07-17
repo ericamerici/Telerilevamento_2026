@@ -724,7 +724,8 @@ dev.off()
 >Commento: i valori scuri indicano l'elevata presenza di vegetazione a discapito del suolo nudo o degradato, pur in minima parte presente.
 
 
->[!NOTA] Questo indice viene espresso sul suolo nudo e non sulla vegetazione, per questa ragione i risultati appaiono "inversi" rispetto agli altri indici.
+>[!NOTE]
+>Questo indice viene espresso sul suolo nudo e non sulla vegetazione, per questa ragione i risultati appaiono "inversi" rispetto agli altri indici.
 
 
 # Classificazione
