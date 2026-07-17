@@ -415,11 +415,21 @@ ndmi25_cl <- classify(ndmi25, class_matrix)
 
 im.multiframe(1,2)
 plot(ndmi15_cl,
-     col = c("red", "orange", "yellowgreen", "darkgreen"),
+     col = c(
+  "#8C510A",  # marrone: stress elevato
+  "#D8B365",  # beige: stress moderato
+  "#5AB4AC",  # turchese: buono stato idrico
+  "#01665E"   # blu-verde scuro: elevato contenuto idrico
+),
      main = "NDMI classificato 2015")
 
 plot(ndmi25_cl,
-     col = c("red", "orange", "yellowgreen", "darkgreen"),
+      col = c(
+  "#8C510A",  # marrone: stress elevato
+  "#D8B365",  # beige: stress moderato
+  "#5AB4AC",  # turchese: buono stato idrico
+  "#01665E"   # blu-verde scuro: elevato contenuto idrico
+),
      main = "NDMI classificato 2025")  
 
 # Percentuali
@@ -445,10 +455,10 @@ tabout # visualizzazione della tabella in R
 p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
    geom_bar(stat = "identity") + # creazione del grafico a barre; stat = "identity" indica a ggplot2 di non fare altri conteggi;
   scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
+    "Stress elevato" = "#8C510A",
+    "Stress moderato" = "#D8B365",
+    "Buono stato idrico" = "#5AB4AC",
+    "Elevato contenuto idrico" = "#01665E"
       )) + # assegnazione colori di riempimento alle classi
   ylim(c(0,20)) + # limiti
   theme(legend.position="none")  # rimuovere la legenda
@@ -456,10 +466,10 @@ p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea 
 p25 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
    geom_bar(stat = "identity") +
   scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
+    "Stress elevato" = "#8C510A",
+    "Stress moderato" = "#D8B365",
+    "Buono stato idrico" = "#5AB4AC",
+    "Elevato contenuto idrico" = "#01665E"
       )) + 
   ylim(c(0,20)) + 
   theme(legend.position="none")  
