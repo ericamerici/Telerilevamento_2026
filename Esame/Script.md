@@ -851,6 +851,8 @@ cartografiche di mappatura
 e degli indicatori a scala
 nazionale e locale. [link](https://www.isprambiente.gov.it/contentfiles/00003400/3468-manuali-2006-40.pdf/)
 
+Firino, L. (22/07/2025). LA DESERTIFICAZIONE IN SARDEGNA: UNA FERITA SEMPRE APERTA. Rga Online, Rivista Giuridica Ambientale.
+
 GeoPortale Sardegna https://www.sardegnageoportale.it/
 
 Sardegna Arpa https://www.sar.sardegna.it/
