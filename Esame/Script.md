@@ -559,7 +559,7 @@ Innanzittutto, si visualizzano le diverse immagini RGB per avere un confronto in
 im.multiframe (2,5)
 
 # plot RGB, colori naturali 2015
-im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)") 
 
 # plot RGB, colori naturali 2018
 im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
@@ -574,7 +574,7 @@ im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")
 im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
 
 # plot RGB, nir in red 2015
-im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)") # nir nel rosso, rosso nel verde, verde nel blu
 
 # plot RGB, nir in red 2018
 im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
