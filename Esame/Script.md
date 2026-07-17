@@ -752,12 +752,26 @@ ndmi25_cl <- classify(ndmi25, class_matrix)
 
 # Plottaggio assegnando i colori a ciascuna classe
 im.multiframe(1,2)
-plot(ndmi15_cl, col = c("red", "orange", "yellowgreen", "darkgreen"), main = "NDMI classificato 2015") # il rosso è associato alla 1 classe, l'arancione alla 2, il giallo-verde alla 3 e il verdescuro alla 4
+plot(ndmi15_cl,
+     col = c(
+  "#8C510A",  # marrone: stress elevato
+  "#D8B365",  # beige: stress moderato
+  "#5AB4AC",  # turchese: buono stato idrico
+  "#01665E"   # blu-verde scuro: elevato contenuto idrico
+),
+     main = "NDMI classificato 2015")
 
-plot(ndmi25_cl, col = c("red", "orange", "yellowgreen", "darkgreen"), main = "NDMI classificato 2025")  
+plot(ndmi25_cl,
+      col = c(
+  "#8C510A",  # marrone: stress elevato
+  "#D8B365",  # beige: stress moderato
+  "#5AB4AC",  # turchese: buono stato idrico
+  "#01665E"   # blu-verde scuro: elevato contenuto idrico
+),
+     main = "NDMI classificato 2025")
 ````
 
-<img width="1536" height="738" alt="ndmi classificato" src="https://github.com/user-attachments/assets/5dc8df55-658a-48c6-9076-05ea50cc5289" />
+<img width="1536" height="738" alt="ndmiCBF" src="https://github.com/user-attachments/assets/e4dafee0-f919-480e-8e5a-140299545235" />
 
 >Commento: si nota un aumento della classe con elevato contenuto idrico e una diminuzione della classe a stress idrico elevato.
 
@@ -806,10 +820,10 @@ Per rappresentare graficamente la distribuzione percentuale delle classi NDMI ne
 p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea il grafico a partire dalla tabella; la variabile classe viene usata nelle ascisse, la variabile indice nelle ordinate; fill = Classe identifica che le barre vengono riempite in modo diverso a seconda della classe; 
    geom_bar(stat = "identity") + # creazione del grafico a barre; stat = "identity" indica a ggplot2 di non fare altri conteggi;
   scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
+    "Stress elevato" = "#8C510A",
+    "Stress moderato" = "D8B365",
+    "Buono stato idrico" = "5AB4AC",
+    "Elevato contenuto idrico" = "01665E"
       )) + # assegnazione colori di riempimento alle classi
   ylim(c(0,20)) + # limiti
   theme(legend.position="none")  # rimuovere la legenda
@@ -817,10 +831,10 @@ p15 <- ggplot(tabout, aes(x=Classe, y=NDMI2015, fill = Classe)) + # ggplot crea 
 p25 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, con il 2025
    geom_bar(stat = "identity") +
   scale_fill_manual(values = c(
-    "Stress elevato" = "red",
-    "Stress moderato" = "orange",
-    "Buono stato idrico" = "yellowgreen",
-    "Elevato contenuto idrico" = "darkgreen"
+    "Stress elevato" = "8C510A",
+    "Stress moderato" = "D8B365",
+    "Buono stato idrico" = "5AB4AC",
+    "Elevato contenuto idrico" = "01665E"
       )) + 
   ylim(c(0,20)) + 
   theme(legend.position="none")  
