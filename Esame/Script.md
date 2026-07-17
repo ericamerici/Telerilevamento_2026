@@ -352,7 +352,7 @@ dvi22 <- im.dvi(gutturu22, 4, 3)
 dvi25 <- im.dvi(gutturu25, 4, 3)
 ````
 
-Si stabilisce un range comune.
+Si stabilisce un range comune,  affinché stessi colori siano assegnati a stessi valori nelle diverse immagini.
 ````R
 lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
                  na.rm = TRUE) # values considera i DN; c rappresenta la concatenazione; na.rm rimuove i no data
