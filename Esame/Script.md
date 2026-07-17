@@ -690,7 +690,7 @@ dev.off()
 
 <img width="1536" height="738" alt="ndviRP" src="https://github.com/user-attachments/assets/8b092ade-3a91-4021-8490-15a2c6724b95" />
 
->Commento: in modo simile all'indice DVI, non emergono significative differenze, a parte per una maggiore quantità di valori più bassi negli anni 2015 e 2018. In generale, come già notato in precedenza, i valori sono conformi alle aspettative, ovvero piuttosto alti, in quanto si tratta di vegetazione forestale in stato di protezione, dunque in salute.
+>Commento: in modo simile all'indice DVI, non emergono significative differenze, a parte per una maggiore quantità di valori più bassi negli anni 2015 e 2022. In generale, come già notato in precedenza, i valori sono conformi alle aspettative, ovvero piuttosto alti, in quanto si tratta di vegetazione forestale in stato di protezione, dunque in salute.
 
 #### ΔNDMI
 
