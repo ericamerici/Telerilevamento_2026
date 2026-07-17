@@ -722,7 +722,7 @@ dev.off()
 <img width="1536" height="738" alt="bsiRP" src="https://github.com/user-attachments/assets/808b990b-9009-4fc2-9299-39767303ba7f" />
 
 >Commento: i valori scuri indicano l'elevata presenza di vegetazione a discapito del suolo nudo o degradato, pur in minima parte presente.
->
+
 >[NOTA!] Questo indice viene espresso sul suolo nudo e non sulla vegetazione, per questa ragione i risultati appaiono "inversi" rispetto agli altri indici.
 
 
