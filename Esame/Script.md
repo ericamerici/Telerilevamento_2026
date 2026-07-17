@@ -72,7 +72,6 @@ library(imageRy) # utile per alcune funzioni di visualizzazione o di calcolo deg
 library(viridis) # visualizzazione mappe con colori adatti a colorblind
 library(ggplot2)  # creazione grafici
 library(patchwork) # combinazione grafici
-library(ggridges)  # creazione grafici di tipo ridge plot
 ````
 
 ## Importazione raster Sentinel-2
@@ -119,7 +118,7 @@ dev.off()
 
 Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore percezione dello stato della vegetazione.
 ````R
-im.multiframe(1,3)
+im.multiframe(1,3) # 1 riga, 3 colonne
 
 # plot RGB, colori naturali 
 im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
@@ -168,7 +167,7 @@ Si visualizza in RGB: colori naturali, e colori falsati per avere una migliore p
 im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")
+im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
 im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
