@@ -11,10 +11,10 @@ list.files()
 
 # caricamento pacchetti 
 library(terra)  
-library(imageRy)  
-library(viridis)
-library(ggplot2)  
-library(patchwork) 
+library(imageRy) # utile per alcune funzioni di visualizzazione o di calcolo degli indici
+library(viridis) # visualizzazione mappe con colori adatti a colorblind
+library(ggplot2)  # creazione grafici
+library(patchwork) # combinazione grafici
 
 
 # importazione di tutti i file raster
@@ -26,32 +26,33 @@ library(patchwork)
 
 ################################ 2015
 
-# plot
+# per plottare
 plot(gutturu15)
-dev.off()
+dev.off() # per eliminare il device appena creato
 
 # visualizzazione dell'immagine importata in tutte le sue bande e scaricata l'immagine in .png
 
-im.multiframe(2,3)
-plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100))
+im.multiframe(2,3) # 2 righe e 3 colonne
+plot(gutturu15[[1]], main = "B2 - Blue", col=cividis(100)) # [[]] corrisponde alla banda da plottare, alla quale si assegna un titolo "main" e una palette di colori; 100 è il numero di tonalità
 plot(gutturu15[[2]], main = "B3 - Green", col=cividis(100))
 plot(gutturu15[[3]], main = "B4 - Red", col=cividis(100))
-plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100))
-plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100))
-dev.off()
+plot(gutturu15[[4]], main = "B8 - NIR", col=cividis(100)) # Near Infrared
+plot(gutturu15[[5]], main = "B11 - SWIR", col=cividis(100)) # Shortwave Infrared
 
 # visualizzazione dell'immagine in RGB
 
-im.multiframe(1,3)
+im.multiframe(1,3) # 1 riga, 3 colonne
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")
+im.plotRGB(gutturu15, r=3, g=2, b=1, title = "Colori naturali (2015)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
-im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")
+im.plotRGB(gutturu15, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2015)")  # visualizza la banda 4 (NIR) nel rosso, la banda 3 (RED) nel verde e la banda 2 (GREEN) nel blu;
 
 # plot RGB, nir in blue
-im.plotRGB(gutturu15, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2015)")
+im.plotRGB(gutturu15, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2015)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 4 (NIR) nel blu; accentua maggiormente il contrasto tra vegetazione e suolo nudo
+
+dev.off()
 
 ################################ 2018
 
@@ -76,13 +77,13 @@ dev.off()
 im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")
+im.plotRGB(gutturu18, r=3, g=2, b=1, title = "Colori naturali (2018)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
-im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)")
+im.plotRGB(gutturu18, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2018)") # visualizza la banda 4 (NIR) nel rosso, la banda 3 (RED) nel verde e la banda 2 (GREEN) nel blu;
 
 # plot RGB, nir in blue
-im.plotRGB(gutturu18, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2018)")
+im.plotRGB(gutturu18, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2018)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 4 (NIR) nel blu; accentua maggiormente il contrasto tra vegetazione e suolo nudo
 
 
 ################################ 2020
@@ -105,13 +106,13 @@ plot(gutturu20[[5]], main = "B11 - SWIR", col=cividis(100))
 im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")
+im.plotRGB(gutturu20, r=3, g=2, b=1, title = "Colori naturali (2020)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
-im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)")
+im.plotRGB(gutturu20, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2020)") # visualizza la banda 4 (NIR) nel rosso, la banda 3 (RED) nel verde e la banda 2 (GREEN) nel blu;
 
 # plot RGB, nir in blue
-im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)")
+im.plotRGB(gutturu20, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2020)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 4 (NIR) nel blu; accentua maggiormente il contrasto tra vegetazione e suolo nudo
 
 ################################ 2022
 
@@ -133,13 +134,14 @@ plot(gutturu22[[5]], main = "B11 - SWIR", col=cividis(100))
 im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")
+im.plotRGB(gutturu22, r=3, g=2, b=1, title = "Colori naturali (2022)")  # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
-im.plotRGB(gutturu22, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2022)")
+im.plotRGB(gutturu22, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2022)") # visualizza la banda 4 (NIR) nel rosso, la banda 3 (RED) nel verde e la banda 2 (GREEN) nel blu;
+
 
 # plot RGB, nir in blue
-im.plotRGB(gutturu22, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2022)")
+im.plotRGB(gutturu22, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2022)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 4 (NIR) nel blu; accentua maggiormente il contrasto tra vegetazione e suolo nudo
 
 dev.off()
 
@@ -162,13 +164,13 @@ plot(gutturu25[[5]], main = "B11 - SWIR", col=cividis(100))
 im.multiframe(1,3)
 
 # plot RGB, colori naturali 
-im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)")
+im.plotRGB(gutturu25, r=3, g=2, b=1, title = "Colori naturali (2025)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 1 (BLUE) nel blu; title assegna un titolo all'uscita grafica.
 
 # plot RGB, nir in red
-im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
+im.plotRGB(gutturu25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)") # visualizza la banda 4 (NIR) nel rosso, la banda 3 (RED) nel verde e la banda 2 (GREEN) nel blu;
 
 # plot RGB, nir in blue
-im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
+im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)") # visualizza la banda 3 (RED) nel rosso, la banda 2 (GREEN) nel verde e la banda 4 (NIR) nel blu; accentua maggiormente il contrasto tra vegetazione e suolo nudo
 
 ###################################
 # Calcolo indici
@@ -176,7 +178,7 @@ im.plotRGB(gutturu25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
 # Calcolo DVI con funzione im.dvi(x, NIR, Red), appartenente a imageRy
 
 # 2015
-dvi15 <- im.dvi(gutturu15, 4, 3)
+dvi15 <- im.dvi(gutturu15, 4, 3) # 4 è la banda nir, 3 è la banda red
 
 # 2018
 dvi18 <- im.dvi(gutturu18, 4, 3)
@@ -190,7 +192,7 @@ dvi22 <- im.dvi(gutturu22, 4, 3)
 # 2025
 dvi25 <- im.dvi(gutturu25, 4, 3)
 
-# stabilire range comune
+# stabilire range comune, affinché stessi colori siano assegnati a stessi valori nelle diverse immagini
 lim_dvi <- range(values(c(dvi15, dvi18, dvi20, dvi22, dvi25)),
                  na.rm = TRUE) # values considera i DN; na.rm rimuove i no data
 
@@ -222,7 +224,7 @@ ndvi25 <- im.ndvi(gutturu25, 4, 3)
 
 # stabilire range comune
 lim_ndvi <- range(values(c(ndvi15, ndvi18, ndvi20, ndvi22, ndvi25)),
-                  na.rm = TRUE)
+                  na.rm = TRUE) # values considera i DN; na.rm rimuove i no data
 
 # plottaggio insieme NDVI
 im.multiframe(2,3)
@@ -251,7 +253,7 @@ ndmi25 <- (gutturu25[[4]]-gutturu25[[5]])/(gutturu25[[4]]+gutturu25[[5]])
 
 # Range comune
 lim_ndmi <- range(values(c(ndmi15, ndmi18, ndmi20, ndmi22, ndmi25)),
-                  na.rm = TRUE)
+                  na.rm = TRUE) # values considera i DN; na.rm rimuove i no data
 
 # Plottaggio insieme NDMI
 im.multiframe(2,3)
@@ -287,7 +289,7 @@ bsi25 <- ((gutturu25[[5]] + gutturu25[[3]]) - (gutturu25[[4]] + gutturu25[[1]]))
 
 # Range Comune
 
-lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)), na.rm = TRUE)
+lim_bsi <- range(values(c(bsi15, bsi18, bsi20, bsi22, bsi25)), na.rm = TRUE) # values considera i DN; na.rm rimuove i no data
 
 # Plottaggio insieme BSI
 im.multiframe(2,3)
@@ -354,7 +356,7 @@ ndmi.diff <- ndmi15 - ndmi25
 bsi.diff <- bsi15 - bsi25
 
 
-# Visualizzazione dei tre risultati
+# Visualizzazione dei risultati
 im.multiframe(2,2)
 plot(dvi.diff, main = "ΔDVI 2015-2025", col=magma(100))
 plot(ndvi.diff, main = "ΔNDVI 2015-2025", col=magma(100))
@@ -365,8 +367,8 @@ plot(bsi.diff, main = "ΔBSI 2015-2025", col=magma(100))
 
 # DVI
   
-dvi_ridg=c(dvi15, dvi18, dvi20, dvi22, dvi25)  
-names(dvi_ridg) =c("DVI 2015", "DVI 2018", "DVI 2020", "DVI 2022", "DVI 2025") # Per assegnare i nomi alle due immagini del vettore
+dvi_ridg=c(dvi15, dvi18, dvi20, dvi22, dvi25)  # creazione dello stack
+names(dvi_ridg) =c("DVI 2015", "DVI 2018", "DVI 2020", "DVI 2022", "DVI 2025") # assegnare i nomi alle due immagini del vettore
 # Applicazione della funzione im.ridgeline del pacchetto imageRy
 im.ridgeline(dvi_ridg, scale=2, palette="magma")
 
@@ -394,59 +396,6 @@ im.ridgeline(bsi_ridg, scale=2, palette="magma")
 ####################################################
 ####################################################
 ####################################################
-
-# Analisi tra stagioni, anno 2025
-
-# ripeto lo stesso procedimento, con il file riguardante il periodo di aprile-maggio 2025
-
-# importare il raster
-
-p25 <-rast("p25.tif")
-
-# visualizzazione delle bande singole con funzione im.multiframe()
-im.multiframe(2,3)
-plot(p25[[1]], main = "B2 - Blue", col=cividis(100))
-plot(p25[[2]], main = "B3 - Green", col=cividis(100))
-plot(p25[[3]], main = "B4 - Red", col=cividis(100))
-plot(p25[[4]], main = "B8 - NIR", col=cividis(100))
-plot(p25[[5]], main = "B11 - SWIR", col=cividis(100))
-
-dev.off()
-
-# visualizzazione in RGB
-
-im.multiframe(1,3)
-
-# plot RGB, colori naturali 
-im.plotRGB(p25, r=3, g=2, b=1, title = "Colori naturali (2025)")
-
-# plot RGB, nir in red
-im.plotRGB(p25, r=4, g=3, b=2, title = "Falsi colori: NIR in red (2025)")
-
-# plot RGB, nir in blue
-im.plotRGB(p25, r=3, g=2, b=4, title = "Falsi colori: NIR in blue (2025)")
-
-dev.off()
-
-ndmip <- (p25[[4]]-p25[[5]])/(p25[[4]]+p25[[5]])
-
-lim_ndmi2 <- range(values(c(ndmip, ndmi25)),
-                  na.rm = TRUE)
-
-# Plottaggio insieme NDMI
-im.multiframe(1,2)
-plot(ndmip, main="NDMI primavera 2025", col=viridis(100), range=lim_ndmi2)
-plot(ndmi25, main="NDMI estate 2025", col=viridis(100), range=lim_ndmi2)
-
-ndmi.diff <- ndmip-ndmi25
-plot(ndmi.diff, main = "ΔNDMI primavera-estate", col=magma(100))
-
-ndmip_ridg=c(ndmip, ndmi25)  
-names(ndmip_ridg)=c("NDMI primavera 2025", "NDMI estate 2025") # Per assegnare i nomi alle due immagini del vettore
-# Applicazione della funzione im.ridgeline del pacchetto imageRy
-im.ridgeline(ndmip_ridg, scale=2, palette="magma")
-
-
 
 # Creazione della matrice di classificazione per l'indice NDMI
 # Ogni riga definisce un intervallo di valori NDMI e la classe assegnata
