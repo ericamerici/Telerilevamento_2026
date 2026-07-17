@@ -841,7 +841,7 @@ p25 <- ggplot(tabout, aes(x=Classe, y=NDMI2025, fill=Classe)) + # stessa cosa, c
 
 p15 + p25
 ````
-<img width="1536" height="738" alt="tabella" src="https://github.com/user-attachments/assets/8da070fc-0418-4d42-bba9-b0af32f62432" />
+<img width="1536" height="738" alt="graficipatch" src="https://github.com/user-attachments/assets/a1622597-97b5-428e-b28b-879e9a65ea13" />
 
 >Commento: La vegetazione con stress moderato e con buono stato idrico non è cambiata di molto: i maggiori cambiamenti si rivelano nella percentuale di vegetazione a stress elevato, e in quella di vegetazione a elevato contenuto idrico, come anche mostrano le percentuali nella tabella.
 
