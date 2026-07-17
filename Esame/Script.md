@@ -43,7 +43,7 @@ L'analisi è stata sviluppata nei limiti del parco per valutare l'efficacia di e
 
 Si vuole, in questo modo, fornire agli incaricati all'amministrazione del parco uno strumento che possa apportare ulteriori risultati da combinare con altre analisi legate al campo, ad esempio.
 
-Si è scelto un lasso di tempo di 10 anni, per sfruttare la totalità della missione Sentinel 2. L'istituzione del parco è avvenuta nel 2014, quindi risulta un buon periodo di tempo per verificare l'efficacia di tale istituzione.
+Si è scelto un lasso di tempo di 10 anni, per sfruttare la totalità della missione Sentinel 2. L'istituzione del parco è avvenuta nel 2014, tramite la Legge Regionale n. 20 del 24.10.2014, quindi risulta un buon periodo di tempo per verificare l'efficacia di tale istituzione.
 
 # Raccolta dati e metodologia
 
